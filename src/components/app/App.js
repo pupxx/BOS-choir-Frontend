@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
-import About from '../about/About';
-import Header from '../../containers/header/Header';
+import Layout from '../layout/Layout'
 import PerformanceList from '../../containers/performance_list/PerformanceList';
 
-// import './app.css'
+import classes from './app.css'
 
 class App extends Component {
   render() {
     return (
       <div>
-        <Header />
-        <About />
+      <Layout>
         <PerformanceList />
+      </Layout>
+
       </div>
     )
   }
