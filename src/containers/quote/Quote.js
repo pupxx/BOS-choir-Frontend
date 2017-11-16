@@ -2,16 +2,19 @@ import React, { Component } from 'react';
 import { connect } from "react-redux";
 
 class Quote extends Component {
-    state = {  }
+    state = {}
     render() {
         return (
-            <div>Quote is connected</div>
+            <div>
+                <p> {this.props.quote.quote} </p>
+                <p> {this.props.quote.reference} </p>
+            </div>
         );
     }
 }
 
-function mapStateToProps (state){
-    return {quote: state.quote}
+function mapStateToProps(state) {
+    return { quote: state.quote }
 }
 
 export default connect(mapStateToProps)(Quote);
