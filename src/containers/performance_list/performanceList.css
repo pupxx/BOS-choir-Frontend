@@ -1,3 +1,11 @@
-.performancesWrapper {
-    margin-top: 70px;
+h3{
+    text-align: center;
+}
+
+ul li{
+    width: 90%;
+    border-bottom: 1px solid #b9bac2;
+    margin-top: 20px;
+    min-height: 50px;
+    vertical-align: middle;
 }
