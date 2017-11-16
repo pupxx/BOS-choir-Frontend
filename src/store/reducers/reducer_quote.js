@@ -4,7 +4,6 @@ var quotes =
     ];
 function getQuote(arr){
     var quote = arr[Math.floor(Math.random() * arr.length)]
-    console.log(quote);
     return quote
 }
 

@@ -22,8 +22,8 @@ class PerformanceList extends Component {
     render() {
         return (
             <Aux>
-                <h3>Performances</h3>
-                <ul>
+                <h3 className={classes.H3}>Performances</h3>
+                <ul className={classes.Listitem}>
                     {this.getPerformances()}
                 </ul>
             </Aux>

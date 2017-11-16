@@ -1,8 +1,8 @@
-h3{
+.H3{
     text-align: center;
 }
 
-ul li{
+.Listitem li{
     width: 90%;
     border-bottom: 1px solid #b9bac2;
     margin-top: 20px;

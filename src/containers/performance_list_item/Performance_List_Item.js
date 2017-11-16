@@ -5,7 +5,7 @@ export default class PerformanceListItem extends Component {
 
     render() {
         return (
-            <li>
+            <li className={classes.Listitem}>
                 {this.props.data}
             </li>
         )

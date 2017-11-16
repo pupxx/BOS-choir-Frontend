@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import Layout from '../layout/Layout';
 import About from '../about/About'
 import PerformanceList from '../../containers/performance_list/PerformanceList';
-import Rehearsal from '../../containers/rehearsals/Rehearsals';
 
 // import classes from './app.css';
 
@@ -13,7 +12,6 @@ class App extends Component {
         <Layout>
           <About />
           <PerformanceList />
-          <Rehearsal />
         </Layout>
       </div>
     )
