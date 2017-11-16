@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
+// import classes from './quote.css';
 
 class Quote extends Component {
     state = {}

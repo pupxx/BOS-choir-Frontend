@@ -7,7 +7,7 @@ const About = function () {
     return (
         <div className={classes.AboutWrapper}>
             <h2>Barrie Ontario Stake Choir</h2>
-            <div className="about">
+            <div className={classes.Quote}>
                 <Quote />
             </div>
         </div>

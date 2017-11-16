@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import classes from './performanceListItem.css'
+import classes from './performanceListItem.css';
 
 export default class PerformanceListItem extends Component {
 

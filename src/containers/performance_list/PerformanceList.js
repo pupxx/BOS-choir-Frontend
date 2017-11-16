@@ -5,7 +5,7 @@ import { fetchPerformances } from '../../store/actions/index';
 import PerformanceListItem from '../performance_list_item/Performance_List_Item';
 import Aux from '../../hoc/Aux'
 
-import classes from './performanceList.css'
+import classes from './performanceList.css';
 
 class PerformanceList extends Component {
 
