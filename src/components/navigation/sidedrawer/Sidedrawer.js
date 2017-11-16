@@ -19,7 +19,7 @@ function sidedrawer(props) {
                 clicked={props.closed}
             />
             <div className={assignedClasses.join(' ')}>
-                <nav>
+                <nav className={classes.Nav}>
                     <NavigationItems />
                 </nav>
             </div>

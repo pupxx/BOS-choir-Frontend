@@ -1,8 +1,7 @@
 import React from 'react';
 import NavigationItem from '../navigationItem/NavigationItem';
 
-
-import classes from './navigationItems.css'
+import classes from './navigationItems.css';
 
 
 function navigationItems (props) {
