@@ -1,13 +1,14 @@
 import React from 'react';
-import NavigationItems from '../navigationItems/NavigationItems'
+import NavigationItems from '../navigationItems/NavigationItems';
+import MenuToggle from './menuToggleButton/MenuToggle';
 
 import classes from './toolbar.css'
 
-export default function Toolbar (){
+export default function Toolbar (props){
 
     return (
         <header className={classes.Toolbar}>
-            <h4>Menu</h4>
+            <MenuToggle toggle={props.toggleOpen}/>
             <nav className={classes.DesktopOnly}>
                 <NavigationItems />
             </nav>
@@ -15,3 +16,4 @@ export default function Toolbar (){
         </header>
     )
 }
+
