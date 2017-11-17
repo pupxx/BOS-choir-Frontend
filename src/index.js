@@ -7,7 +7,6 @@ import promise from 'redux-promise';
 
 import './index.css';
 import App from './components/app/App';
-import About from './components/about/About';
 import registerServiceWorker from './registerServiceWorker';
 import reducers from './store/reducers';
 
