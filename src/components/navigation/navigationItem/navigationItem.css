@@ -1,5 +1,7 @@
 .NavigationItem{
-    margin-top: 30px;
+    margin-top: 10px;
+    line-height: 70px;
+    border-bottom: 2px solid lightgray;
     box-sizing: border-box;
     display: block;
     width: 100%;
