@@ -4,6 +4,7 @@ import { Route } from 'react-router-dom';
 import Layout from '../layout/Layout';
 import About from '../about/About'
 import PerformanceList from '../../containers/performance_list/PerformanceList';
+import Rehearsals from '../../containers/rehearsals/Rehearsals';
 
 // import classes from './app.css';
 
@@ -12,8 +13,9 @@ class App extends Component {
     return (
       <div>
         <Layout>
-            <Route path="/" component={About} />
-            <Route path="/" component={PerformanceList} />
+            <Route path="/rehearsals" component={Rehearsals} />
+            <Route path="/" exact component={About} />
+            <Route path="/" exact component={PerformanceList} />
         </Layout>
       </div>
     )

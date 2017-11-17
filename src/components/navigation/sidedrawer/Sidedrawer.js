@@ -20,7 +20,7 @@ function sidedrawer(props) {
             />
             <div className={assignedClasses.join(' ')}>
                 <nav className={classes.Nav}>
-                    <NavigationItems />
+                    <NavigationItems toggle={props.closed}/>
                 </nav>
             </div>
         </Aux>
