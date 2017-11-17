@@ -21,7 +21,6 @@ class Layout extends Component {
     }
 
     sideDrawerOpen(){
-        console.log('sideDrawrerOpen')
         this.setState((prevState)=>{ 
             return {showSideDrawer: !prevState.showSideDrawer}
         })

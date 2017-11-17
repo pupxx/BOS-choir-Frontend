@@ -4,15 +4,16 @@ import NavigationItem from '../navigationItem/NavigationItem';
 import classes from './navigationItems.css';
 
 
-function navigationItems (props) {
-    console.log('nav items', props)
+function navigationItems(props) {
+    const currentPath = window.location.pathname;
+
     return (
         <ul className={classes.NavigationItems}>
-            <NavigationItem link="/" active={true} toggle={props.toggle}>Performances</NavigationItem>
-            <NavigationItem link="/" toggle={props.toggle}>Leadership Info</NavigationItem>
-            <NavigationItem link="/rehearsals" toggle={props.toggle}>Rehearsals</NavigationItem>
+            {currentPath !== '/performances' ? <NavigationItem link="/performances" active={true} toggle={props.toggle}>Performances</NavigationItem> : null}
+            {currentPath !== '/contacts' ? <NavigationItem link="/contacts" toggle={props.toggle}>Leadership Info</NavigationItem> : null}
+            {currentPath !== '/rehearsals' ? <NavigationItem link="/rehearsals" toggle={props.toggle}>Rehearsals</NavigationItem> : null}
         </ul>
     )
 }
 
-export default navigationItems ;
+export default navigationItems;

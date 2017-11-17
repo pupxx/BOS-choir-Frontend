@@ -16,11 +16,13 @@ class Rehearsal extends Component {
     
     listRehearsals(){
         return this.props.rehearsals.map((el)=>{
-            return <div key={el.rehearsedate}>
+            return (
+            <div key={el.rehearsedate}>
                 <p>{el.rehearsedate}</p> 
                 <p>{el.churchname}</p>
                 <p>{el.churchphone}</p>
             </div>
+            )   
         })
     }
 
