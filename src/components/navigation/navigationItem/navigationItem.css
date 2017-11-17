@@ -34,6 +34,7 @@
         width: auto;
         align-items: center;
         line-height: 100%;
+        border-bottom: none;
     }
 
     .NavigationItem a{
