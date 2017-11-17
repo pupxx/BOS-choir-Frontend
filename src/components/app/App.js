@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { Route } from 'react-router-dom';
+
 import Layout from '../layout/Layout';
 import About from '../about/About'
 import PerformanceList from '../../containers/performance_list/PerformanceList';
@@ -10,8 +12,8 @@ class App extends Component {
     return (
       <div>
         <Layout>
-          <About />
-          <PerformanceList />
+            <Route path="/" component={About} />
+            <Route path="/" component={PerformanceList} />
         </Layout>
       </div>
     )
