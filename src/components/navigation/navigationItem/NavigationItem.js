@@ -8,7 +8,6 @@ import classes from './navigationItem.css';
 function navigationItem(props) {
     return (
         <li className={classes.NavigationItem} onClick={() => {
-            console.log('in toggle!!!', props)
             props.toggle()
         }}>
             <Link to={props.link}
