@@ -6,10 +6,13 @@ import MenuToggle from "./menuToggleButton/MenuToggle";
 import classes from "./toolbar.css";
 
 export default function Toolbar(props) {
-  console.log("toolbar", props);
+  const currentPath = window.location.pathname;
   return (
     <header className={classes.Toolbar}>
-      <MenuToggle toggle={props.toggleOpen} />
+      {currentPath === "/" || currentPath === "/signin" ? null : (
+        <MenuToggle toggle={props.toggleOpen} />
+      )}
+
       <nav className={classes.DesktopOnly}>
         <NavigationItems toggle={props.toggleOpen} />
       </nav>
