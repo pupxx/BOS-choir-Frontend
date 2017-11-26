@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import NavigationItems from "../navigationItems/NavigationItems";
 import MenuToggle from "./menuToggleButton/MenuToggle";
 
@@ -12,7 +13,9 @@ export default function Toolbar(props) {
       <nav className={classes.DesktopOnly}>
         <NavigationItems toggle={props.toggleOpen} />
       </nav>
-      <h4>Login</h4>
+      <Link className={classes.Link} to="/signin">
+        Login
+      </Link>
     </header>
   );
 }
