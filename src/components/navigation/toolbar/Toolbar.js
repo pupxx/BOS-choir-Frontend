@@ -16,6 +16,11 @@ export default function Toolbar(props) {
       <nav className={classes.DesktopOnly}>
         <NavigationItems toggle={props.toggleOpen} />
       </nav>
+      {currentPath === "/signin" ? (
+        <Link className={classes.Link} to="/">
+          Home
+        </Link>
+      ) : null}
       <Link className={classes.Link} to="/signin">
         Login
       </Link>
