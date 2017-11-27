@@ -8,9 +8,11 @@ function navigationItems(props) {
 
   return (
     <ul className={classes.NavigationItems}>
-      <NavigationItem link="/" toggle={props.toggle}>
-        Home
-      </NavigationItem>
+      {currentPath === "/" ? null : (
+        <NavigationItem link="/" toggle={props.toggle}>
+          Home
+        </NavigationItem>
+      )}
       {currentPath !== "/performances" ? (
         <NavigationItem
           link="/performances"
