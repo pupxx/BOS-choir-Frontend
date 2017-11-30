@@ -1,26 +1,35 @@
-import axios from 'axios';
+import axios from "axios";
+import { AUTH_USER, FETCH_PERFORMANCES, FETCH_REHEARSALS } from "./types";
 
-export const FETCH_PERFORMANCES = 'FETCH_PERFORMANCES';
-export const FETCH_REHEARSALS = 'FETCH_REHEARSALS';
-
-const ROOT_URL = 'http://localhost:4000'
+const ROOT_URL = "http://localhost:4000";
 
 export function fetchPerformances() {
-    const url = `${ROOT_URL}/performances`
-    const request = axios.get(url);
-    return {
-        type: FETCH_PERFORMANCES,
-        payload: request
-    }
+  return function(dispatch) {
+    const url = `${ROOT_URL}/performances`;
+    axios.get(url).then(performances => {
+      dispatch({ type: FETCH_PERFORMANCES, payload: performances.data });
+    });
+  };
 }
 
 export function fetchRehearsals() {
+  return function(dispatch) {
     const url = `${ROOT_URL}/rehearsals`;
-    const request = axios.get(url);
+    axios.get(url).then(rehearsals => {
+      dispatch({ type: FETCH_REHEARSALS, payload: rehearsals.data });
+    });
+  };
+}
 
-    return {
-        type: FETCH_REHEARSALS,
-        payload: request
-        
-    }
+export function signinUser({ email, password }) {
+  return function(dispatch) {
+    const url = `${ROOT_URL}/signin`;
+    axios
+      .post(url, { email, password })
+      .then(response => {
+        dispatch({ type: AUTH_USER });
+        localStorage.setItem("token", response.data.token);
+      })
+      .catch(err => {});
+  };
 }
