@@ -1,5 +1,10 @@
 import axios from "axios";
-import { AUTH_USER, FETCH_PERFORMANCES, FETCH_REHEARSALS } from "./types";
+import {
+  AUTH_USER,
+  FETCH_PERFORMANCES,
+  FETCH_REHEARSALS,
+  AUTH_ERROR
+} from "./types";
 
 const ROOT_URL = "http://localhost:4000";
 
@@ -30,6 +35,15 @@ export function signinUser({ email, password }) {
         dispatch({ type: AUTH_USER });
         localStorage.setItem("token", response.data.token);
       })
-      .catch(err => {});
+      .catch(err => {
+        dispatch(authError(err.response.data.message));
+      });
+  };
+}
+
+export function authError(error) {
+  return {
+    type: AUTH_ERROR,
+    payload: error
   };
 }
