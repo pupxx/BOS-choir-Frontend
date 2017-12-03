@@ -3,7 +3,8 @@ import {
   AUTH_USER,
   FETCH_PERFORMANCES,
   FETCH_REHEARSALS,
-  AUTH_ERROR
+  AUTH_ERROR,
+  UNAUTH_USER
 } from "./types";
 
 const ROOT_URL = "http://localhost:4000";
@@ -39,6 +40,11 @@ export function signinUser({ email, password }) {
         dispatch(authError(err.response.data.message));
       });
   };
+}
+
+export function signOutUser() {
+  localStorage.removeItem("token");
+  return { type: UNAUTH_USER };
 }
 
 export function authError(error) {
