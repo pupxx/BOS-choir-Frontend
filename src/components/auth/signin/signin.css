@@ -2,7 +2,12 @@
   padding: 40px;
 }
 
-.Button {
-  background-color: rgb(37, 74, 119);
-  border-color: rgb(37, 74, 119);
+.LoginButton {
+  background-color: #6fde4a;
+  border-color: #6fde4a;
+}
+
+.SignupButton {
+  background-color: #254a77;
+  border-color: #254a77;
 }

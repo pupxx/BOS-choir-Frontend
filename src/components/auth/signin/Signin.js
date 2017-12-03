@@ -28,7 +28,12 @@ class Signin extends Component {
   }
 
   render() {
-    const buttonStyle = `${classes.Button} btn btn-primary`;
+    const loginButtonStyle = `${
+      classes.LoginButton
+    } btn btn-primary btn-sm btn-block`;
+    const signupButtonStyle = `${
+      classes.SignupButton
+    } btn btn-primary btn-sm btn-block`;
     const { handleSubmit } = this.props;
     return (
       <form
@@ -48,8 +53,12 @@ class Signin extends Component {
           component={this.renderField}
         />
         {this.displayError()}
-        <button className={buttonStyle} action="submit">
+        <button className={loginButtonStyle} action="submit">
           Login
+        </button>
+        <hr />
+        <button type="button" className={signupButtonStyle}>
+          Register
         </button>
       </form>
     );
