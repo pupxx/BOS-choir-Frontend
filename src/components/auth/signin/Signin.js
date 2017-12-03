@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import * as actions from "../../../store/actions";
 import { Field, reduxForm } from "redux-form";
+import { Link } from "react-router-dom";
 
 import classes from "./signin.css";
 
@@ -57,9 +58,9 @@ class Signin extends Component {
           Login
         </button>
         <hr />
-        <button type="button" className={signupButtonStyle}>
+        <Link to="/signup" className={signupButtonStyle}>
           Register
-        </button>
+        </Link>
       </form>
     );
   }

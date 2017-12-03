@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Route } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 
 import Layout from "../layout/Layout";
 import About from "../about/About";
@@ -24,10 +24,12 @@ class App extends Component {
     return (
       <div>
         <Layout>
-          <Route path="/rehearsals" component={Rehearsals} />
-          <Route path="/" exact render={this.renderAboutandPerformances} />
-          <Route path="/signup" exact component={Signup} />
-          <Route path="/signin" exact component={Signin} />
+          <Switch>
+            <Route path="/signin" component={Signin} />
+            <Route path="/signup" component={Signup} />
+            <Route path="/rehearsals" component={Rehearsals} />
+            <Route path="/" render={this.renderAboutandPerformances} />
+          </Switch>
         </Layout>
       </div>
     );
