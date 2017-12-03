@@ -3,12 +3,14 @@ import { connect } from "react-redux";
 import * as actions from "../../../store/actions";
 import { Field, reduxForm } from "redux-form";
 
+import classes from "./signin.css";
+
 class Signin extends Component {
   renderField(field) {
     return (
-      <div>
+      <div className="form-group">
         <label>{field.label}</label>
-        <input {...field.input} type={field.type} />
+        <input {...field.input} className="form-control" type={field.type} />
       </div>
     );
   }
@@ -26,9 +28,13 @@ class Signin extends Component {
   }
 
   render() {
+    const buttonStyle = `${classes.Button} btn btn-primary`;
     const { handleSubmit } = this.props;
     return (
-      <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
+      <form
+        className={classes.Form}
+        onSubmit={handleSubmit(this.onSubmit.bind(this))}
+      >
         <Field
           name="email"
           label="Email:"
@@ -42,7 +48,9 @@ class Signin extends Component {
           component={this.renderField}
         />
         {this.displayError()}
-        <button action="submit">Login</button>
+        <button className={buttonStyle} action="submit">
+          Login
+        </button>
       </form>
     );
   }
