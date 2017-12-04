@@ -27,6 +27,22 @@ export function fetchRehearsals() {
   };
 }
 
+export function signupUser({ email, password }) {
+  return function(dispatch) {
+    const url = `${ROOT_URL}/signup`;
+    axios
+      .post(url, { email, password })
+      .then(response => {
+        console.log(response, "this is the response");
+        dispatch({ type: AUTH_USER });
+        localStorage.setItem("token", response.data.token);
+      })
+      .catch(err => {
+        dispatch(authError(err.response.data.message));
+      });
+  };
+}
+
 export function signinUser({ email, password }) {
   return function(dispatch) {
     const url = `${ROOT_URL}/signin`;

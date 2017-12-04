@@ -35,7 +35,8 @@ class Toolbar extends Component {
       <header className={classes.Toolbar}>
         {currentPath === "/" ||
         currentPath === "/signin" ||
-        currentPath === "/signout" ? null : (
+        currentPath === "/signout" ||
+        currentPath === "/signup" ? null : (
           <MenuToggle toggle={this.props.toggleOpen} />
         )}
         <nav className={classes.DesktopOnly}>

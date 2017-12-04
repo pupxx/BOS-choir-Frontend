@@ -2,12 +2,14 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Field, reduxForm } from "redux-form";
 import { Link } from "react-router-dom";
+import * as actions from "../../../store/actions";
 
 import classes from "./signup.css";
 
 class Signup extends Component {
   onSubmit(values) {
-    console.log("onsubmit");
+    const { email, password } = values;
+    this.props.signupUser({ email, password });
   }
 
   renderField(field) {
@@ -36,20 +38,20 @@ class Signup extends Component {
           component={this.renderField}
         />
         <Field
-          name="confirmEmail"
-          label="Confirm Email:"
-          type="email"
-          component={this.renderField}
-        />
-        <Field
           name="password"
           label="Password:"
           type="password"
           component={this.renderField}
         />
-        <Link to="/signup" className={signupButtonStyle}>
+        <Field
+          name="confirmPassword"
+          label="Confirm Password:"
+          type="password"
+          component={this.renderField}
+        />
+        <button action="submit" className={signupButtonStyle}>
           Register
-        </Link>
+        </button>
       </form>
     );
   }
@@ -57,4 +59,4 @@ class Signup extends Component {
 
 export default reduxForm({
   form: "signup"
-})(connect(null, null)(Signup));
+})(connect(null, actions)(Signup));
