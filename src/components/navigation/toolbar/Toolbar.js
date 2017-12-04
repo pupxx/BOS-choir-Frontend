@@ -17,23 +17,25 @@ class Toolbar extends Component {
       );
     } else {
       return (
-        <Link onClick={this.signoutUser} className={classes.Link} to="/">
+        <Link onClick={this.signoutUser} className={classes.Link} to="/signout">
           Logout
         </Link>
       );
     }
   }
 
-  signoutUser() {
-    this.props.signoutUser();
-  }
+  // signoutUser() {
+  //   this.props.signoutUser();
+  // }
 
   render() {
     console.log(this.props.authenticated);
     const currentPath = window.location.pathname;
     return (
       <header className={classes.Toolbar}>
-        {currentPath === "/" || currentPath === "/signin" ? null : (
+        {currentPath === "/" ||
+        currentPath === "/signin" ||
+        currentPath === "/signout" ? null : (
           <MenuToggle toggle={this.props.toggleOpen} />
         )}
         <nav className={classes.DesktopOnly}>
