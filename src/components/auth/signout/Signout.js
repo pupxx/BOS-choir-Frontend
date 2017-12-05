@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import * as actions from "../../../store/actions";
+import { Link } from "react-router-dom";
 
 import Signin from "../signin/Signin";
 
@@ -13,7 +14,7 @@ class Signout extends Component {
     return (
       <div>
         <h1>GoodBye</h1>
-        <Signin />
+        <Link to="/signin">Signin</Link>
       </div>
     );
   }

@@ -36,8 +36,9 @@ export function signupUser({ email, password }, cb) {
         dispatch({ type: AUTH_USER });
         localStorage.setItem("token", response.data.token);
         return response;
-      }).then((response)=>{
-        cb()
+      })
+      .then(response => {
+        cb();
       })
       .catch(err => {
         dispatch(authError(err.response.data.message));
@@ -54,11 +55,11 @@ export function signinUser({ email, password }, cb) {
         dispatch({ type: AUTH_USER });
         localStorage.setItem("token", response.data.token);
         return response;
-      }).then((response)=>{
-        cb()
+      })
+      .then(() => {
+        cb();
       })
       .catch(err => {
-        console.log(err);
         dispatch(authError(err.response.data.message));
       });
   };

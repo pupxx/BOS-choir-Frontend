@@ -20,7 +20,7 @@ class Signin extends Component {
     let email = values.email;
     let password = values.password;
     this.props.signinUser({ email, password }, () => {
-      this.props.history.push('/profile')
+      this.props.history.push("/profile");
     });
   }
 
