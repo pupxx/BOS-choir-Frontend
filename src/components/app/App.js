@@ -10,6 +10,7 @@ import Rehearsals from "../../containers/rehearsals/Rehearsals";
 import Signup from "../../components/auth/signup/Signup";
 import Signin from "../../components/auth/signin/Signin";
 import Signout from "../../components/auth/signout/Signout";
+import Profile from "../../containers/profile/Profile"
 
 // import classes from './app.css';
 
@@ -28,6 +29,7 @@ class App extends Component {
       <div>
         <Layout>
           <Switch>
+            <Route path="/profile" component={Profile} />
             <Route path="/signin" component={Signin} />
             <Route path="/signup" component={Signup} />
             <Route path="/signout" component={Signout} />

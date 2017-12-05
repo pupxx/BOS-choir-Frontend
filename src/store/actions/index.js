@@ -43,7 +43,7 @@ export function signupUser({ email, password }) {
   };
 }
 
-export function signinUser({ email, password }) {
+export function signinUser({ email, password }, cb) {
   return function(dispatch) {
     const url = `${ROOT_URL}/signin`;
     axios
@@ -51,8 +51,12 @@ export function signinUser({ email, password }) {
       .then(response => {
         dispatch({ type: AUTH_USER });
         localStorage.setItem("token", response.data.token);
+        return response;
+      }).then((response)=>{
+        cb()
       })
       .catch(err => {
+        console.log(err);
         dispatch(authError(err.response.data.message));
       });
   };
