@@ -27,15 +27,17 @@ export function fetchRehearsals() {
   };
 }
 
-export function signupUser({ email, password }) {
+export function signupUser({ email, password }, cb) {
   return function(dispatch) {
     const url = `${ROOT_URL}/signup`;
     axios
       .post(url, { email, password })
       .then(response => {
-        console.log(response, "this is the response");
         dispatch({ type: AUTH_USER });
         localStorage.setItem("token", response.data.token);
+        return response;
+      }).then((response)=>{
+        cb()
       })
       .catch(err => {
         dispatch(authError(err.response.data.message));

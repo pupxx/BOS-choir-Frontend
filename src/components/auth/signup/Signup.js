@@ -9,7 +9,9 @@ import classes from "./signup.css";
 class Signup extends Component {
   onSubmit(values) {
     const { email, password } = values;
-    this.props.signupUser({ email, password });
+    this.props.signupUser({ email, password }, () => {
+      this.props.history.push('/profile')
+    });
   }
 
   renderField(field) {
