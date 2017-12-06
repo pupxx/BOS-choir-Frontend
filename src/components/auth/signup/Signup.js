@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Field, reduxForm } from "redux-form";
-import { Link } from "react-router-dom";
 import * as actions from "../../../store/actions";
 
 import classes from "./signup.css";
@@ -10,7 +9,7 @@ class Signup extends Component {
   onSubmit(values) {
     const { email, password } = values;
     this.props.signupUser({ email, password }, () => {
-      this.props.history.push('/profile')
+      this.props.history.push("/profile");
     });
   }
 

@@ -3,8 +3,6 @@ import { connect } from "react-redux";
 import * as actions from "../../../store/actions";
 import { Link } from "react-router-dom";
 
-import Signin from "../signin/Signin";
-
 class Signout extends Component {
   componentWillMount() {
     this.props.signOutUser();
