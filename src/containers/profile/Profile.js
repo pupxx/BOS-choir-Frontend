@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import * as actions from "../../store/actions";
 
 class Profile extends Component {
-  componentDidMount() {
-    this.props.getProfile();
-  }
+  // componentDidMount() {
+  //   this.props.fetchProfile();
+  // }
 
   render() {
     return (
@@ -16,4 +17,4 @@ class Profile extends Component {
   }
 }
 
-export default connect(null, null)(Profile);
+export default connect(null, actions)(Profile);
