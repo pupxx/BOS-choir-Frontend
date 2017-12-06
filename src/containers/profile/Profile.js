@@ -2,6 +2,10 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 
 class Profile extends Component {
+  componentDidMount() {
+    this.props.getProfile();
+  }
+
   render() {
     return (
       <div>
