@@ -11,6 +11,7 @@ import Signup from "../../components/auth/signup/Signup";
 import Signin from "../../components/auth/signin/Signin";
 import Signout from "../../components/auth/signout/Signout";
 import Profile from "../../containers/profile/Profile";
+import MemberLanding from "../../containers/memberLanding/MemberLanding";
 import requireAuth from "../../hoc/auth/require_authentication";
 
 // import classes from './app.css';
@@ -30,6 +31,10 @@ class App extends Component {
       <div>
         <Layout>
           <Switch>
+            <Route
+              path="/member/landing"
+              component={requireAuth(MemberLanding)}
+            />
             <Route path="/profile" component={requireAuth(Profile)} />
             <Route path="/signin" component={Signin} />
             <Route path="/signup" component={Signup} />

@@ -1,22 +1,8 @@
 import axios from "axios";
-import {
-  AUTH_USER,
-  FETCH_PERFORMANCES,
-  FETCH_REHEARSALS,
-  AUTH_ERROR,
-  UNAUTH_USER
-} from "./types";
+import { AUTH_USER, FETCH_REHEARSALS, AUTH_ERROR, UNAUTH_USER } from "./types";
+export * from "./performances";
 
 const ROOT_URL = "http://localhost:4000";
-
-export function fetchPerformances() {
-  return function(dispatch) {
-    const url = `${ROOT_URL}/performances`;
-    axios.get(url).then(performances => {
-      dispatch({ type: FETCH_PERFORMANCES, payload: performances.data });
-    });
-  };
-}
 
 export function fetchRehearsals() {
   return function(dispatch) {
