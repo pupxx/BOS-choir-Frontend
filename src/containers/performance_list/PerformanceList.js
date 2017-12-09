@@ -14,14 +14,20 @@ class PerformanceList extends Component {
 
   getPerformances() {
     return _.map(this.props.performances, (el, i) => {
-      return <PerformanceListItem key={i} data={el.perfname} />;
+      return (
+        <PerformanceListItem
+          key={i}
+          title={el.perfname}
+          attending={el.attending}
+        />
+      );
     });
   }
 
   render() {
     return (
       <Aux>
-        <h3 className={classes.H3}>Performances</h3>
+        <h4 className={classes.H3}>Performances</h4>
         <ul className={classes.Listitem}>{this.getPerformances()}</ul>
       </Aux>
     );

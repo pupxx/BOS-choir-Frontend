@@ -1,3 +1,11 @@
-.Listitem{
-    list-style: none;
+.Listitem {
+  list-style: none;
+}
+
+.Attending {
+  color: green;
+}
+
+.NotAttending {
+  color: red;
 }
