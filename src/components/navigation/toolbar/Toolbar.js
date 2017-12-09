@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import * as actions from "../../../store/actions";
 import NavigationItems from "../navigationItems/NavigationItems";
@@ -30,13 +30,14 @@ class Toolbar extends Component {
 
   render() {
     console.log(this.props.authenticated);
-    const currentPath = window.location.pathname;
+    // const currentPath = window.location.pathname;
+    console.log(this.props.location, "this is the current path");
     return (
       <header className={classes.Toolbar}>
-        {currentPath === "/" ||
-        currentPath === "/signin" ||
-        currentPath === "/signout" ||
-        currentPath === "/signup" ? null : (
+        {this.props.locations === "/" ||
+        this.props.locations === "/signin" ||
+        this.props.locations === "/signout" ||
+        this.props.locations === "/signup" ? null : (
           <MenuToggle toggle={this.props.toggleOpen} />
         )}
         <nav className={classes.DesktopOnly}>
@@ -51,4 +52,4 @@ class Toolbar extends Component {
 function mapStateToProps(state) {
   return { authenticated: state.auth.authenticated };
 }
-export default connect(mapStateToProps, actions)(Toolbar);
+export default withRouter(connect(mapStateToProps, actions)(Toolbar));

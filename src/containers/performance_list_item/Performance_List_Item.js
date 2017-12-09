@@ -1,13 +1,17 @@
 import React, { Component } from "react";
 import classes from "./performanceListItem.css";
+import { connect } from "react-redux";
 
-export default class PerformanceListItem extends Component {
+class PerformanceListItem extends Component {
   render() {
-    var phrase = (
-      <h6 className={classes.NotAttending}>I will not be attending</h6>
-    );
-    if (this.props.attending) {
-      phrase = <h6 className={classes.Attending}>I will be attending</h6>;
+    if (this.props.authenticated) {
+      if (!this.props.attending) {
+        var phrase = (
+          <h6 className={classes.NotAttending}>I will not be attending</h6>
+        );
+      } else {
+        phrase = <h6 className={classes.Attending}>I will be attending</h6>;
+      }
     }
 
     return (
@@ -18,3 +22,9 @@ export default class PerformanceListItem extends Component {
     );
   }
 }
+
+function mapStateToProps(state) {
+  return { authenticated: state.auth.authenticated };
+}
+
+export default connect(mapStateToProps, null)(PerformanceListItem);

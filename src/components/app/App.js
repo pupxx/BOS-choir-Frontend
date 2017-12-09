@@ -17,6 +17,10 @@ import requireAuth from "../../hoc/auth/require_authentication";
 // import classes from './app.css';
 
 class App extends Component {
+  componentWillMount() {
+    if (this.props.authenticated) this.props.history.push("/member/landing");
+  }
+
   renderAboutandPerformances() {
     return (
       <div>
@@ -48,4 +52,8 @@ class App extends Component {
   }
 }
 
-export default connect(null, actions)(App);
+function mapStateToProps(state) {
+  return { authenticated: state.auth.authenticated };
+}
+
+export default connect(mapStateToProps, actions)(App);

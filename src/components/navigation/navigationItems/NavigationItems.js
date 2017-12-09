@@ -9,7 +9,7 @@ function navigationItems(props) {
   return (
     <ul className={classes.NavigationItems}>
       {currentPath === "/" ? null : (
-        <NavigationItem link="/" toggle={props.toggle}>
+        <NavigationItem link="/member/landing" toggle={props.toggle}>
           Home
         </NavigationItem>
       )}
