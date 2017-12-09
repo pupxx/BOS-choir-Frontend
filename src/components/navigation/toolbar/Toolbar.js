@@ -30,18 +30,17 @@ class Toolbar extends Component {
 
   render() {
     console.log(this.props.authenticated);
-    // const currentPath = window.location.pathname;
-    console.log(this.props.location, "this is the current path");
+    const { location, toggleOpen } = this.props;
     return (
       <header className={classes.Toolbar}>
-        {this.props.locations === "/" ||
-        this.props.locations === "/signin" ||
-        this.props.locations === "/signout" ||
-        this.props.locations === "/signup" ? null : (
-          <MenuToggle toggle={this.props.toggleOpen} />
+        {location.pathname === "/" ||
+        location.pathname === "/signin" ||
+        location.pathname === "/signout" ||
+        location.pathname === "/signup" ? null : (
+          <MenuToggle toggle={toggleOpen} />
         )}
         <nav className={classes.DesktopOnly}>
-          <NavigationItems toggle={this.props.toggleOpen} />
+          <NavigationItems toggle={toggleOpen} />
         </nav>
         {this.renderSigninOut()}
       </header>
