@@ -5,6 +5,8 @@ import moment from "moment";
 import _ from "lodash";
 import { fetchRehearsals } from "../../store/actions/index";
 
+import classes from "./rehearsals.css";
+
 class Rehearsal extends Component {
   constructor(props) {
     super(props);
@@ -19,21 +21,23 @@ class Rehearsal extends Component {
   listRehearsals() {
     return _.map(this.props.rehearsals, el => {
       let date = moment(el.rehearsedate).format("LL");
+      let phrase = ` ${el.churchname} ${el.churchphone}`;
       return (
-        <div key={el.rehearsedate}>
-          <p>{date}</p>
-          <p>
-            {el.churchname}
-            <span>{el.churchphone}</span>
-          </p>
+        <div className={classes.Rehearsal} key={el.rehearsedate}>
+          <h6>{date}</h6>
+          <h6>{phrase}</h6>
         </div>
       );
     });
   }
 
   render() {
-    console.log(this.props.location);
-    return <div>{this.listRehearsals()}</div>;
+    return (
+      <div>
+        <h4 className={classes.RehearsalTitle}>Upcoming Choir Practices</h4>
+        {this.listRehearsals()}
+      </div>
+    );
   }
 }
 
