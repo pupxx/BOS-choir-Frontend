@@ -18,7 +18,13 @@ import requireAuth from "../../hoc/auth/require_authentication";
 
 class App extends Component {
   componentWillMount() {
-    if (this.props.authenticated) this.props.history.push("/member/landing");
+    let location = this.props.history.location.pathname;
+    console.log(location);
+    if (this.props.authenticated && location === "/") {
+      this.props.history.push("/member/landing");
+    } else {
+      this.props.history.push(location);
+    }
   }
 
   renderAboutandPerformances() {
@@ -43,7 +49,7 @@ class App extends Component {
             <Route path="/signin" component={Signin} />
             <Route path="/signup" component={Signup} />
             <Route path="/signout" component={Signout} />
-            <Route path="/rehearsals" component={Rehearsals} />
+            <Route path="/rehearsals" component={requireAuth(Rehearsals)} />
             <Route path="/" render={this.renderAboutandPerformances} />
           </Switch>
         </Layout>

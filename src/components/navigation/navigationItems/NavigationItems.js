@@ -1,19 +1,21 @@
 import React from "react";
 import NavigationItem from "../navigationItem/NavigationItem";
+import { withRouter } from "react-router-dom";
 
 import classes from "./navigationItems.css";
 
 function navigationItems(props) {
-  const currentPath = window.location.pathname;
+  const location = props.location;
+  // const currentPath = window.location.pathname;
 
   return (
     <ul className={classes.NavigationItems}>
-      {currentPath === "/" ? null : (
+      {location.pathname === "/" ? null : (
         <NavigationItem link="/member/landing" toggle={props.toggle}>
           Home
         </NavigationItem>
       )}
-      {currentPath !== "/performances" ? (
+      {location.pathname !== "/performances" ? (
         <NavigationItem
           link="/performances"
           active={true}
@@ -22,12 +24,12 @@ function navigationItems(props) {
           Performances
         </NavigationItem>
       ) : null}
-      {currentPath !== "/contacts" ? (
+      {location.pathname !== "/contacts" ? (
         <NavigationItem link="/contacts" toggle={props.toggle}>
           Leadership Info
         </NavigationItem>
       ) : null}
-      {currentPath !== "/rehearsals" ? (
+      {location.pathname !== "/rehearsals" ? (
         <NavigationItem link="/rehearsals" toggle={props.toggle}>
           Rehearsals
         </NavigationItem>
@@ -36,4 +38,4 @@ function navigationItems(props) {
   );
 }
 
-export default navigationItems;
+export default withRouter(navigationItems);

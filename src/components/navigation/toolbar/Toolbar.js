@@ -24,10 +24,6 @@ class Toolbar extends Component {
     }
   }
 
-  // signoutUser() {
-  //   this.props.signoutUser();
-  // }
-
   render() {
     console.log(this.props.authenticated);
     const { location, toggleOpen } = this.props;
