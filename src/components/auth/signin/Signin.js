@@ -75,8 +75,8 @@ function checkForUpperCase(str) {
     if (isNaN(parseInt(el, 10))) {
       return el === el.toUpperCase();
     }
+    return false;
   });
-  console.log(hasCap);
   return hasCap;
 }
 
