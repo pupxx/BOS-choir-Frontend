@@ -12,6 +12,7 @@ class Signin extends Component {
       <div className="form-group">
         <label>{field.label}</label>
         <input {...field.input} className="form-control" type={field.type} />
+        {field.meta.error}
       </div>
     );
   }
@@ -68,10 +69,61 @@ class Signin extends Component {
   }
 }
 
+function checkForUpperCase(str) {
+  const arr = str.split("");
+  const hasCap = arr.some(el => {
+    if (isNaN(parseInt(el, 10))) {
+      return el === el.toUpperCase();
+    }
+  });
+  console.log(hasCap);
+  return hasCap;
+}
+
+function hasANumber(str) {
+  const arr = str.split("");
+  const hasNumber = [];
+  const mappedArr = arr.map(el => parseInt(el, 10));
+  mappedArr.forEach(el => {
+    if (el >= 0) {
+      hasNumber.push(el);
+    }
+  });
+  if (!hasNumber.length) {
+    return false;
+  }
+  return true;
+}
+
+function validate(values) {
+  const errors = {};
+
+  if (!values.email) {
+    errors.email = "Please enter a valid email";
+  }
+  if (!values.password) {
+    errors.password = "Please enter a valid password";
+  }
+  if (values.password && values.password.length < 8) {
+    errors.password =
+      "password must be at least 8 characters long and contain at least one capital letter and one number.";
+  }
+  if (values.password && !hasANumber(values.password)) {
+    errors.password =
+      "password must be at least 8 characters long and contain at least one capital letter and one number.";
+  }
+  if (values.password && !checkForUpperCase(values.password)) {
+    errors.password =
+      "password must be at least 8 characters long and contain at least one capital letter and one number.";
+  }
+  return errors;
+}
+
 function mapStateToProps(state) {
   return { errorMessage: state.auth.error };
 }
 
 export default reduxForm({
+  validate,
   form: "signin"
 })(connect(mapStateToProps, actions)(Signin));
