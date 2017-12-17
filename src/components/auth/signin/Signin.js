@@ -12,7 +12,7 @@ class Signin extends Component {
       <div className="form-group">
         <label>{field.label}</label>
         <input {...field.input} className="form-control" type={field.type} />
-        {field.meta.error}
+        {field.meta.touched ? field.meta.error : ""}
       </div>
     );
   }
