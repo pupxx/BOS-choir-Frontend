@@ -8,11 +8,13 @@ import classes from "./signin.css";
 
 class Signin extends Component {
   renderField(field) {
+    const { meta: { touched, error } } = field;
+    let className = `form-control ${touched && error ? "is-invalid" : ""}`;
     return (
       <div className="form-group">
         <label>{field.label}</label>
-        <input {...field.input} className="form-control" type={field.type} />
-        {field.meta.touched ? field.meta.error : ""}
+        <input {...field.input} className={className} type={field.type} />
+        <div className="invalid-feedback">{touched ? error : ""}</div>
       </div>
     );
   }
