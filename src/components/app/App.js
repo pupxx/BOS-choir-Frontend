@@ -1,3 +1,4 @@
+import ShowSinglePerformance from "../../containers/showSinglePerformance/ShowSinglePerformance";
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Route, Switch } from "react-router-dom";
@@ -50,6 +51,10 @@ class App extends Component {
             <Route path="/signup" component={Signup} />
             <Route path="/signout" component={Signout} />
             <Route path="/rehearsals" component={requireAuth(Rehearsals)} />
+            <Route
+              path="/performances/showperformance"
+              component={requireAuth(ShowSinglePerformance)}
+            />
             <Route path="/" render={this.renderAboutandPerformances} />
           </Switch>
         </Layout>
