@@ -7,10 +7,16 @@ class PerformanceListItem extends Component {
     if (this.props.authenticated) {
       if (!this.props.attending) {
         var attendance = (
-          <h6 className={classes.NotAttending}>I will not be attending</h6>
+          <h6 className={classes.NotAttending}>
+            I will not be attending <span className={classes.Carrot}>></span>
+          </h6>
         );
       } else {
-        attendance = <h6 className={classes.Attending}>I will be attending</h6>;
+        attendance = (
+          <h6 className={classes.Attending}>
+            I will be attending <span className={classes.Carrot}>></span>
+          </h6>
+        );
       }
     }
 
