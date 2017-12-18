@@ -12,15 +12,46 @@ class PerformanceList extends Component {
     this.props.fetchPerformances();
   }
 
+  showSinglePerformance(id) {
+    console.log(id);
+  }
+
   getPerformances() {
     return _.map(this.props.performances, (el, i) => {
-      return (
-        <PerformanceListItem
-          key={i}
-          title={el.perfname}
-          attending={el.attending}
-        />
-      );
+      if (this.props.authenticated) {
+        // var showSingle = this.showSinglePerformance;
+        if (!el.attending) {
+          var attendance = (
+            <h6 className={classes.NotAttending}>
+              I will not be attending <span className={classes.Carrot}>></span>
+            </h6>
+          );
+        } else {
+          attendance = (
+            <h6 className={classes.Attending}>
+              I will be attending <span className={classes.Carrot}>></span>
+            </h6>
+          );
+        }
+        return (
+          <div
+            key={i}
+            onClick={e => {
+              this.showSinglePerformance(el.id);
+            }}
+          >
+            <PerformanceListItem title={el.perfname}>
+              {attendance}
+            </PerformanceListItem>
+          </div>
+        );
+      } else {
+        return (
+          <div key={i}>
+            <PerformanceListItem title={el.perfname} />
+          </div>
+        );
+      }
     });
   }
 
@@ -35,7 +66,10 @@ class PerformanceList extends Component {
 }
 
 function mapStateToProps(state) {
-  return { performances: state.performanceList };
+  return {
+    performances: state.performanceList,
+    authenticated: state.auth.authenticated
+  };
 }
 
 export default connect(mapStateToProps, actions)(PerformanceList);

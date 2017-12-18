@@ -1,11 +1,25 @@
-.H3{
-    text-align: center;
+.H3 {
+  text-align: center;
 }
 
-.Listitem li{
-    width: 90%;
-    border-bottom: 1px solid #b9bac2;
-    margin-top: 20px;
-    min-height: 50px;
-    vertical-align: middle;
+.Listitem li {
+  width: 90%;
+  border-bottom: 1px solid #b9bac2;
+  margin-top: 20px;
+  min-height: 50px;
+  vertical-align: middle;
+}
+
+.Attending {
+  color: green;
+}
+
+.NotAttending {
+  color: red;
+}
+
+.Carrot {
+  float: right;
+  font-size: 0.75em;
+  color: black;
 }

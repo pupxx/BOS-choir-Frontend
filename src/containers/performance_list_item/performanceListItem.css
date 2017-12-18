@@ -1,17 +1,3 @@
 .Listitem {
   list-style: none;
 }
-
-.Attending {
-  color: green;
-}
-
-.NotAttending {
-  color: red;
-}
-
-.Carrot {
-  float: right;
-  font-size: 0.75em;
-  color: black;
-}
