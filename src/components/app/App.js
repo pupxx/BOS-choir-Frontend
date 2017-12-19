@@ -52,7 +52,7 @@ class App extends Component {
             <Route path="/signout" component={Signout} />
             <Route path="/rehearsals" component={requireAuth(Rehearsals)} />
             <Route
-              path="/performances/showperformance"
+              path="/performances/showperformance/:id"
               component={requireAuth(ShowSinglePerformance)}
             />
             <Route path="/" render={this.renderAboutandPerformances} />

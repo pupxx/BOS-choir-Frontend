@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import _ from "lodash";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 import * as actions from "../../store/actions";
 import PerformanceListItem from "../performance_list_item/Performance_List_Item";
 import Aux from "../../hoc/Aux";
@@ -12,9 +13,9 @@ class PerformanceList extends Component {
     this.props.fetchPerformances();
   }
 
-  showSinglePerformance(id) {
-    console.log(id);
-  }
+  // showSinglePerformance(id) {
+  //   console.log(id);
+  // }
 
   getPerformances() {
     return _.map(this.props.performances, (el, i) => {
@@ -34,22 +35,17 @@ class PerformanceList extends Component {
           );
         }
         return (
-          <div
-            key={i}
-            onClick={e => {
-              this.showSinglePerformance(el.id);
-            }}
-          >
+          <Link to={`/performances/showperformance/${el.id}`} key={el.id}>
             <PerformanceListItem title={el.perfname}>
               {attendance}
             </PerformanceListItem>
-          </div>
+          </Link>
         );
       } else {
         return (
-          <div key={i}>
+          <Link to={`/performances/showperformance/${el.id}`} key={el.id}>
             <PerformanceListItem title={el.perfname} />
-          </div>
+          </Link>
         );
       }
     });
