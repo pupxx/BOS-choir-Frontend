@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import moment from "moment";
 import * as actions from "../../store/actions";
 
 import Aux from "../../hoc/Aux";
@@ -18,15 +19,15 @@ class ShowSinglePerformance extends Component {
     return (
       <Aux>
         <h5>{perfname}</h5>
-        <h5>{perfdate}</h5>
+        <h5>{moment(perfdate).format("LL")}</h5>
         <h5>{perftime}</h5>
         <h5>{menattire}</h5>
         <h5>{womenattire}</h5>
         <h5>
           {attending ? (
-            <button> I will NOT be attending this performance.</button>
+            <button> Unfortunately I will NOT be able to attend.</button>
           ) : (
-            <button>I Will be attending this performance</button>
+            <button>Notify Choir Director that I Will be attending.</button>
           )}
         </h5>
       </Aux>
@@ -36,8 +37,7 @@ class ShowSinglePerformance extends Component {
 
 function mapStateToProps(state, ownProps) {
   return {
-    performance: state.performanceList[ownProps.match.params.id],
-    authenticated: state.auth.authenticated
+    performance: state.performanceList[ownProps.match.params.id]
   };
 }
 

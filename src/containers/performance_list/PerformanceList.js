@@ -13,10 +13,6 @@ class PerformanceList extends Component {
     this.props.fetchPerformances();
   }
 
-  // showSinglePerformance(id) {
-  //   console.log(id);
-  // }
-
   getPerformances() {
     return _.map(this.props.performances, (el, i) => {
       if (this.props.authenticated) {
