@@ -22,6 +22,13 @@ class ShowSinglePerformance extends Component {
         <h5>{perftime}</h5>
         <h5>{menattire}</h5>
         <h5>{womenattire}</h5>
+        <h5>
+          {attending ? (
+            <button> I will NOT be attending this performance.</button>
+          ) : (
+            <button>I Will be attending this performance</button>
+          )}
+        </h5>
       </Aux>
     );
   }
