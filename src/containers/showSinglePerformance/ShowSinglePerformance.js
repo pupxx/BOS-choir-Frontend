@@ -19,8 +19,7 @@ class ShowSinglePerformance extends Component {
       perfdate,
       perftime,
       menattire,
-      womenattire,
-      pieces
+      womenattire
     } = this.props.performance;
     console.log(this.props.performance);
     return (
