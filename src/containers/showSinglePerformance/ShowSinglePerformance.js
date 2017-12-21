@@ -6,6 +6,12 @@ import * as actions from "../../store/actions";
 import Aux from "../../hoc/Aux";
 
 class ShowSinglePerformance extends Component {
+  renderPieces() {
+    return this.props.performance.pieces.map((piece, i) => {
+      return <li key={i}>{piece.piecetitle}</li>;
+    });
+  }
+
   render() {
     const {
       attending,
@@ -13,7 +19,8 @@ class ShowSinglePerformance extends Component {
       perfdate,
       perftime,
       menattire,
-      womenattire
+      womenattire,
+      pieces
     } = this.props.performance;
     console.log(this.props.performance);
     return (
@@ -23,6 +30,10 @@ class ShowSinglePerformance extends Component {
         <h5>{perftime}</h5>
         <h5>{menattire}</h5>
         <h5>{womenattire}</h5>
+        <div>
+          <h5>Pieces</h5>
+          <ul>{this.renderPieces()}</ul>
+        </div>
         <h5>
           {attending ? (
             <button> Unfortunately I will NOT be able to attend.</button>
