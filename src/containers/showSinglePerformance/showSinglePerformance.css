@@ -1,0 +1,9 @@
+.Attending {
+  background-color: #6fde4a;
+  border-color: #6fde4a;
+}
+
+.AttendanceButton {
+  width: 80%;
+  margin: auto;
+}

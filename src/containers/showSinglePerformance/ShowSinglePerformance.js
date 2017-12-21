@@ -5,6 +5,8 @@ import * as actions from "../../store/actions";
 
 import Aux from "../../hoc/Aux";
 
+import classes from "./showSinglePerformance.css";
+
 class ShowSinglePerformance extends Component {
   renderPieces() {
     return this.props.performance.pieces.map((piece, i) => {
@@ -13,6 +15,12 @@ class ShowSinglePerformance extends Component {
   }
 
   render() {
+    const attendingButton = `${classes.Attending} ${
+      classes.AttendanceButton
+    } btn btn-primary btn-sm btn-block`;
+    const notAttending = `${
+      classes.AttendanceButton
+    } btn btn-primary btn-danger btn-sm btn-block`;
     const {
       attending,
       perfname,
@@ -33,13 +41,17 @@ class ShowSinglePerformance extends Component {
           <h5>Pieces</h5>
           <ul>{this.renderPieces()}</ul>
         </div>
-        <h5>
+        <div>
           {attending ? (
-            <button> Unfortunately I will NOT be able to attend.</button>
+            <button className={notAttending}>
+              Unfortunately I will NOT be able to attend.
+            </button>
           ) : (
-            <button>Notify Choir Director that I Will be attending.</button>
+            <button className={attendingButton}>
+              Notify Choir Director that I Will be attending.
+            </button>
           )}
-        </h5>
+        </div>
       </Aux>
     );
   }
