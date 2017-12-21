@@ -20,13 +20,19 @@ class PerformanceList extends Component {
         if (!el.attending) {
           var attendance = (
             <h6 className={classes.NotAttending}>
-              I will not be attending <span className={classes.Carrot}>></span>
+              <button className={classes.AttendingWrapper}>
+                I will not be attending
+              </button>{" "}
+              <span className={classes.Carrot}>></span>
             </h6>
           );
         } else {
           attendance = (
             <h6 className={classes.Attending}>
-              I will be attending <span className={classes.Carrot}>></span>
+              <button className={classes.NotAttendingWrapper}>
+                I will be attending
+              </button>
+              <span className={classes.Carrot}>></span>
             </h6>
           );
         }

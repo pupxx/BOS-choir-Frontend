@@ -8,12 +8,20 @@
   margin-top: 20px;
   min-height: 50px;
   vertical-align: middle;
+  color: black;
+}
+
+.AttendingWrapper {
+  background-color: #fac8c8;
 }
 
 .Attending {
   color: green;
 }
 
+.NotAttendingWrapper {
+  background-color: lightgreen;
+}
 .NotAttending {
   color: red;
 }
