@@ -22,7 +22,7 @@ class PerformanceList extends Component {
             <h6 className={classes.NotAttending}>
               <button className={classes.AttendingWrapper}>
                 I will not be attending
-              </button>{" "}
+              </button>
               <span className={classes.Carrot}>></span>
             </h6>
           );

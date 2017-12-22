@@ -15,15 +15,8 @@
   background-color: #fac8c8;
 }
 
-.Attending {
-  color: green;
-}
-
 .NotAttendingWrapper {
   background-color: lightgreen;
-}
-.NotAttending {
-  color: red;
 }
 
 .Carrot {

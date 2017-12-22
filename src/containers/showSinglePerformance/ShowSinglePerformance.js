@@ -8,6 +8,12 @@ import Aux from "../../hoc/Aux";
 import classes from "./showSinglePerformance.css";
 
 class ShowSinglePerformance extends Component {
+  componentDidMount() {
+    if (!this.props.performance) {
+      this.props.fetchPerformances();
+    }
+  }
+
   renderPieces() {
     return this.props.performance.pieces.map((piece, i) => {
       return <li key={i}>{piece.piecetitle}</li>;
@@ -15,6 +21,9 @@ class ShowSinglePerformance extends Component {
   }
 
   render() {
+    if (!this.props.performance) {
+      return <div>Loading...</div>;
+    }
     const attendingButton = `${classes.Attending} ${
       classes.AttendanceButton
     } btn btn-primary btn-sm btn-block`;
@@ -30,6 +39,7 @@ class ShowSinglePerformance extends Component {
       womenattire
     } = this.props.performance;
     console.log(this.props.performance);
+
     return (
       <Aux>
         <h5>{perfname}</h5>
