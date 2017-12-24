@@ -20,6 +20,11 @@ class ShowSinglePerformance extends Component {
     });
   }
 
+  addAttendance() {
+    let perfID = this.props.performance.performanceID;
+    this.props.addAttendance(perfID);
+  }
+
   render() {
     if (!this.props.performance) {
       return <div>Loading...</div>;
@@ -57,7 +62,10 @@ class ShowSinglePerformance extends Component {
               Unfortunately I will NOT be able to attend.
             </button>
           ) : (
-            <button className={attendingButton}>
+            <button
+              onClick={this.addAttendance.bind(this)}
+              className={attendingButton}
+            >
               Notify Choir Director that I Will be attending.
             </button>
           )}
