@@ -37,3 +37,23 @@ export function addAttendance(id) {
     });
   };
 }
+
+export function removeAttendance(id) {
+  return function(dispatch) {
+    let url = `${ROOT_URL}/performances/attendance/not-attending/${id}`;
+    let perfurl = `${ROOT_URL}/performances/member/landing`;
+    let token = localStorage.getItem("token");
+    let headers = { authorization: token };
+    axios.delete(url, { headers }).then(response => {
+      console.log(response);
+      if (response.data[0].id) {
+        axios.get(perfurl, { headers }).then(performances => {
+          dispatch({
+            type: FETCH_PERFORMANCES,
+            payload: performances.data
+          });
+        });
+      }
+    });
+  };
+}

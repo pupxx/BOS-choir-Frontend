@@ -25,6 +25,11 @@ class ShowSinglePerformance extends Component {
     this.props.addAttendance(perfID);
   }
 
+  removeAttendance() {
+    let perfID = this.props.performance.performanceID;
+    this.props.removeAttendance(perfID);
+  }
+
   render() {
     if (!this.props.performance) {
       return <div>Loading...</div>;
@@ -43,7 +48,6 @@ class ShowSinglePerformance extends Component {
       menattire,
       womenattire
     } = this.props.performance;
-    console.log(this.props.performance);
 
     return (
       <Aux>
@@ -58,7 +62,10 @@ class ShowSinglePerformance extends Component {
         </div>
         <div>
           {attending ? (
-            <button className={notAttending}>
+            <button
+              onClick={this.removeAttendance.bind(this)}
+              className={notAttending}
+            >
               Unfortunately I will NOT be able to attend.
             </button>
           ) : (
