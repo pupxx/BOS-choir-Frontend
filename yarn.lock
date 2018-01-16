@@ -5751,6 +5751,10 @@ signal-exit@^3.0.0, signal-exit@^3.0.2:
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/signal-exit/-/signal-exit-3.0.2.tgz#b5fdc08f1287ea1178628e415e25132b73646c6d"
 
+simple-zeropad@^1.0.3:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/simple-zeropad/-/simple-zeropad-1.0.5.tgz#5aa2fe5d1904c851ee64a9969e76dde1cf8a3e5d"
+
 slash@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/slash/-/slash-1.0.0.tgz#c41f2f6c39fc16d1cd17ad4b5d896114ae470d55"
@@ -6169,6 +6173,10 @@ trim-right@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/trim-right/-/trim-right-1.0.1.tgz#cb2e1203067e0c8de1f614094b9fe45704ea6003"
 
+trim@0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/trim/-/trim-0.0.1.tgz#5858547f6b290757ee95cccc666fb50084c460dd"
+
 tryit@^1.0.1:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/tryit/-/tryit-1.0.3.tgz#393be730a9446fd1ead6da59a014308f36c289cb"
@@ -6186,6 +6194,13 @@ tunnel-agent@^0.6.0:
 tweetnacl@^0.14.3, tweetnacl@~0.14.0:
   version "0.14.5"
   resolved "https://registry.yarnpkg.com/tweetnacl/-/tweetnacl-0.14.5.tgz#5ae68177f192d4456269d108afa93ff8743f4f64"
+
+twentyfour-to-twelve@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/twentyfour-to-twelve/-/twentyfour-to-twelve-1.0.1.tgz#89857be5ae2abe83e7a0a2d0b41c218ee2c2dbfc"
+  dependencies:
+    simple-zeropad "^1.0.3"
+    trim "0.0.1"
 
 type-check@~0.3.2:
   version "0.3.2"

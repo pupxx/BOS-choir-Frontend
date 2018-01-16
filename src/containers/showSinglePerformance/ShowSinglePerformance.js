@@ -6,6 +6,7 @@ import * as actions from "../../store/actions";
 import Aux from "../../hoc/Aux";
 
 import classes from "./showSinglePerformance.css";
+const twelve = require('twentyfour-to-twelve');
 
 class ShowSinglePerformance extends Component {
   componentDidMount() {
@@ -34,30 +35,42 @@ class ShowSinglePerformance extends Component {
     if (!this.props.performance) {
       return <div>Loading...</div>;
     }
-    const attendingButton = `${classes.Attending} ${
+    const attendingButton = `${
       classes.AttendanceButton
-    } btn btn-primary btn-sm btn-block`;
-    const notAttending = `${
+    } btn btn-danger btn-sm btn-block`;
+    const notAttending = `${classes.Attending} ${
       classes.AttendanceButton
-    } btn btn-primary btn-danger btn-sm btn-block`;
+    } btn btn-primary btn-success btn-sm btn-block`;
+    
     const {
       attending,
       perfname,
       perfdate,
       perftime,
       menattire,
-      womenattire
+      womenattire,
+      churchname,
+      churchaddress1,
+      churchaddress2,
+      churchcity,
+      churchphone,
+      churchprov
     } = this.props.performance;
-
+    console.log(this.props.performance);
     return (
       <Aux>
         <h5>{perfname}</h5>
-        <h5>{moment(perfdate).format("LL")}</h5>
-        <h5>{perftime}</h5>
-        <h5>{menattire}</h5>
-        <h5>{womenattire}</h5>
+        <h6>{moment(perfdate).format("LL")}</h6>
+        <h6>{twelve(perftime)}</h6>
+        <h6>{churchname}</h6>
+        <h6>{churchaddress1}</h6>
+        <h6>{churchaddress2}</h6>
+        <h6>{churchcity}, {churchprov}</h6>
+        <h6>{churchphone}</h6>
+        <h6>Mens Attire: <span><i>{menattire}</i></span></h6>
+        <h6>Womens Attire: <span><i>{womenattire}</i></span></h6>
         <div>
-          <h5>Pieces</h5>
+          <h6>Pieces</h6>
           <ul>{this.renderPieces()}</ul>
         </div>
         <div>
@@ -66,14 +79,18 @@ class ShowSinglePerformance extends Component {
               onClick={this.removeAttendance.bind(this)}
               className={notAttending}
             >
-              Unfortunately I will NOT be able to attend.
+              <p className={classes.AttendanceNotification}>I am currently attending this performance.</p>
+              <p className={classes.AttendanceNotification}>By clicking this button I will be notifying</p>
+              <p className={classes.AttendanceNotification}>the Choir Director that I will NOT be attending</p>
             </button>
           ) : (
             <button
               onClick={this.addAttendance.bind(this)}
               className={attendingButton}
             >
-              Notify Choir Director that I Will be attending.
+                <p className={classes.AttendanceNotification}>I am currently NOT attending this performance.</p>
+                <p className={classes.AttendanceNotification}>By clicking this button I will be notifying</p>
+                <p className={classes.AttendanceNotification}>the Choir Director that I WILL be attending</p>
             </button>
           )}
         </div>

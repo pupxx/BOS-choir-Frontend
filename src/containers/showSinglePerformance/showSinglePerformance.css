@@ -6,10 +6,15 @@
 .AttendanceButton {
   width: 80%;
   margin: auto;
+  font-size: .65em;
 }
 
 .btn-primary,
 .Attending:hover {
   background-color: #6fde4a;
   border-color: #6fde4a;
+}
+
+.AttendanceNotification{
+  margin: 5px;
 }
