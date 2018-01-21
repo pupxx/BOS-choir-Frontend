@@ -1,7 +1,13 @@
-.Label {
+/* .Label {
   width: 100px;
+  text-align: right;
 }
 
 .Form {
   text-align: center;
+} */
+
+.Form {
+  width: 80%;
+  margin: auto;
 }
