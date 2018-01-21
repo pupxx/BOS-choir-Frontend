@@ -12,6 +12,7 @@ import Signup from "../../components/auth/signup/Signup";
 import Signin from "../../components/auth/signin/Signin";
 import Signout from "../../components/auth/signout/Signout";
 import Profile from "../../containers/profile/Profile";
+import Register from "../../containers/register/Register";
 import MemberLanding from "../../containers/memberLanding/MemberLanding";
 import requireAuth from "../../hoc/auth/require_authentication";
 
@@ -47,6 +48,7 @@ class App extends Component {
               component={requireAuth(MemberLanding)}
             />
             <Route path="/profile" component={requireAuth(Profile)} />
+            <Route path="/member/register" component={requireAuth(Register)} />
             <Route path="/signin" component={Signin} />
             <Route path="/signup" component={Signup} />
             <Route path="/signout" component={Signout} />
