@@ -19,26 +19,34 @@ class Register extends Component {
     );
   }
 
-  renderSelect(field) {
-    return (
-      <div className="form-group">
-        <label>{field.label}</label>
-        <select {...field.input} type="select" className="form-control">
-          <option value="">select</option>
-          <option value="soprano">Soprano</option>
-          <option value="alto">Alto</option>
-          <option value="tenor">Tenor</option>
-          <option value="bass">Base</option>
-        </select>
-      </div>
-    );
-  }
+  // renderOptions(arr) {
+  //   return arr.map((option, i) => {
+  //     return (
+  //       <option key={i} value="">
+  //         {option}
+  //       </option>
+  //     );
+  //   });
+  // }
+
+  // renderSelect(field) {
+  //   let opt = field.options;
+  //   return (
+  //     <div className="form-group">
+  //       <label>{field.label}</label>
+  //       <select {...field.input} type="select" className="form-control">
+  //         this.renderOptions(opt)
+  //       </select>
+  //     </div>
+  //   );
+  // }
 
   onSubmit(values) {
     console.log(values);
   }
 
   render() {
+    let parts = ["Soprano", "Alto", "Tenor", "Bass"];
     console.log(this.props);
     const { handleSubmit } = this.props;
     return (
@@ -99,15 +107,23 @@ class Register extends Component {
         <Field
           label="Ward or Branch"
           name="ward"
-          component={this.renderSelect}
+          component="select"
           className="form-control"
         />
+        <label htmlFor="part">Part</label>
         <Field
+          id="part"
           label="Part"
           name="part"
-          component={this.renderSelect}
+          component="select"
           className="form-control"
-        />
+        >
+          <option>select</option>
+          <option>Soprano</option>
+          <option>Alto</option>
+          <option>Tenor</option>
+          <option>Bass</option>
+        </Field>
         <button type="submit" className="btn btn-primary">
           Submit
         </button>
