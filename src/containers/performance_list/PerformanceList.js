@@ -58,6 +58,7 @@ class PerformanceList extends Component {
       <Aux>
         <h4 className={classes.H3}>Upcoming Performances</h4>
         <ul className={classes.Listitem}>{this.getPerformances()}</ul>
+        <Link to={"/member/register"}>Register</Link>
       </Aux>
     );
   }

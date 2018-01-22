@@ -1,6 +1,7 @@
 import axios from "axios";
 import { AUTH_USER, FETCH_REHEARSALS, AUTH_ERROR, UNAUTH_USER } from "./types";
 export * from "./performances";
+export * from "./profile";
 
 const ROOT_URL = "http://localhost:4000";
 

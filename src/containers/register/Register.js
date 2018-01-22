@@ -1,10 +1,16 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Field, reduxForm } from "redux-form";
+import * as actions from "../../store/actions";
 
 import classes from "./register.css";
 
 class Register extends Component {
+  componentDidMount() {
+    console.log(this.props);
+    this.props.fetchProfile();
+  }
+
   renderField(field) {
     return (
       <div className="form-group">
@@ -18,16 +24,6 @@ class Register extends Component {
       </div>
     );
   }
-
-  // renderOptions = arr => {
-  //   return arr.map((option, i) => {
-  //     return (
-  //       <option key={i} value={option}>
-  //         {option}
-  //       </option>
-  //     );
-  //   });
-  // };
 
   renderSelect = field => {
     let list = field.options.map((el, i) => {
@@ -141,4 +137,4 @@ function mapStateToProps(state) {
 
 export default reduxForm({
   form: "register"
-})(connect(mapStateToProps, null)(Register));
+})(connect(mapStateToProps, actions)(Register));
