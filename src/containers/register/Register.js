@@ -19,27 +19,34 @@ class Register extends Component {
     );
   }
 
-  // renderOptions(arr) {
+  // renderOptions = arr => {
   //   return arr.map((option, i) => {
   //     return (
-  //       <option key={i} value="">
+  //       <option key={i} value={option}>
   //         {option}
   //       </option>
   //     );
   //   });
-  // }
+  // };
 
-  // renderSelect(field) {
-  //   let opt = field.options;
-  //   return (
-  //     <div className="form-group">
-  //       <label>{field.label}</label>
-  //       <select {...field.input} type="select" className="form-control">
-  //         this.renderOptions(opt)
-  //       </select>
-  //     </div>
-  //   );
-  // }
+  renderSelect = field => {
+    let list = field.options.map((el, i) => {
+      return (
+        <option key={i} value={el}>
+          {el}
+        </option>
+      );
+    });
+    return (
+      <div className="form-group">
+        <label>{field.label}</label>
+        <select {...field.input} type="select" className="form-control">
+          <option>select</option>
+          {list}
+        </select>
+      </div>
+    );
+  };
 
   onSubmit(values) {
     console.log(values);
@@ -47,6 +54,7 @@ class Register extends Component {
 
   render() {
     let parts = ["Soprano", "Alto", "Tenor", "Bass"];
+    let location = ["Barrie", "Orilla", "Brampton"];
     console.log(this.props);
     const { handleSubmit } = this.props;
     return (
@@ -107,23 +115,18 @@ class Register extends Component {
         <Field
           label="Ward or Branch"
           name="ward"
-          component="select"
+          component={this.renderSelect}
+          options={location}
           className="form-control"
         />
-        <label htmlFor="part">Part</label>
         <Field
           id="part"
           label="Part"
           name="part"
-          component="select"
+          component={this.renderSelect}
+          options={parts}
           className="form-control"
-        >
-          <option>select</option>
-          <option>Soprano</option>
-          <option>Alto</option>
-          <option>Tenor</option>
-          <option>Bass</option>
-        </Field>
+        />
         <button type="submit" className="btn btn-primary">
           Submit
         </button>
