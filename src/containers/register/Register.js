@@ -49,92 +49,98 @@ class Register extends Component {
   }
 
   render() {
-    let parts = ["Soprano", "Alto", "Tenor", "Bass"];
-    let location = ["Barrie", "Orilla", "Brampton"];
-    console.log(this.props);
-    const { handleSubmit } = this.props;
-    return (
-      <form
-        onSubmit={handleSubmit(this.onSubmit.bind(this))}
-        className={classes.Form}
-      >
-        <h3>Please Register</h3>
-        <Field
-          name="firstName"
-          label="First Name:"
-          type="text"
-          placeholder="First Name"
-          component={this.renderField}
-        />
-        <Field
-          name="lastName"
-          label="Last Name:"
-          type="text"
-          component={this.renderField}
-        />
-        <Field
-          name="address1"
-          label="Address 1:"
-          type="text"
-          component={this.renderField}
-        />
-        <Field
-          name="address2"
-          label="Address 2:"
-          type="text"
-          component={this.renderField}
-        />
-        <Field
-          name="city"
-          label="City:"
-          type="text"
-          component={this.renderField}
-        />
-        <Field
-          name="postalCode"
-          label="Postal Code:"
-          type="text"
-          component={this.renderField}
-        />
-        <Field
-          name="phone"
-          label="Phone:"
-          type="text"
-          component={this.renderField}
-        />
-        <Field
-          name="email"
-          label="Email:"
-          type="email"
-          component={this.renderField}
-        />
-        <Field
-          label="Ward or Branch"
-          name="ward"
-          component={this.renderSelect}
-          options={location}
-          className="form-control"
-        />
-        <Field
-          id="part"
-          label="Part"
-          name="part"
-          component={this.renderSelect}
-          options={parts}
-          className="form-control"
-        />
-        <button type="submit" className="btn btn-primary">
-          Submit
-        </button>
-      </form>
-    );
+    if (!this.props.initialValues) {
+      return <div>loading...</div>;
+    } else {
+      let parts = ["Soprano", "Alto", "Tenor", "Bass"];
+      let location = ["Barrie", "Orilla", "Brampton"];
+      const { handleSubmit } = this.props;
+      return (
+        <form
+          onSubmit={handleSubmit(this.onSubmit.bind(this))}
+          className={classes.Form}
+        >
+          <h3>Please Register {this.props.initialValues.firstname}</h3>
+          <Field
+            name="firstname"
+            label="First Name:"
+            type="text"
+            placeholder="First Name"
+            component={this.renderField}
+          />
+          <Field
+            name="lastname"
+            label="Last Name:"
+            type="text"
+            component={this.renderField}
+          />
+          <Field
+            name="address1"
+            label="Address 1:"
+            type="text"
+            component={this.renderField}
+          />
+          <Field
+            name="address2"
+            label="Address 2:"
+            type="text"
+            component={this.renderField}
+          />
+          <Field
+            name="city"
+            label="City:"
+            type="text"
+            component={this.renderField}
+          />
+          <Field
+            name="postal"
+            label="Postal Code:"
+            type="text"
+            component={this.renderField}
+          />
+          <Field
+            name="phone"
+            label="Phone:"
+            type="text"
+            component={this.renderField}
+          />
+          <Field
+            name="email"
+            label="Email:"
+            type="email"
+            component={this.renderField}
+          />
+          <Field
+            label="Ward or Branch"
+            name="churchname"
+            component={this.renderSelect}
+            options={location}
+            className="form-control"
+          />
+          <Field
+            id="part"
+            label="Part"
+            name="part"
+            component={this.renderSelect}
+            options={parts}
+            className="form-control"
+          />
+          <button type="submit" className="btn btn-primary">
+            Submit
+          </button>
+        </form>
+      );
+    }
   }
 }
 
 function mapStateToProps(state) {
-  return {};
+  return { initialValues: state.profile[1] };
 }
 
-export default reduxForm({
-  form: "register"
-})(connect(mapStateToProps, actions)(Register));
+export default connect(mapStateToProps, actions)(
+  reduxForm({
+    form: "register",
+    enableReinitialize: true
+  })(Register)
+);

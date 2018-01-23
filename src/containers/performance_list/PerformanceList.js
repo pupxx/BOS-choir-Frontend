@@ -11,6 +11,7 @@ import classes from "./performanceList.css";
 class PerformanceList extends Component {
   componentDidMount() {
     this.props.fetchPerformances();
+    // this.props.fetchProfile();
   }
 
   getPerformances() {
