@@ -33,9 +33,10 @@ export function signupUser({ email, password }, cb) {
   };
 }
 
-export function signinUser({ email, password }, cb) {
+export function signinUser({ email, password }, goToLanding, goToRegister) {
   return function(dispatch) {
     const url = `${ROOT_URL}/signin`;
+    const getMemberInfo = `${ROOT_URL}/members/member-info`;
     axios
       .post(url, { email, password })
       .then(response => {
@@ -43,8 +44,16 @@ export function signinUser({ email, password }, cb) {
         localStorage.setItem("token", response.data.token);
         return response;
       })
-      .then(() => {
-        cb();
+      .then(response => {
+        let token = localStorage.getItem("token");
+        let headers = { authorization: token };
+        axios.get(getMemberInfo, { headers }).then(memberInfo => {
+          if (memberInfo.data[0].firstname === "") {
+            goToRegister();
+          } else {
+            goToLanding();
+          }
+        });
       })
       .catch(err => {
         dispatch(authError(err.response.data.message));

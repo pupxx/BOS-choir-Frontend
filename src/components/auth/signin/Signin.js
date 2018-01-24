@@ -22,9 +22,13 @@ class Signin extends Component {
   onSubmit(values) {
     let email = values.email;
     let password = values.password;
-    this.props.signinUser({ email, password }, () => {
-      this.props.history.push("/member/landing");
-    });
+    this.props.signinUser(
+      { email, password },
+      () => {
+        this.props.history.push("/member/landing");
+      },
+      () => this.props.history.push("/member/register")
+    );
   }
 
   displayError() {
