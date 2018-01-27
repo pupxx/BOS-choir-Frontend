@@ -2,6 +2,7 @@ import axios from "axios";
 import { AUTH_USER, FETCH_REHEARSALS, AUTH_ERROR, UNAUTH_USER } from "./types";
 export * from "./performances";
 export * from "./profile";
+export * from "./churchs";
 
 const ROOT_URL = "http://localhost:4000";
 
@@ -37,22 +38,25 @@ export function signinUser({ email, password }, goToLanding, goToRegister) {
   return function(dispatch) {
     const url = `${ROOT_URL}/signin`;
     const getMemberInfo = `${ROOT_URL}/members/member-info`;
-    axios
+    let token;
+    let headers;
+    return axios
       .post(url, { email, password })
       .then(response => {
         dispatch({ type: AUTH_USER });
         localStorage.setItem("token", response.data.token);
         return response;
       })
-      .then(response => {
-        let token = localStorage.getItem("token");
-        let headers = { authorization: token };
-        axios.get(getMemberInfo, { headers }).then(memberInfo => {
+      .then(() => {
+        token = localStorage.getItem("token");
+        headers = { authorization: token };
+        return axios.get(getMemberInfo, { headers }).then(memberInfo => {
           if (memberInfo.data[0].firstname === "") {
             goToRegister();
           } else {
             goToLanding();
           }
+          return memberInfo;
         });
       })
       .catch(err => {

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Field, reduxForm } from "redux-form";
 import * as actions from "../../store/actions";
+import _ from "lodash";
 
 import classes from "./register.css";
 
@@ -9,6 +10,7 @@ class Register extends Component {
   componentDidMount() {
     console.log(this.props);
     this.props.fetchProfile();
+    this.props.fetchChurchs();
   }
 
   renderField(field) {
@@ -33,6 +35,7 @@ class Register extends Component {
         </option>
       );
     });
+
     return (
       <div className="form-group">
         <label>{field.label}</label>
@@ -54,94 +57,92 @@ class Register extends Component {
   }
 
   render() {
-    console.log(this.props.initialValues);
-
     let parts = ["Soprano", "Alto", "Tenor", "Bass"];
-    let location = ["Barrie Ward", "Orilla", "Brampton"];
+    let location = _.map(this.props.churchs, (el, i) => {
+      return el.churchname;
+    });
     const { handleSubmit } = this.props;
-    return (
-      <form
-        onSubmit={handleSubmit(this.onSubmit.bind(this))}
-        className={classes.Form}
-      >
-        <h3>Please Register</h3>
-        <Field
-          name="firstname"
-          label="First Name:"
-          type="text"
-          placeholder="First Name"
-          component={this.renderField}
-        />
-        <Field
-          name="lastname"
-          label="Last Name:"
-          type="text"
-          component={this.renderField}
-          placeholder="Last Name"
-        />
-        <Field
-          name="address1"
-          label="Address 1:"
-          type="text"
-          component={this.renderField}
-          placeholder="Address 1"
-        />
-        <Field
-          name="address2"
-          label="Address 2:"
-          type="text"
-          component={this.renderField}
-          placeholder="Address 2"
-        />
-        <Field
-          name="city"
-          label="City:"
-          type="text"
-          component={this.renderField}
-          placeholder="City"
-        />
-        <Field
-          name="postal"
-          label="Postal Code:"
-          type="text"
-          component={this.renderField}
-          placeholder="Postal Code"
-        />
-        <Field
-          name="phone"
-          label="Phone:"
-          type="text"
-          component={this.renderField}
-          placeholder="Phone"
-        />
-        <Field
-          name="email"
-          label="Email:"
-          type="email"
-          component={this.renderField}
-          placeholder="Email"
-        />
-        <Field
-          name="churchname"
-          label="Ward or Branch"
-          component={this.renderSelect}
-          options={location}
-          className="form-control"
-          placeholder="Ward or Branch"
-        />
-        <Field
-          name="part"
-          label="Part"
-          component={this.renderSelect}
-          options={parts}
-          className="form-control"
-          placeholder="Part"
-        />
-        <button type="submit" className="btn btn-primary">
-          Submit
-        </button>
-      </form>
-    );
+
+    if (!location[0]) {
+      return <div>Loading...</div>;
+    } else {
+      return (
+        <form
+          onSubmit={handleSubmit(this.onSubmit.bind(this))}
+          className={classes.Form}
+        >
+          <h3>Please Register</h3>
+          <Field
+            name="firstname"
+            label="First Name:"
+            type="text"
+            placeholder="First Name"
+            component={this.renderField}
+          />
+          <Field
+            name="lastname"
+            label="Last Name:"
+            type="text"
+            component={this.renderField}
+            placeholder="Last Name"
+          />
+          <Field
+            name="address1"
+            label="Address 1:"
+            type="text"
+            component={this.renderField}
+            placeholder="Address 1"
+          />
+          <Field
+            name="address2"
+            label="Address 2:"
+            type="text"
+            component={this.renderField}
+            placeholder="Address 2"
+          />
+          <Field
+            name="city"
+            label="City:"
+            type="text"
+            component={this.renderField}
+            placeholder="City"
+          />
+          <Field
+            name="postal"
+            label="Postal Code:"
+            type="text"
+            component={this.renderField}
+            placeholder="Postal Code"
+          />
+          <Field
+            name="phone"
+            label="Phone:"
+            type="text"
+            component={this.renderField}
+            placeholder="Phone"
+          />
+          <Field
+            name="churchname"
+            label="Ward or Branch"
+            component={this.renderSelect}
+            options={location}
+            className="form-control"
+            placeholder="Ward or Branch"
+          />
+          <Field
+            name="part"
+            label="Part"
+            component={this.renderSelect}
+            options={parts}
+            className="form-control"
+            placeholder="Part"
+          />
+          <button type="submit" className="btn btn-primary">
+            Submit
+          </button>
+        </form>
+      );
+    }
   }
 }
 
@@ -156,7 +157,10 @@ function validate(values) {
 }
 
 function mapStateToProps(state) {
-  return { initialValues: state.profile[1] };
+  return {
+    initialValues: state.profile[1],
+    churchs: state.churchs
+  };
 }
 
 export default connect(mapStateToProps, actions)(
