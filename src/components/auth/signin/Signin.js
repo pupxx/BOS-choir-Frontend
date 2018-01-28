@@ -75,52 +75,32 @@ class Signin extends Component {
   }
 }
 
-function checkForUpperCase(str) {
-  const arr = str.split("");
-  const hasCap = arr.some(el => {
-    if (isNaN(parseInt(el, 10))) {
-      return el === el.toUpperCase();
-    }
-    return false;
-  });
-  return hasCap;
-}
-
-function hasANumber(str) {
-  const arr = str.split("");
-  const hasNumber = [];
-  const mappedArr = arr.map(el => parseInt(el, 10));
-  mappedArr.forEach(el => {
-    if (el >= 0) {
-      hasNumber.push(el);
-    }
-  });
-  if (!hasNumber.length) {
-    return false;
-  }
-  return true;
-}
-
 function validate(values) {
+  const emailReg = /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9]))\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9])|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/;
+  const whiteSpaceReg = / /;
+  const capReg = /[A-Z]/;
+  const specCharReg = /[~!@#$&]/;
+  const numReg = /[0-9]/;
   const errors = {};
 
-  if (!values.email) {
-    errors.email = "Please enter a valid email";
+  if (
+    !values.email ||
+    (values.email && !emailReg.test(values.email)) ||
+    whiteSpaceReg.test(values.email) ||
+    whiteSpaceReg.test(values.email)
+  ) {
+    errors.email = "Please enter a valid email.";
   }
-  if (!values.password) {
-    errors.password = "Please enter a valid password";
-  }
-  if (values.password && values.password.length < 8) {
+  if (
+    !values.password ||
+    (values.password && values.password.length < 8) ||
+    !specCharReg.test(values.password) ||
+    !capReg.test(values.password) ||
+    whiteSpaceReg.test(values.password) ||
+    !numReg.test(values.password)
+  ) {
     errors.password =
-      "password must be at least 8 characters long and contain at least one capital letter and one number.";
-  }
-  if (values.password && !hasANumber(values.password)) {
-    errors.password =
-      "password must be at least 8 characters long and contain at least one capital letter and one number.";
-  }
-  if (values.password && !checkForUpperCase(values.password)) {
-    errors.password =
-      "password must be at least 8 characters long and contain at least one capital letter and one number.";
+      "Password must be 8 characters long, include one capital, one special character, (i.e., ~!@#$&), and a number.";
   }
   return errors;
 }

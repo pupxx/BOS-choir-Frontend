@@ -66,6 +66,7 @@ function validate(values) {
   const whiteSpaceReg = / /;
   const capReg = /[A-Z]/;
   const specCharReg = /[~!@#$&]/;
+  const numReg = /[0-9]/;
 
   const errors = {};
 
@@ -83,10 +84,11 @@ function validate(values) {
     (values.password && values.password.length < 8) ||
     !specCharReg.test(values.password) ||
     !capReg.test(values.password) ||
-    whiteSpaceReg.test(values.password)
+    whiteSpaceReg.test(values.password) ||
+    !numReg.test(values.password)
   ) {
     errors.password =
-      "Password must be 8 characters long and include one capital and one special character. (i.e., ~!@#$&)";
+      "Password must be 8 characters, include one capital, one special character, (i.e., ~!@#$&), and a number.";
   }
 
   if (!values.confirmPassword || values.password !== values.confirmPassword) {
