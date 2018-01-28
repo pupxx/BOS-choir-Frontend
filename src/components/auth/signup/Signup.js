@@ -14,10 +14,13 @@ class Signup extends Component {
   }
 
   renderField(field) {
+    const { meta: { touched, error } } = field;
+    const className = `form-control ${touched && error ? "is-invalid" : ""}`;
     return (
       <div className="form-group">
         <label>{field.label}</label>
-        <input {...field.input} className="form-control" type={field.type} />
+        <input {...field.input} className={className} type={field.type} />
+        {touched ? error : ""}
       </div>
     );
   }
@@ -58,6 +61,41 @@ class Signup extends Component {
   }
 }
 
+function validate(values) {
+  const emailReg = /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9]))\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9])|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/;
+  const whiteSpaceReg = / /;
+  const capReg = /[A-Z]/;
+  const specCharReg = /[~!@#$&]/;
+
+  const errors = {};
+
+  if (
+    !values.email ||
+    (values.email && !emailReg.test(values.email)) ||
+    whiteSpaceReg.test(values.email) ||
+    whiteSpaceReg.test(values.email)
+  ) {
+    errors.email = "Please enter a valid email.";
+  }
+
+  if (
+    !values.password ||
+    (values.password && values.password.length < 8) ||
+    !specCharReg.test(values.password) ||
+    !capReg.test(values.password) ||
+    whiteSpaceReg.test(values.password)
+  ) {
+    errors.password =
+      "Password must be 8 characters long and include one capital and one special character. (i.e., ~!@#$&)";
+  }
+
+  if (!values.confirmPassword || values.password !== values.confirmPassword) {
+    errors.confirmPassword = "Oops! Passwords do not match.";
+  }
+  return errors;
+}
+
 export default reduxForm({
+  validate,
   form: "signup"
 })(connect(null, actions)(Signup));
