@@ -9,7 +9,7 @@ class Signup extends Component {
   onSubmit(values) {
     const { email, password } = values;
     this.props.signupUser({ email, password }, () => {
-      this.props.history.push("/member/landing");
+      this.props.history.push("/signin");
     });
   }
 
