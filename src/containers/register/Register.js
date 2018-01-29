@@ -8,6 +8,7 @@ import classes from "./register.css";
 
 class Register extends Component {
   componentDidMount() {
+    this.props.fetchMemberInfo();
     this.props.fetchProfile();
     this.props.fetchChurchs();
   }
@@ -67,11 +68,13 @@ class Register extends Component {
     let location = _.map(this.props.churchs, (el, i) => {
       return el.churchname;
     });
+    console.log(this.props.churchs);
     const { handleSubmit } = this.props;
 
     if (!location[0]) {
       return <div>Loading...</div>;
     } else {
+      console.log(this.props, "here are the props");
       return (
         <form
           onSubmit={handleSubmit(this.onSubmit.bind(this))}
@@ -201,9 +204,11 @@ function validate(values) {
 }
 
 function mapStateToProps(state) {
+  let arr = _.map(state.memberInfo);
   return {
-    initialValues: state.profile[1],
-    churchs: state.churchs
+    initialValues: arr[0],
+    churchs: state.churchs,
+    memberInfo: state.memberInfo
   };
 }
 

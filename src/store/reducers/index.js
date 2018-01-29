@@ -6,6 +6,7 @@ import { reducer as form } from "redux-form";
 import authReducer from "./auth/auth_reducer";
 import profile from "./reducer_profile";
 import churchs from "./reducers_churchs";
+import memberInfo from "./reducer_memberInfo";
 
 const rootReducer = combineReducers({
   performanceList,
@@ -14,7 +15,8 @@ const rootReducer = combineReducers({
   form,
   auth: authReducer,
   profile,
-  churchs
+  churchs,
+  memberInfo
 });
 
 export default rootReducer;

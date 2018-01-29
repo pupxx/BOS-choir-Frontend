@@ -1,5 +1,12 @@
 import axios from "axios";
-import { AUTH_USER, FETCH_REHEARSALS, AUTH_ERROR, UNAUTH_USER } from "./types";
+import {
+  AUTH_USER,
+  FETCH_REHEARSALS,
+  FETCH_CHURCHS,
+  FETCH_MEMBER_INFO,
+  AUTH_ERROR,
+  UNAUTH_USER
+} from "./types";
 export * from "./performances";
 export * from "./profile";
 export * from "./churchs";
@@ -51,6 +58,7 @@ export function signinUser({ email, password }, goToLanding, goToRegister) {
         token = localStorage.getItem("token");
         headers = { authorization: token };
         return axios.get(getMemberInfo, { headers }).then(memberInfo => {
+          dispatch({ type: FETCH_MEMBER_INFO, payload: memberInfo });
           if (memberInfo.data[0].firstname === "") {
             goToRegister();
           } else {

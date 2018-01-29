@@ -94,7 +94,7 @@ function validate(values) {
   if (
     !values.password ||
     (values.password && values.password.length < 8) ||
-    !specCharReg.test(values.password) ||
+    // !specCharReg.test(values.password) ||
     !capReg.test(values.password) ||
     whiteSpaceReg.test(values.password) ||
     !numReg.test(values.password)

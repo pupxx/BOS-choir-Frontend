@@ -5,3 +5,4 @@ export const FETCH_REHEARSALS = "FETCH_REHEARSALS";
 export const AUTH_ERROR = "auth_error";
 export const FETCH_PROFILE = "FETCH_PROFILE";
 export const FETCH_CHURCHS = "FETCH_CHURCHS";
+export const FETCH_MEMBER_INFO = "FETCH_MEMBER_INFO";
