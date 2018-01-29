@@ -2,7 +2,6 @@ import axios from "axios";
 import {
   AUTH_USER,
   FETCH_REHEARSALS,
-  FETCH_CHURCHS,
   FETCH_MEMBER_INFO,
   AUTH_ERROR,
   UNAUTH_USER

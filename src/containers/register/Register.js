@@ -68,13 +68,11 @@ class Register extends Component {
     let location = _.map(this.props.churchs, (el, i) => {
       return el.churchname;
     });
-    console.log(this.props.churchs);
     const { handleSubmit } = this.props;
 
     if (!location[0]) {
       return <div>Loading...</div>;
     } else {
-      console.log(this.props, "here are the props");
       return (
         <form
           onSubmit={handleSubmit(this.onSubmit.bind(this))}
