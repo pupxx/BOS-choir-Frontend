@@ -203,8 +203,9 @@ function validate(values) {
 
 function mapStateToProps(state) {
   let arr = _.map(state.memberInfo);
+  let profile = _.map(state.profile);
   return {
-    initialValues: arr[0],
+    initialValues: profile[0],
     churchs: state.churchs,
     memberInfo: state.memberInfo
   };
