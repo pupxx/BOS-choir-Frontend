@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Field, reduxForm } from "redux-form";
+import { reset, Field, reduxForm } from "redux-form";
 import * as actions from "../../store/actions";
 import _ from "lodash";
 
@@ -60,7 +60,11 @@ class Register extends Component {
   };
 
   onSubmit(values) {
+    // this.props.reset();
     console.log(values);
+    this.props.updateMemberProfile(values, () => {
+      // this.props.history.push("/member/landing");
+    });
   }
 
   render() {
@@ -73,6 +77,7 @@ class Register extends Component {
     if (!location[0]) {
       return <div>Loading...</div>;
     } else {
+      console.log(this.props);
       return (
         <form
           onSubmit={handleSubmit(this.onSubmit.bind(this))}
@@ -202,7 +207,6 @@ function validate(values) {
 }
 
 function mapStateToProps(state) {
-  let arr = _.map(state.memberInfo);
   let profile = _.map(state.profile);
   return {
     initialValues: profile[0],
@@ -214,7 +218,8 @@ function mapStateToProps(state) {
 export default connect(mapStateToProps, actions)(
   reduxForm({
     validate,
-    form: "register"
+    form: "register",
+    enableReinitialize: true
   })(Register)
 );
 // export default reduxForm({
