@@ -45,11 +45,7 @@ class PerformanceList extends Component {
           </Link>
         );
       } else {
-        return (
-          <Link to={`/performances/showperformance/${el.id}`} key={el.id}>
-            <PerformanceListItem title={el.perfname} />
-          </Link>
-        );
+        return <PerformanceListItem key={el.id} title={el.perfname} />;
       }
     });
   }
