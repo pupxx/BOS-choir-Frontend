@@ -1,4 +1,5 @@
 import axios from "axios";
+import { fetchProfile } from "./profile";
 import {
   AUTH_USER,
   FETCH_REHEARSALS,
@@ -58,13 +59,20 @@ export function signinUser({ email, password }, goToLanding, goToRegister) {
         headers = { authorization: token };
         return axios.get(getMemberInfo, { headers }).then(memberInfo => {
           dispatch({ type: FETCH_MEMBER_INFO, payload: memberInfo });
-          if (memberInfo.data[0].firstname === "") {
-            goToRegister();
-          } else {
-            goToLanding();
-          }
+
           return memberInfo;
         });
+      })
+      .then(memberInfo => {
+        dispatch(fetchProfile());
+        return memberInfo;
+      })
+      .then(memberInfo => {
+        if (memberInfo.data[0].firstname === "") {
+          goToRegister();
+        } else {
+          goToLanding();
+        }
       })
       .catch(err => {
         dispatch(authError(err.response.data.message));

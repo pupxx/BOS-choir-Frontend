@@ -8,8 +8,8 @@ import classes from "./register.css";
 
 class Register extends Component {
   componentDidMount() {
-    this.props.fetchMemberInfo();
-    this.props.fetchProfile();
+    // this.props.fetchMemberInfo();
+    // this.props.fetchProfile();
     this.props.fetchChurchs();
   }
 
@@ -63,7 +63,7 @@ class Register extends Component {
     // this.props.reset();
     console.log(values);
     this.props.updateMemberProfile(values, () => {
-      // this.props.history.push("/member/landing");
+      this.props.history.push("/member/landing");
     });
   }
 
@@ -77,7 +77,6 @@ class Register extends Component {
     if (!location[0]) {
       return <div>Loading...</div>;
     } else {
-      console.log(this.props);
       return (
         <form
           onSubmit={handleSubmit(this.onSubmit.bind(this))}
@@ -209,6 +208,7 @@ function validate(values) {
 function mapStateToProps(state) {
   let profile = _.map(state.profile);
   return {
+    profile: state.profile,
     initialValues: profile[0],
     churchs: state.churchs,
     memberInfo: state.memberInfo
@@ -222,6 +222,7 @@ export default connect(mapStateToProps, actions)(
     enableReinitialize: true
   })(Register)
 );
+
 // export default reduxForm({
 //   validate,
 //   form: "register",
