@@ -8,7 +8,7 @@ import className from "./profile.css";
 
 class Profile extends Component {
   componentDidMount() {
-    // this.props.fetchProfile();
+    this.props.fetchProfile();
     this.props.fetchMemberInfo();
   }
 
