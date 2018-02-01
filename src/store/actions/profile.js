@@ -33,7 +33,6 @@ export function fetchMemberInfo() {
     axios
       .get(url, { headers })
       .then(memberOwnInfo => {
-        console.log("here is the member info", memberOwnInfo);
         dispatch({ type: FETCH_MEMBER_INFO, payload: memberOwnInfo });
       })
       .catch(err => {

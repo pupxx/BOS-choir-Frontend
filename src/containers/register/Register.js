@@ -60,10 +60,8 @@ class Register extends Component {
   };
 
   onSubmit(values) {
-    // this.props.reset();
-    console.log(values);
     this.props.updateMemberProfile(values, () => {
-      this.props.history.push("/member/landing");
+      this.props.history.push("/profile");
     });
   }
 

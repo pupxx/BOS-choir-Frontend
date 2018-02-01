@@ -66,6 +66,7 @@ class Profile extends Component {
           <h6>{phone}</h6>
           <h6>{churchname}</h6>
           <h6>{part}</h6>
+          <Link to="/member/register">Edit</Link>
         </div>
       );
     } else {
