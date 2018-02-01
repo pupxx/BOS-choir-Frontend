@@ -4,23 +4,40 @@ import { Link } from "react-router-dom";
 import _ from "lodash";
 import * as actions from "../../store/actions";
 
+import className from "./profile.css";
+
 class Profile extends Component {
   componentDidMount() {
-    this.props.fetchProfile();
+    // this.props.fetchProfile();
     this.props.fetchMemberInfo();
   }
 
   render() {
     let memberProfile = _.map(this.props.profile)[0];
     let memberInfo = _.map(this.props.memberInfo)[0];
-    if (!memberProfile || !memberInfo) {
+    let register = `alert alert-danger ${className.ClickToRegisterWrapper}`;
+    if (!memberInfo) {
       return (
-        <Link to="/member/register" className="alert alert-danger">
-          Please Click here to complete registration.
-        </Link>
+        <div className="ui active transition visible inverted dimmer">
+          <div className="content">
+            <div className="center">
+              <div className="ui inverted text loader">...</div>
+            </div>
+          </div>
+        </div>
       );
-    } else {
-      console.log(this.props.memberInfo);
+    } else if (memberInfo.firstname === "") {
+      return (
+        <div className={register}>
+          <Link to="/member/register" className={className.ClickToRegister}>
+            <h5>
+              It Looks like you haven't completed registration. Please Click
+              here to get that finished as soon as possible.
+            </h5>
+          </Link>
+        </div>
+      );
+    } else if (memberProfile) {
       const {
         firstname,
         lastname,
@@ -48,12 +65,13 @@ class Profile extends Component {
           <h6>{part}</h6>
         </div>
       );
+    } else {
+      return <div>There was an error Please try again</div>;
     }
   }
 }
 
 function mapStateToProps(state) {
-  console.log(state);
   return { profile: state.profile, memberInfo: state.memberInfo };
 }
 
