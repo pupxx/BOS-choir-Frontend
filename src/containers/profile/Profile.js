@@ -31,9 +31,12 @@ class Profile extends Component {
         <div className={register}>
           <Link to="/member/register" className={className.ClickToRegister}>
             <h5>
-              It Looks like you haven't completed registration. Please Click
-              here to get that finished as soon as possible.
+              John 8:13: The Pharisees therefore said unto him, Thou
+              bearest record of thyself; thy record is not true.
             </h5>
+            <div>
+              <h5>Please Click here to finish registration.</h5>
+            </div>
           </Link>
         </div>
       );
