@@ -34,6 +34,11 @@ function navigationItems(props) {
           Rehearsals
         </NavigationItem>
       ) : null}
+      {location.pathname !== "/profile" ? (
+        <NavigationItem link="/profile" toggle={props.toggle}>
+          Profile
+        </NavigationItem>
+      ) : null}
     </ul>
   );
 }
