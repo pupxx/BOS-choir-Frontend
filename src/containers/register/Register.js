@@ -8,8 +8,8 @@ import classes from "./register.css";
 
 class Register extends Component {
   componentDidMount() {
-    // this.props.fetchMemberInfo();
-    // this.props.fetchProfile();
+    this.props.fetchMemberInfo();
+    this.props.fetchProfile();
     this.props.fetchChurchs();
   }
 
