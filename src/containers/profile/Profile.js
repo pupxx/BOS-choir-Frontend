@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import _ from "lodash";
 import * as actions from "../../store/actions";
+import LoaderWithText from "../../components/UI/loaders/LoaderWithText";
 
 import className from "./profile.css";
 
@@ -18,13 +19,14 @@ class Profile extends Component {
     let register = `alert alert-danger ${className.ClickToRegisterWrapper}`;
     if (!memberInfo) {
       return (
-        <div className="ui active transition visible inverted dimmer">
-          <div className="content">
-            <div className="center">
-              <div className="ui inverted text loader">...</div>
-            </div>
-          </div>
-        </div>
+        <LoaderWithText />
+        // <div className="ui active transition visible inverted dimmer">
+        //   <div className="content">
+        //     <div className="center">
+        //       <div className="ui inverted text loader">...</div>
+        //     </div>
+        //   </div>
+        // </div>
       );
     } else if (memberInfo.firstname === "") {
       return (
