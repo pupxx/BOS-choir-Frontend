@@ -21,7 +21,7 @@ class PerformanceList extends Component {
         if (!el.attending) {
           var attendance = (
             <h6 className={classes.NotAttending}>
-              <button className={classes.AttendingWrapper}>
+              <button className={classes.NotAttendingWrapper}>
                 I will not be attending
               </button>
               <span className={classes.Carrot}>></span>
@@ -30,7 +30,7 @@ class PerformanceList extends Component {
         } else {
           attendance = (
             <h6 className={classes.Attending}>
-              <button className={classes.NotAttendingWrapper}>
+              <button className={classes.AttendingWrapper}>
                 I will be attending
               </button>
               <span className={classes.Carrot}>></span>
@@ -39,7 +39,7 @@ class PerformanceList extends Component {
         }
         return (
           <Link to={`/performances/showperformance/${el.id}`} key={el.id}>
-            <PerformanceListItem title={el.perfname}>
+            <PerformanceListItem title={el.perfname} attend={el.attending}>
               {attendance}
             </PerformanceListItem>
           </Link>
@@ -51,11 +51,11 @@ class PerformanceList extends Component {
   }
 
   render() {
+    console.log(this.props);
     return (
       <Aux>
-        <h3 className={classes.H3}>Upcoming Performances</h3>
+        <h5 className={classes.H3}>Upcoming Performances</h5>
         <ul className={classes.Listitem}>{this.getPerformances()}</ul>
-        <Link to={"/member/register"}>Register</Link>
       </Aux>
     );
   }

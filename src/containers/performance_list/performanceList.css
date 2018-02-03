@@ -5,17 +5,19 @@
 .Listitem li {
   width: 90%;
   border-bottom: 1px solid #b9bac2;
+  border-left: 1px solid #b9bac2;
+  border-radius: 10px;
   margin-top: 20px;
   min-height: 50px;
   vertical-align: middle;
   color: black;
 }
 
-.AttendingWrapper {
+.NotAttendingWrapper {
   background-color: #fac8c8;
 }
 
-.NotAttendingWrapper {
+.AttendingWrapper {
   background-color: lightgreen;
 }
 

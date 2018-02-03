@@ -4,13 +4,29 @@ import { connect } from "react-redux";
 
 class PerformanceListItem extends Component {
   render() {
+    let liStyle;
+    if (this.props.authenticated) {
+      console.log("authed");
+      if (this.props.attend) {
+        liStyle = { backgroundColor: "#d3ffd3" };
+      } else {
+        liStyle = { backgroundColor: "#ffe8e8" };
+      }
+    } else {
+      console.log("not authed");
+      liStyle = {};
+    }
     return (
-      <li className={classes.Listitem}>
-        <h5>{this.props.title}</h5>
+      <li className={classes.Listitem} style={liStyle}>
+        <h6>{this.props.title}</h6>
         <div>{this.props.children}</div>
       </li>
     );
   }
 }
-
-export default connect(null, null)(PerformanceListItem);
+function mapStateToProps(state) {
+  return {
+    authenticated: state.auth.authenticated
+  };
+}
+export default connect(mapStateToProps, null)(PerformanceListItem);
