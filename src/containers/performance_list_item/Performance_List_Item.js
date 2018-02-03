@@ -8,9 +8,9 @@ class PerformanceListItem extends Component {
     if (this.props.authenticated) {
       console.log("authed");
       if (this.props.attend) {
-        liStyle = { backgroundColor: "#d3ffd3" };
+        liStyle = { backgroundColor: "#ecfeec" };
       } else {
-        liStyle = { backgroundColor: "#ffe8e8" };
+        liStyle = { backgroundColor: "#fff6f6" };
       }
     } else {
       console.log("not authed");
