@@ -6,3 +6,4 @@ export const AUTH_ERROR = "auth_error";
 export const FETCH_PROFILE = "FETCH_PROFILE";
 export const FETCH_CHURCHS = "FETCH_CHURCHS";
 export const FETCH_MEMBER_INFO = "FETCH_MEMBER_INFO";
+export const IS_ADMIN = "IS_ADMIN";

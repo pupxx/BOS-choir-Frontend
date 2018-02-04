@@ -7,6 +7,7 @@ import authReducer from "./auth/auth_reducer";
 import profile from "./reducer_profile";
 import churchs from "./reducers_churchs";
 import memberInfo from "./reducer_memberInfo";
+import isAdmin from "./auth/reducer_admin";
 
 const rootReducer = combineReducers({
   performanceList,
@@ -14,6 +15,7 @@ const rootReducer = combineReducers({
   rehearsals,
   form,
   auth: authReducer,
+  isAdmin,
   profile,
   churchs,
   memberInfo

@@ -51,7 +51,6 @@ class PerformanceList extends Component {
   }
 
   render() {
-    console.log(this.props);
     return (
       <Aux>
         <h5 className={classes.H3}>Upcoming Performances</h5>
@@ -63,6 +62,7 @@ class PerformanceList extends Component {
 
 function mapStateToProps(state) {
   return {
+    memberInfo: state.memberInfo,
     performances: state.performanceList,
     authenticated: state.auth.authenticated
   };

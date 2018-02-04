@@ -5,7 +5,8 @@ import {
   FETCH_REHEARSALS,
   FETCH_MEMBER_INFO,
   AUTH_ERROR,
-  UNAUTH_USER
+  UNAUTH_USER,
+  IS_ADMIN
 } from "./types";
 export * from "./performances";
 export * from "./profile";
@@ -41,7 +42,12 @@ export function signupUser({ email, password }, cb) {
   };
 }
 
-export function signinUser({ email, password }, goToLanding, goToRegister) {
+export function signinUser(
+  { email, password },
+  goToLanding,
+  goToRegister,
+  goToAdmin
+) {
   return function(dispatch) {
     const url = `${ROOT_URL}/signin`;
     const getMemberInfo = `${ROOT_URL}/members/member-info`;
@@ -68,10 +74,15 @@ export function signinUser({ email, password }, goToLanding, goToRegister) {
         return memberInfo;
       })
       .then(memberInfo => {
-        if (memberInfo.data[0].firstname === "") {
-          goToRegister();
+        if (memberInfo.data[0].admin === true) {
+          dispatch({ type: IS_ADMIN, payload: memberInfo.data[0] });
+          goToAdmin();
         } else {
-          goToLanding();
+          if (memberInfo.data[0].firstname === "") {
+            goToRegister();
+          } else {
+            goToLanding();
+          }
         }
       })
       .catch(err => {
@@ -89,5 +100,21 @@ export function authError(error) {
   return {
     type: AUTH_ERROR,
     payload: error
+  };
+}
+
+export function isAdmin(goToMemberLanding, goToAdminLocation) {
+  const token = localStorage.getItem("token");
+  const headers = { authorization: token };
+  let url = `${ROOT_URL}/admin/isAdmin`;
+  return function(dispatch) {
+    return axios.get(url, { headers }).then(isadmin => {
+      if (isadmin.data[0].admin === true) {
+        dispatch({ type: IS_ADMIN, payload: isadmin.data[0] });
+        goToAdminLocation();
+      } else {
+        goToMemberLanding();
+      }
+    });
   };
 }

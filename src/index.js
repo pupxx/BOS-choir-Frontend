@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { BrowserRouter, Route } from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { Provider } from "react-redux";
 import { createStore, applyMiddleware } from "redux";
 import reduxThunk from "redux-thunk";
@@ -8,6 +8,9 @@ import { AUTH_USER } from "./store/actions/types";
 
 import "./index.css";
 import App from "./components/app/App";
+import require_admin from "./hoc/authorize/Authorize";
+import require_auth from "./hoc/auth/require_authentication";
+import AdminLanding from "../src/containers/admin/adminLanding/AdminLanding";
 import registerServiceWorker from "./registerServiceWorker";
 import reducers from "./store/reducers";
 
@@ -23,7 +26,13 @@ const app = (
   <Provider store={store}>
     <BrowserRouter>
       <div>
-        <Route path="/" component={App} />
+        <Switch>
+          <Route
+            path="/admin/admin-landing"
+            component={require_auth(require_admin(AdminLanding))}
+          />
+          <Route path="/" component={App} />
+        </Switch>
       </div>
     </BrowserRouter>
   </Provider>

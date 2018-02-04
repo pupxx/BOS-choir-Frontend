@@ -24,10 +24,9 @@ class Signin extends Component {
     let password = values.password;
     this.props.signinUser(
       { email, password },
-      () => {
-        this.props.history.push("/member/landing");
-      },
-      () => this.props.history.push("/member/register")
+      () => this.props.history.push("/member/landing"),
+      () => this.props.history.push("/member/register"),
+      () => this.props.history.push("/admin/admin-landing")
     );
   }
 
