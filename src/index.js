@@ -8,8 +8,8 @@ import { AUTH_USER } from "./store/actions/types";
 
 import "./index.css";
 import App from "./components/app/App";
-import require_admin from "./hoc/authorize/Authorize";
-import require_auth from "./hoc/auth/require_authentication";
+import requireAdmin from "./hoc/authorize/Authorize";
+import requireAuth from "./hoc/auth/require_authentication";
 import AdminLanding from "../src/containers/admin/adminLanding/AdminLanding";
 import registerServiceWorker from "./registerServiceWorker";
 import reducers from "./store/reducers";
@@ -27,10 +27,10 @@ const app = (
     <BrowserRouter>
       <div>
         <Switch>
-          <Route
+          {/* <Route
             path="/admin/admin-landing"
-            component={require_auth(require_admin(AdminLanding))}
-          />
+            component={requireAuth(requireAdmin(AdminLanding))}
+          /> */}
           <Route path="/" component={App} />
         </Switch>
       </div>

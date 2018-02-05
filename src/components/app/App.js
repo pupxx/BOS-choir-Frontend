@@ -15,6 +15,8 @@ import Profile from "../../containers/profile/Profile";
 import Register from "../../containers/register/Register";
 import MemberLanding from "../../containers/memberLanding/MemberLanding";
 import requireAuth from "../../hoc/auth/require_authentication";
+import requireAdmin from "../../hoc/authorize/Authorize";
+import AdminLanding from "../../containers/admin/adminLanding/AdminLanding";
 
 // import classes from './app.css';
 
@@ -43,6 +45,10 @@ class App extends Component {
       <div>
         <Layout>
           <Switch>
+            <Route
+              path="/admin/admin-landing"
+              component={requireAuth(requireAdmin(AdminLanding))}
+            />
             <Route
               path="/member/landing"
               component={requireAuth(MemberLanding)}
