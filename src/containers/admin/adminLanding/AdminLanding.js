@@ -15,10 +15,7 @@ class AdminLanding extends Component {
       <div>
         <TestComponent>
           Hello there
-          <Route
-            path="/admin/admin-landing/profile"
-            component={requireAuth(Rehearsals)}
-          />
+          <Route path="/admin/admin-landing/profile" component={Profile} />
         </TestComponent>
       </div>
     );

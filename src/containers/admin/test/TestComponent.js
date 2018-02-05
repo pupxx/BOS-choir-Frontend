@@ -6,7 +6,6 @@ import AdminToolBar, { AdminToolbar } from "../adminToolbar/AdminToolbar";
 class TestComponent extends Component {
   state = {};
   render() {
-    console.log(this.props);
     return (
       <Aux>
         <AdminToolbar />

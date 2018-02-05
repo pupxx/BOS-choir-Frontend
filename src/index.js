@@ -27,10 +27,10 @@ const app = (
     <BrowserRouter>
       <div>
         <Switch>
-          {/* <Route
+          <Route
             path="/admin/admin-landing"
             component={requireAuth(requireAdmin(AdminLanding))}
-          /> */}
+          />
           <Route path="/" component={App} />
         </Switch>
       </div>
