@@ -9,6 +9,11 @@ import Profile from "../../profile/Profile";
 import Rehearsals from "../../rehearsals/Rehearsals";
 
 class AdminLanding extends Component {
+  componentWillMount() {
+    this.props.fetchMemberInfo();
+    this.props.fetchProfile();
+  }
+
   render() {
     console.log(this.props);
     return (
