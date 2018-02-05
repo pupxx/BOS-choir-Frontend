@@ -25,7 +25,6 @@ class Toolbar extends Component {
   }
 
   render() {
-    console.log(this.props.authenticated);
     const { location, toggleOpen } = this.props;
     return (
       <header className={classes.Toolbar}>

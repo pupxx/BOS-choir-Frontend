@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
 import * as actions from "../../store/actions/index";
 
 import LoaderWithText from "../../components/UI/loaders/LoaderWithText";
@@ -16,7 +15,8 @@ export default function(ComposedComponent) {
     }
 
     render() {
-      console.log(this.props);
+      console.log("admin", this.props.admin);
+      console.log("authenticated", this.props.authenticated);
       if (!this.props.admin) {
         return <LoaderWithText />;
       } else {
@@ -26,8 +26,10 @@ export default function(ComposedComponent) {
   }
 
   function mapStateToProps(state) {
-    console.log("from inside Authorize hoc", state);
-    return { admin: state.isAdmin.admin };
+    return {
+      admin: state.isAdmin.admin,
+      authenticated: state.auth.authenticated
+    };
   }
 
   return connect(mapStateToProps, actions)(RequireAdmin);

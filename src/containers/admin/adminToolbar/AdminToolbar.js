@@ -12,7 +12,6 @@ export class AdminToolbar extends Component {
   };
 
   render() {
-    console.log(this.props);
     const { activeItem } = this.state;
 
     return (
@@ -48,7 +47,7 @@ export class AdminToolbar extends Component {
           </Menu>
 
           <Segment>
-            <img src="/assets/images/wireframe/media-paragraph.png" />
+            <div>...</div>
           </Segment>
         </div>
       </Aux>
@@ -56,7 +55,6 @@ export class AdminToolbar extends Component {
   }
 }
 function mapStateToProps(state) {
-  console.log(state);
   return { admin: state.isAdmin.admin };
 }
 

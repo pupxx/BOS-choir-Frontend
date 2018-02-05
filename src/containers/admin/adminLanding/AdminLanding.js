@@ -1,12 +1,11 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Route, Switch } from "react-router-dom";
-import requireAuth from "../../../hoc/auth/require_authentication";
 import * as actions from "../../../store/actions";
 
-import TestComponent from "../../admin/test/TestComponent";
+import AdminLayout from "../../admin/adminLayout/AdminLayout";
 import Profile from "../../profile/Profile";
-import Rehearsals from "../../rehearsals/Rehearsals";
+import Register from "../../register/Register";
 
 class AdminLanding extends Component {
   componentWillMount() {
@@ -15,13 +14,14 @@ class AdminLanding extends Component {
   }
 
   render() {
-    console.log(this.props);
     return (
       <div>
-        <TestComponent>
-          Hello there
-          <Route path="/admin/admin-landing/profile" component={Profile} />
-        </TestComponent>
+        <AdminLayout>
+          <Switch>
+            <Route path="/admin/admin-landing/profile" component={Profile} />
+            <Route path="/admin/admin-landing/register" component={Register} />
+          </Switch>
+        </AdminLayout>
       </div>
     );
   }

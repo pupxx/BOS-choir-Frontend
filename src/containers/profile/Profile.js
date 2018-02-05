@@ -14,20 +14,16 @@ class Profile extends Component {
   }
 
   render() {
+    if (this.props.admin) {
+      var location = "/admin/admin-landing/register";
+    } else {
+      location = "/member/register";
+    }
     let memberProfile = _.map(this.props.profile)[0];
     let memberInfo = _.map(this.props.memberInfo)[0];
     let register = `alert alert-danger ${className.ClickToRegisterWrapper}`;
     if (!memberInfo) {
-      return (
-        <LoaderWithText />
-        // <div className="ui active transition visible inverted dimmer">
-        //   <div className="content">
-        //     <div className="center">
-        //       <div className="ui inverted text loader">...</div>
-        //     </div>
-        //   </div>
-        // </div>
-      );
+      return <LoaderWithText />;
     } else if (memberInfo.firstname === "") {
       return (
         <div className={register}>
@@ -68,7 +64,7 @@ class Profile extends Component {
           <h6>{phone}</h6>
           <h6>{churchname}</h6>
           <h6>{part}</h6>
-          <Link to="/member/register">Edit</Link>
+          <Link to={location}>Edit</Link>
         </div>
       );
     } else {
@@ -78,7 +74,11 @@ class Profile extends Component {
 }
 
 function mapStateToProps(state) {
-  return { profile: state.profile, memberInfo: state.memberInfo };
+  return {
+    profile: state.profile,
+    memberInfo: state.memberInfo,
+    admin: state.isAdmin.admin
+  };
 }
 
 export default connect(mapStateToProps, actions)(Profile);

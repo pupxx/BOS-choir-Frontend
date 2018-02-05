@@ -60,9 +60,13 @@ class Register extends Component {
   };
 
   onSubmit(values) {
-    this.props.updateMemberProfile(values, () => {
-      this.props.history.push("/profile");
-    });
+    if (this.props.admin) {
+      var location = () =>
+        this.props.history.push("/admin/admin-landing/profile");
+    } else {
+      location = () => this.props.history.push("/profile");
+    }
+    this.props.updateMemberProfile(values, location);
   }
 
   render() {
@@ -206,6 +210,7 @@ function validate(values) {
 function mapStateToProps(state) {
   let profile = _.map(state.profile);
   return {
+    admin: state.isAdmin.admin,
     profile: state.profile,
     initialValues: profile[0],
     churchs: state.churchs,

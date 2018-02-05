@@ -23,8 +23,9 @@ import AdminLanding from "../../containers/admin/adminLanding/AdminLanding";
 class App extends Component {
   componentWillMount() {
     let location = this.props.history.location.pathname;
-    console.log(location);
     if (this.props.authenticated && location === "/") {
+      let admin = () => this.props.history.push("/admin/admin-landing");
+      this.props.isAdmin(() => {}, admin);
       this.props.history.push("/member/landing");
     } else {
       this.props.history.push(location);
@@ -72,7 +73,10 @@ class App extends Component {
 }
 
 function mapStateToProps(state) {
-  return { authenticated: state.auth.authenticated };
+  return {
+    authenticated: state.auth.authenticated,
+    admin: state.isAdmin.admin
+  };
 }
 
 export default connect(mapStateToProps, actions)(App);

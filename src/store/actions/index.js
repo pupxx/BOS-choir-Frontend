@@ -108,13 +108,18 @@ export function isAdmin(goToMemberLanding, goToAdminLocation) {
   const headers = { authorization: token };
   let url = `${ROOT_URL}/admin/isAdmin`;
   return function(dispatch) {
-    return axios.get(url, { headers }).then(isadmin => {
-      if (isadmin.data[0].admin === true) {
-        dispatch({ type: IS_ADMIN, payload: isadmin.data[0] });
-        goToAdminLocation();
-      } else {
-        goToMemberLanding();
-      }
-    });
+    return axios
+      .get(url, { headers })
+      .then(isadmin => {
+        if (isadmin.data[0].admin === true) {
+          dispatch({ type: IS_ADMIN, payload: isadmin.data[0] });
+          goToAdminLocation();
+        } else {
+          goToMemberLanding();
+        }
+      })
+      .catch(err => {
+        dispatch(authError(err.response.data.message));
+      });
   };
 }

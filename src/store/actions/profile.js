@@ -1,5 +1,5 @@
 import axios from "axios";
-import { FETCH_PROFILE, FETCH_MEMBER_INFO, AUTH_ERROR } from "./types";
+import { FETCH_PROFILE, FETCH_MEMBER_INFO } from "./types";
 import { authError } from "./index";
 
 const ROOT_URL = "http://localhost:4000";
