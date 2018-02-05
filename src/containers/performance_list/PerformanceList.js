@@ -51,7 +51,6 @@ class PerformanceList extends Component {
   }
 
   render() {
-    console.log(this.props);
     return (
       <Aux>
         <h5 className={classes.H3}>Upcoming Performances</h5>

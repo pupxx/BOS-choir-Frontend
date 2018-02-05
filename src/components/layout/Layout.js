@@ -27,7 +27,6 @@ class Layout extends Component {
   }
 
   render() {
-    console.log(this.props);
     return (
       <Aux>
         <Toolbar toggleOpen={this.sideDrawerOpen} />

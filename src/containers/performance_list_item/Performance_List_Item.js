@@ -6,7 +6,6 @@ class PerformanceListItem extends Component {
   render() {
     let liStyle;
     if (this.props.authenticated) {
-      console.log("authed");
       if (this.props.attend) {
         liStyle = { backgroundColor: "#ecfeec" };
       } else {
