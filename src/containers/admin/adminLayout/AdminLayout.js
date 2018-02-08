@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import Aux from "../../../hoc/Aux";
 import AdminToolbar from "../adminToolbar/AdminToolbar";
-import SearchableTable from "../searchableTable/SearchableTable";
+import AdminMemberList from "../adminMemberList/AdminMemberList";
 
 import classes from "./adminLayout.css";
 
@@ -21,7 +21,7 @@ class AdminLayout extends Component {
           Search Performances
         </Link>
         <main>{this.props.children}</main>
-        <SearchableTable />
+        <AdminMemberList />
       </Aux>
     );
   }

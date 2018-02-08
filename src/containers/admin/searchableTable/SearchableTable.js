@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { Table, Form } from "semantic-ui-react";
 
 import _ from "lodash";
+import classes from "./searchableTable.css";
 
 class SearchableTable extends Component {
   state = {
@@ -54,7 +55,8 @@ class SearchableTable extends Component {
     const { column, items, direction } = this.state;
     return (
       <div>
-        <Form ui form>
+        <hr />
+        <Form ui form className={classes.Form}>
           <div className="ui mini input labeled">
             <label class="ui label label">Search Name</label>
             <input
