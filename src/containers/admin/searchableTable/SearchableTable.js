@@ -56,9 +56,9 @@ class SearchableTable extends Component {
     return (
       <div>
         <hr />
-        <Form ui form className={classes.Form}>
+        <Form className={classes.Form}>
           <div className="ui mini input labeled">
-            <label class="ui label label">Search Name</label>
+            <label className="ui label label">Search Name</label>
             <input
               type="text"
               placeholder="Search"
