@@ -42,6 +42,8 @@ export class AdminToolbar extends Component {
                 name="logout"
                 active={activeItem === "logout"}
                 onClick={this.handleItemClick}
+                as={Link}
+                to="/signout"
               />
             </Menu.Menu>
           </Menu>
