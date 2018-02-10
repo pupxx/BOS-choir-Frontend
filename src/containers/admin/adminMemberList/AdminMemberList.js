@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import * as actions from "../../../store/actions";
 import { Table, Form } from "semantic-ui-react";
+import { Link } from "react-router-dom";
 import LoaderWithText from "../../../components/UI/loaders/LoaderWithText";
 import _ from "lodash";
 
@@ -17,19 +18,39 @@ class AdminMemberList extends Component {
   };
 
   componentWillMount() {
-    this.props.fetchAdminMemberList();
-  }
-
-  componentWillReceiveProps() {
     this.setState({ items: _.map(this.props.adminMemberList) });
   }
 
-  handleChange(event) {
+  // componentWillReceiveProps() {
+  //   this.setState({ items: _.map(this.props.adminMemberList) });
+  // }
+
+  searchName(event) {
     var updatedList = _.map(this.props.adminMemberList);
     updatedList = updatedList.filter(function(item) {
       return (
-        item.lastname.toLowerCase().search(event.target.value.toLowerCase()) !==
+        item.name.toLowerCase().search(event.target.value.toLowerCase()) !== -1
+      );
+    });
+    this.setState({ items: updatedList });
+  }
+
+  searchWard(event) {
+    var updatedList = _.map(this.props.adminMemberList);
+    updatedList = updatedList.filter(function(item) {
+      return (
+        item.church.toLowerCase().search(event.target.value.toLowerCase()) !==
         -1
+      );
+    });
+    this.setState({ items: updatedList });
+  }
+
+  searchPart(event) {
+    var updatedList = _.map(this.props.adminMemberList);
+    updatedList = updatedList.filter(function(item) {
+      return (
+        item.part.toLowerCase().search(event.target.value.toLowerCase()) !== -1
       );
     });
     this.setState({ items: updatedList });
@@ -52,14 +73,11 @@ class AdminMemberList extends Component {
   };
 
   render() {
-    const { column, items, direction } = this.state;
-    if (!_.map(this.props.adminMemberList).length) {
-      return (
-        <div>
-          <LoaderWithText />
-        </div>
-      );
+    console.log(this.props);
+    if (!this.props.adminMemberList) {
+      return <LoaderWithText />;
     } else {
+      const { column, items, direction } = this.state;
       return (
         <div>
           <hr />
@@ -69,7 +87,23 @@ class AdminMemberList extends Component {
               <input
                 type="text"
                 placeholder="Search"
-                onChange={this.handleChange.bind(this)}
+                onChange={this.searchName.bind(this)}
+              />
+            </div>
+            <div className="ui mini input labeled">
+              <label className="ui label label">Searh Ward</label>
+              <input
+                type="text"
+                placeholder="Search"
+                onChange={this.searchWard.bind(this)}
+              />
+            </div>
+            <div className="ui mini input labeled">
+              <label className="ui label label">Searh Part</label>
+              <input
+                type="text"
+                placeholder="Search"
+                onChange={this.searchPart.bind(this)}
               />
             </div>
           </Form>
@@ -80,16 +114,28 @@ class AdminMemberList extends Component {
             <Table.Header>
               <Table.Row>
                 <Table.HeaderCell
-                  sorted={column === "firstname" ? direction : null}
-                  onClick={this.handleSort("firstname")}
+                  sorted={column === "name" ? direction : null}
+                  onClick={this.handleSort("name")}
                 >
-                  First Name
+                  Name
                 </Table.HeaderCell>
                 <Table.HeaderCell
-                  sorted={column === "lastname" ? direction : null}
-                  onClick={this.handleSort("lastname")}
+                  sorted={column === "phone" ? direction : null}
+                  onClick={this.handleSort("phone")}
                 >
-                  Last Name
+                  Phone
+                </Table.HeaderCell>
+                <Table.HeaderCell
+                  sorted={column === "church" ? direction : null}
+                  onClick={this.handleSort("church")}
+                >
+                  Church
+                </Table.HeaderCell>
+                <Table.HeaderCell
+                  sorted={column === "part" ? direction : null}
+                  onClick={this.handleSort("part")}
+                >
+                  Part
                 </Table.HeaderCell>
                 <Table.HeaderCell
                   sorted={column === "email" ? direction : null}
@@ -100,13 +146,18 @@ class AdminMemberList extends Component {
               </Table.Row>
             </Table.Header>
             <Table.Body>
-              {_.map(items, ({ memberID, firstname, lastname, email }) => (
-                <Table.Row key={memberID}>
-                  <Table.Cell>{firstname}</Table.Cell>
-                  <Table.Cell>{lastname}</Table.Cell>
-                  <Table.Cell>{email}</Table.Cell>
-                </Table.Row>
-              ))}
+              {_.map(
+                items,
+                ({ memberID, name, phone, part, church, email }) => (
+                  <Table.Row key={memberID}>
+                    <Table.Cell>{name}</Table.Cell>
+                    <Table.Cell>{phone}</Table.Cell>
+                    <Table.Cell>{church}</Table.Cell>
+                    <Table.Cell>{part}</Table.Cell>
+                    <Table.Cell>{email}</Table.Cell>
+                  </Table.Row>
+                )
+              )}
             </Table.Body>
           </Table>
         </div>

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, withRouter } from "react-router-dom";
 import * as actions from "../../../store/actions";
 
 import AdminLayout from "../../admin/adminLayout/AdminLayout";
@@ -12,6 +12,7 @@ class AdminLanding extends Component {
   componentWillMount() {
     this.props.fetchMemberInfo();
     this.props.fetchProfile();
+    this.props.fetchAdminMemberList();
   }
 
   render() {
@@ -23,7 +24,7 @@ class AdminLanding extends Component {
             <Route path="/admin/admin-landing/register" component={Register} />
             <Route
               path="/admin/admin-landing/member-list"
-              component={AdminMemberList}
+              component={withRouter(AdminMemberList)}
             />
           </Switch>
         </AdminLayout>
