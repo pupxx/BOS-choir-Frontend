@@ -14,7 +14,8 @@ class AdminMemberList extends Component {
   state = {
     items: _.map(this.props.adminMemberList),
     column: null,
-    direction: null
+    direction: null,
+    emailList: []
   };
 
   componentWillMount() {
@@ -72,8 +73,21 @@ class AdminMemberList extends Component {
     });
   };
 
+  addToEmailList = e => {
+    if (this.state.emailList.length && e.target.checked === false) {
+      for (var i = 0; i < this.state.emailList.length; i++) {
+        if (this.state.emailList[i] === e.target.value) {
+          this.state.emailList.splice(i, 1);
+        }
+      }
+    } else {
+      this.state.emailList.push(e.target.value);
+    }
+    console.log(this.state.emailList);
+  };
+
   render() {
-    console.log(this.props);
+    console.log(this.state.emailList);
     if (!this.props.adminMemberList) {
       return <LoaderWithText />;
     } else {
@@ -143,6 +157,7 @@ class AdminMemberList extends Component {
                 >
                   Email
                 </Table.HeaderCell>
+                <Table.HeaderCell>Send Email</Table.HeaderCell>
               </Table.Row>
             </Table.Header>
             <Table.Body>
@@ -155,6 +170,17 @@ class AdminMemberList extends Component {
                     <Table.Cell>{church}</Table.Cell>
                     <Table.Cell>{part}</Table.Cell>
                     <Table.Cell>{email}</Table.Cell>
+                    <Table.Cell>
+                      <div>
+                        <input
+                          type="checkbox"
+                          value={email}
+                          onClick={e => {
+                            this.addToEmailList(e);
+                          }}
+                        />
+                      </div>
+                    </Table.Cell>
                   </Table.Row>
                 )
               )}
