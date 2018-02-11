@@ -1,18 +1,19 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { Link, Route, Switch } from "react-router-dom";
 import * as actions from "../../../store/actions";
+import Aux from "../../../hoc/Aux";
 import { Table, Form } from "semantic-ui-react";
-import { Link } from "react-router-dom";
 import LoaderWithText from "../../../components/UI/loaders/LoaderWithText";
 import _ from "lodash";
 
+import AdminShowSingleMember from "../adminShowSingleMember/AdminShowSingleMember";
 import classes from "./adminMemberList.css";
 
 // import SearchableTable from "../searchableTable/SearchableTable";
 
 class AdminMemberList extends Component {
   state = {
-    items: _.map(this.props.adminMemberList),
     column: null,
     direction: null,
     emailList: []
@@ -22,15 +23,16 @@ class AdminMemberList extends Component {
     this.setState({ items: _.map(this.props.adminMemberList) });
   }
 
-  // componentWillReceiveProps() {
-  //   this.setState({ items: _.map(this.props.adminMemberList) });
-  // }
+  componentDidMount() {
+    this.props.fetchAdminMemberList();
+  }
 
   searchName(event) {
     var updatedList = _.map(this.props.adminMemberList);
     updatedList = updatedList.filter(function(item) {
       return (
-        item.name.toLowerCase().search(event.target.value.toLowerCase()) !== -1
+        item.lastname.toLowerCase().search(event.target.value.toLowerCase()) !==
+        -1
       );
     });
     this.setState({ items: updatedList });
@@ -40,8 +42,9 @@ class AdminMemberList extends Component {
     var updatedList = _.map(this.props.adminMemberList);
     updatedList = updatedList.filter(function(item) {
       return (
-        item.church.toLowerCase().search(event.target.value.toLowerCase()) !==
-        -1
+        item.churchname
+          .toLowerCase()
+          .search(event.target.value.toLowerCase()) !== -1
       );
     });
     this.setState({ items: updatedList });
@@ -87,115 +90,139 @@ class AdminMemberList extends Component {
   };
 
   render() {
-    console.log("!!!!!!!!", this.props);
+    console.log("!!!!!!!!", this.state.items);
     if (!this.props.adminMemberList) {
       return <LoaderWithText />;
     } else {
       const { column, items, direction } = this.state;
       return (
-        <div>
-          <hr />
-          <Form className={classes.Form}>
-            <div className="ui mini input labeled">
-              <label className="ui label label">Search Name</label>
-              <input
-                type="text"
-                placeholder="Search"
-                onChange={this.searchName.bind(this)}
+        <Aux>
+          <div>
+            <hr />
+            <Form className={classes.Form}>
+              <div className="ui mini input labeled">
+                <label className="ui label label">Search Name</label>
+                <input
+                  type="text"
+                  placeholder="Search"
+                  onChange={this.searchName.bind(this)}
+                />
+              </div>
+              <div className="ui mini input labeled">
+                <label className="ui label label">Searh Ward</label>
+                <input
+                  type="text"
+                  placeholder="Search"
+                  onChange={this.searchWard.bind(this)}
+                />
+              </div>
+              <div className="ui mini input labeled">
+                <label className="ui label label">Searh Part</label>
+                <input
+                  type="text"
+                  placeholder="Search"
+                  onChange={this.searchPart.bind(this)}
+                />
+              </div>
+            </Form>
+            <Table
+              className="ui small compact striped celled fixed sortable table"
+              color={"yellow"}
+            >
+              <Table.Header>
+                <Table.Row>
+                  <Table.HeaderCell
+                    textAlign={"center"}
+                    sorted={column === "lastname" ? direction : null}
+                    onClick={this.handleSort("lastname")}
+                  >
+                    Name
+                  </Table.HeaderCell>
+                  <Table.HeaderCell
+                    textAlign={"center"}
+                    sorted={column === "phone" ? direction : null}
+                    onClick={this.handleSort("phone")}
+                  >
+                    Phone
+                  </Table.HeaderCell>
+                  <Table.HeaderCell
+                    textAlign={"center"}
+                    sorted={column === "churchname" ? direction : null}
+                    onClick={this.handleSort("churchname")}
+                  >
+                    Church
+                  </Table.HeaderCell>
+                  <Table.HeaderCell
+                    textAlign={"center"}
+                    sorted={column === "part" ? direction : null}
+                    onClick={this.handleSort("part")}
+                  >
+                    Part
+                  </Table.HeaderCell>
+                  <Table.HeaderCell
+                    textAlign={"center"}
+                    sorted={column === "email" ? direction : null}
+                    onClick={this.handleSort("email")}
+                  >
+                    Email
+                  </Table.HeaderCell>
+                  <Table.HeaderCell textAlign={"center"}>
+                    Group Email
+                  </Table.HeaderCell>
+                </Table.Row>
+              </Table.Header>
+              <Table.Body>
+                {_.map(
+                  items,
+                  ({
+                    memberID,
+                    firstname,
+                    lastname,
+                    phone,
+                    part,
+                    churchname,
+                    email
+                  }) => (
+                    <Table.Row key={memberID}>
+                      <Table.Cell value={memberID}>
+                        <Link
+                          to={`/admin/admin-landing/member-list/show-member/${memberID}`}
+                        >
+                          {lastname}, {firstname}
+                        </Link>
+                      </Table.Cell>
+                      <Table.Cell>{phone}</Table.Cell>
+                      <Table.Cell>{churchname}</Table.Cell>
+                      <Table.Cell>{part}</Table.Cell>
+                      <Table.Cell>
+                        <a href={`mailto:${email}`}>{email}</a>
+                      </Table.Cell>
+                      <Table.Cell>
+                        <div className={classes.CheckBox}>
+                          <input
+                            type="checkbox"
+                            value={email}
+                            onClick={e => {
+                              this.addToEmailList(e);
+                            }}
+                          />
+                        </div>
+                      </Table.Cell>
+                    </Table.Row>
+                  )
+                )}
+              </Table.Body>
+            </Table>
+          </div>
+          <div>
+            <Switch>
+              <Route
+                path="/admin/admin-landing/member-list/show-member/:id"
+                component={AdminShowSingleMember}
               />
-            </div>
-            <div className="ui mini input labeled">
-              <label className="ui label label">Searh Ward</label>
-              <input
-                type="text"
-                placeholder="Search"
-                onChange={this.searchWard.bind(this)}
-              />
-            </div>
-            <div className="ui mini input labeled">
-              <label className="ui label label">Searh Part</label>
-              <input
-                type="text"
-                placeholder="Search"
-                onChange={this.searchPart.bind(this)}
-              />
-            </div>
-          </Form>
-          <Table
-            className="ui small compact striped celled fixed sortable table"
-            color={"yellow"}
-          >
-            <Table.Header>
-              <Table.Row>
-                <Table.HeaderCell
-                  textAlign={"center"}
-                  sorted={column === "name" ? direction : null}
-                  onClick={this.handleSort("name")}
-                >
-                  Name
-                </Table.HeaderCell>
-                <Table.HeaderCell
-                  textAlign={"center"}
-                  sorted={column === "phone" ? direction : null}
-                  onClick={this.handleSort("phone")}
-                >
-                  Phone
-                </Table.HeaderCell>
-                <Table.HeaderCell
-                  textAlign={"center"}
-                  sorted={column === "church" ? direction : null}
-                  onClick={this.handleSort("church")}
-                >
-                  Church
-                </Table.HeaderCell>
-                <Table.HeaderCell
-                  textAlign={"center"}
-                  sorted={column === "part" ? direction : null}
-                  onClick={this.handleSort("part")}
-                >
-                  Part
-                </Table.HeaderCell>
-                <Table.HeaderCell
-                  textAlign={"center"}
-                  sorted={column === "email" ? direction : null}
-                  onClick={this.handleSort("email")}
-                >
-                  Email
-                </Table.HeaderCell>
-                <Table.HeaderCell textAlign={"center"}>
-                  Group Email
-                </Table.HeaderCell>
-              </Table.Row>
-            </Table.Header>
-            <Table.Body>
-              {_.map(
-                items,
-                ({ memberID, name, phone, part, church, email }) => (
-                  <Table.Row key={memberID}>
-                    <Table.Cell>{name}</Table.Cell>
-                    <Table.Cell>{phone}</Table.Cell>
-                    <Table.Cell>{church}</Table.Cell>
-                    <Table.Cell>{part}</Table.Cell>
-                    <Table.Cell>
-                      <a href={`mailto:${email}`}>{email}</a>
-                    </Table.Cell>
-                    <Table.Cell>
-                      <div className={classes.CheckBox}>
-                        <input
-                          type="checkbox"
-                          value={email}
-                          onClick={e => {
-                            this.addToEmailList(e);
-                          }}
-                        />
-                      </div>
-                    </Table.Cell>
-                  </Table.Row>
-                )
-              )}
-            </Table.Body>
-          </Table>
-        </div>
+            </Switch>
+          </div>
+        </Aux>
       );
     }
   }

@@ -12,7 +12,6 @@ export function fetchAdminMemberList() {
     return axios
       .get(url, { headers })
       .then(response => {
-        console.log("HERE IS THE RESPONSE", response);
         dispatch({ type: FETCH_ADMIN_MEMBER_LIST, payload: response.data });
       })
       .catch(err => {
