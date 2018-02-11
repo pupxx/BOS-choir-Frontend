@@ -128,41 +128,41 @@ class AdminMemberList extends Component {
             <Table.Header>
               <Table.Row>
                 <Table.HeaderCell
-                  className={classes.HeaderCell}
+                  textAlign={"center"}
                   sorted={column === "name" ? direction : null}
                   onClick={this.handleSort("name")}
                 >
                   Name
                 </Table.HeaderCell>
                 <Table.HeaderCell
-                  className={classes.HeaderCell}
+                  textAlign={"center"}
                   sorted={column === "phone" ? direction : null}
                   onClick={this.handleSort("phone")}
                 >
                   Phone
                 </Table.HeaderCell>
                 <Table.HeaderCell
-                  className={classes.HeaderCell}
+                  textAlign={"center"}
                   sorted={column === "church" ? direction : null}
                   onClick={this.handleSort("church")}
                 >
                   Church
                 </Table.HeaderCell>
                 <Table.HeaderCell
-                  className={classes.HeaderCell}
+                  textAlign={"center"}
                   sorted={column === "part" ? direction : null}
                   onClick={this.handleSort("part")}
                 >
                   Part
                 </Table.HeaderCell>
                 <Table.HeaderCell
-                  className={classes.HeaderCell}
+                  textAlign={"center"}
                   sorted={column === "email" ? direction : null}
                   onClick={this.handleSort("email")}
                 >
                   Email
                 </Table.HeaderCell>
-                <Table.HeaderCell className={classes.HeaderCell}>
+                <Table.HeaderCell textAlign={"center"}>
                   Group Email
                 </Table.HeaderCell>
               </Table.Row>
