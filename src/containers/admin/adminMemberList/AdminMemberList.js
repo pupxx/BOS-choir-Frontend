@@ -87,7 +87,7 @@ class AdminMemberList extends Component {
   };
 
   render() {
-    console.log(this.state.emailList);
+    console.log("!!!!!!!!", this.props);
     if (!this.props.adminMemberList) {
       return <LoaderWithText />;
     } else {
@@ -128,36 +128,43 @@ class AdminMemberList extends Component {
             <Table.Header>
               <Table.Row>
                 <Table.HeaderCell
+                  className={classes.HeaderCell}
                   sorted={column === "name" ? direction : null}
                   onClick={this.handleSort("name")}
                 >
                   Name
                 </Table.HeaderCell>
                 <Table.HeaderCell
+                  className={classes.HeaderCell}
                   sorted={column === "phone" ? direction : null}
                   onClick={this.handleSort("phone")}
                 >
                   Phone
                 </Table.HeaderCell>
                 <Table.HeaderCell
+                  className={classes.HeaderCell}
                   sorted={column === "church" ? direction : null}
                   onClick={this.handleSort("church")}
                 >
                   Church
                 </Table.HeaderCell>
                 <Table.HeaderCell
+                  className={classes.HeaderCell}
                   sorted={column === "part" ? direction : null}
                   onClick={this.handleSort("part")}
                 >
                   Part
                 </Table.HeaderCell>
                 <Table.HeaderCell
+                  className={classes.HeaderCell}
                   sorted={column === "email" ? direction : null}
                   onClick={this.handleSort("email")}
                 >
                   Email
                 </Table.HeaderCell>
-                <Table.HeaderCell>Send Email</Table.HeaderCell>
+                <Table.HeaderCell className={classes.HeaderCell}>
+                  Group Email
+                </Table.HeaderCell>
               </Table.Row>
             </Table.Header>
             <Table.Body>
@@ -169,9 +176,11 @@ class AdminMemberList extends Component {
                     <Table.Cell>{phone}</Table.Cell>
                     <Table.Cell>{church}</Table.Cell>
                     <Table.Cell>{part}</Table.Cell>
-                    <Table.Cell>{email}</Table.Cell>
                     <Table.Cell>
-                      <div>
+                      <a href={`mailto:${email}`}>{email}</a>
+                    </Table.Cell>
+                    <Table.Cell>
+                      <div className={classes.CheckBox}>
                         <input
                           type="checkbox"
                           value={email}
