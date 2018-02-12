@@ -24,7 +24,9 @@ class AdminMemberList extends Component {
   }
 
   componentDidMount() {
-    this.props.fetchAdminMemberList();
+    if (!this.props.adminMemberList) {
+      this.props.fetchAdminMemberList();
+    }
   }
 
   searchName(event) {
@@ -89,12 +91,34 @@ class AdminMemberList extends Component {
     console.log(this.state.emailList);
   };
 
+  renderTotalParts() {
+    let arr = this.state.items;
+    let soprano = arr.filter(({ part }) => {
+      return part === "Soprano";
+    });
+    let alto = arr.filter(({ part }) => {
+      return part === "Alto";
+    });
+    let tenor = arr.filter(({ part }) => {
+      return part === "Tenor";
+    });
+    let bass = arr.filter(({ part }) => {
+      return part === "Bass";
+    });
+    return (
+      <h6>{`Soprano: ${soprano.length} Alto: ${alto.length} Tenor: ${
+        tenor.length
+      } Bass: ${bass.length}`}</h6>
+    );
+  }
+
   render() {
     console.log("!!!!!!!!", this.state.items);
     if (!this.props.adminMemberList) {
       return <LoaderWithText />;
     } else {
       const { column, items, direction } = this.state;
+
       return (
         <Aux>
           <div>
@@ -125,6 +149,8 @@ class AdminMemberList extends Component {
                 />
               </div>
             </Form>
+            {this.state.items.length ? this.renderTotalParts() : null}
+
             <Table
               className="ui small compact striped celled fixed sortable table"
               color={"yellow"}
