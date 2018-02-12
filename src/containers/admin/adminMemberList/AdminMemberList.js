@@ -8,6 +8,7 @@ import LoaderWithText from "../../../components/UI/loaders/LoaderWithText";
 import _ from "lodash";
 
 import AdminShowSingleMember from "../adminShowSingleMember/AdminShowSingleMember";
+import SearchBar from "../searchBar/SearchBar";
 import classes from "./adminMemberList.css";
 
 // import SearchableTable from "../searchableTable/SearchableTable";
@@ -124,30 +125,18 @@ class AdminMemberList extends Component {
           <div>
             <hr />
             <Form className={classes.Form}>
-              <div className="ui mini input labeled">
-                <label className="ui label label">Search Name</label>
-                <input
-                  type="text"
-                  placeholder="Search"
-                  onChange={this.searchName.bind(this)}
-                />
-              </div>
-              <div className="ui mini input labeled">
-                <label className="ui label label">Searh Ward</label>
-                <input
-                  type="text"
-                  placeholder="Search"
-                  onChange={this.searchWard.bind(this)}
-                />
-              </div>
-              <div className="ui mini input labeled">
-                <label className="ui label label">Searh Part</label>
-                <input
-                  type="text"
-                  placeholder="Search"
-                  onChange={this.searchPart.bind(this)}
-                />
-              </div>
+              <SearchBar
+                title="Search Name"
+                handleSearch={e => this.searchName(e)}
+              />
+              <SearchBar
+                title="Search Ward"
+                handleSearch={e => this.searchWard(e)}
+              />
+              <SearchBar
+                title="Search Part"
+                handleSearch={e => this.searchPart(e)}
+              />
             </Form>
             {this.state.items.length ? this.renderTotalParts() : null}
 
