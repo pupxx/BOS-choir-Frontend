@@ -47,10 +47,6 @@ class App extends Component {
         <Layout>
           <Switch>
             <Route
-              path="/admin/admin-landing"
-              component={requireAuth(requireAdmin(AdminLanding))}
-            />
-            <Route
               path="/member/landing"
               component={requireAuth(MemberLanding)}
             />

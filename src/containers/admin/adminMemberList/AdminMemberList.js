@@ -114,12 +114,10 @@ class AdminMemberList extends Component {
   }
 
   render() {
-    console.log("!!!!!!!!", this.state.items);
     if (!this.props.adminMemberList) {
       return <LoaderWithText />;
     } else {
       const { column, items, direction } = this.state;
-
       return (
         <Aux>
           <div>
