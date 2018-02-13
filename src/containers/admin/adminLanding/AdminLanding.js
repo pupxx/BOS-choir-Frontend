@@ -7,6 +7,7 @@ import AdminLayout from "../../admin/adminLayout/AdminLayout";
 import Profile from "../../profile/Profile";
 import Register from "../../register/Register";
 import AdminMemberList from "../../admin/adminMemberList/AdminMemberList";
+import AdminPerformanceList from "../../admin/adminPerformanceList/AdminPerformanceList";
 
 class AdminLanding extends Component {
   componentWillMount() {
@@ -22,6 +23,10 @@ class AdminLanding extends Component {
           <Switch>
             <Route path="/admin/admin-landing/profile" component={Profile} />
             <Route path="/admin/admin-landing/register" component={Register} />
+            <Route
+              path="/admin/admin-landing/performances"
+              component={AdminPerformanceList}
+            />
             <Route
               path="/admin/admin-landing/member-list"
               component={withRouter(AdminMemberList)}

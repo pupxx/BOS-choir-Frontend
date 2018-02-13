@@ -12,6 +12,7 @@ export * from "./performances";
 export * from "./profile";
 export * from "./churchs";
 export * from "./admin/adminMembers";
+export * from "./admin/adminPerformances";
 
 const ROOT_URL = "http://localhost:4000";
 

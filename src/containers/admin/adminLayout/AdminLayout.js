@@ -17,7 +17,7 @@ class AdminLayout extends Component {
         <Link to={"/admin/admin-landing/member-list"} className={classnames}>
           Search Members
         </Link>
-        <Link to={"/admin/admin-landing"} className={classnames}>
+        <Link to={"/admin/admin-landing/performances"} className={classnames}>
           Search Performances
         </Link>
         <main>{this.props.children}</main>
