@@ -8,7 +8,7 @@ import LoaderWithText from "../../../components/UI/loaders/LoaderWithText";
 import _ from "lodash";
 
 import AdminShowSingleMember from "../adminShowSingleMember/AdminShowSingleMember";
-import SearchBar from "../searchBar/SearchBar";
+import SearchBar from "../../../components/searchBar/SearchBar";
 import classes from "./adminMemberList.css";
 
 // import SearchableTable from "../searchableTable/SearchableTable";
