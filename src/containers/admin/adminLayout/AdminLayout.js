@@ -10,14 +10,14 @@ import classes from "./adminLayout.css";
 class AdminLayout extends Component {
   state = {};
   render() {
-    let bbl = `ui medium label ${classes.Blue}`;
+    let classnames = `ui medium label ${classes.Blue}`;
     return (
       <Aux>
         <AdminToolbar />
-        <Link to={"/admin/admin-landing/member-list"} className={bbl}>
+        <Link to={"/admin/admin-landing/member-list"} className={classnames}>
           Search Members
         </Link>
-        <Link to={"/admin/admin-landing"} className={bbl}>
+        <Link to={"/admin/admin-landing"} className={classnames}>
           Search Performances
         </Link>
         <main>{this.props.children}</main>
