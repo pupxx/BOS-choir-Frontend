@@ -12,7 +12,6 @@ export function fetchAdminPerformanceList() {
     axios
       .get(url, { headers })
       .then(performances => {
-        console.log(performances, "PERFORMANCEs");
         dispatch({
           type: FETCH_ADMIN_PERFORMANCE_LIST,
           payload: performances.data

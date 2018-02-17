@@ -15,10 +15,16 @@ class AdminLayout extends Component {
       <Aux>
         <AdminToolbar />
         <Link to={"/admin/admin-landing/member-list"} className={classnames}>
-          Search Members
+          Members
         </Link>
         <Link to={"/admin/admin-landing/performances"} className={classnames}>
-          Search Performances
+          Performances
+        </Link>
+        <Link to={"/admin/admin-landing/rehearsals"} className={classnames}>
+          Rehearsals
+        </Link>
+        <Link to={"/admin/admin-landing/pieces"} className={classnames}>
+          Pieces
         </Link>
         <main>{this.props.children}</main>
       </Aux>

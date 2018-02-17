@@ -20,28 +20,28 @@ export class AdminToolbar extends Component {
           <Menu pointing secondary>
             <Menu.Item
               name="home"
-              active={activeItem === "home"}
-              onClick={this.handleItemClick}
+              // active={activeItem === "home"}
+              // onClick={this.handleItemClick}
               as={Link}
               to="/admin/admin-landing"
             />
             <Menu.Item
               name="profile"
-              active={activeItem === "profile"}
-              onClick={this.handleItemClick}
+              // active={activeItem === "profile"}
+              // onClick={this.handleItemClick}
               as={Link}
               to="/admin/admin-landing/profile"
             />
-            <Menu.Item
+            {/* <Menu.Item
               name="friends"
               active={activeItem === "friends"}
               onClick={this.handleItemClick}
-            />
+            /> */}
             <Menu.Menu position="right">
               <Menu.Item
                 name="logout"
-                active={activeItem === "logout"}
-                onClick={this.handleItemClick}
+                // active={activeItem === "logout"}
+                // onClick={this.handleItemClick}
                 as={Link}
                 to="/signout"
               />
