@@ -9,3 +9,25 @@
 .HeaderCell {
   text-align: center !important;
 }
+
+.Popup {
+  padding: 10px 20px !important;
+}
+
+.PopupHead {
+  padding-left: 20px;
+}
+
+.DeleteEdit {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 50px;
+  align-items: end;
+}
+
+.Delete {
+  color: red;
+}
+.Delete:hover {
+  color: red;
+}

@@ -9,6 +9,7 @@ import _ from "lodash";
 
 import AdminShowSingleMember from "../adminShowSingleMember/AdminShowSingleMember";
 import SearchBar from "../../../components/searchBar/SearchBar";
+import PopUp from "../../../components/UI/popup/PopUp";
 import classes from "./adminMemberList.css";
 
 // import SearchableTable from "../searchableTable/SearchableTable";
@@ -107,13 +108,16 @@ class AdminMemberList extends Component {
       return part === "Bass";
     });
     return (
-      <h6>{`Soprano: ${soprano.length} Alto: ${alto.length} Tenor: ${
+      <h6>{`Total Members: ${
+        _.map(this.props.adminMemberList).length
+      } Soprano: ${soprano.length} Alto: ${alto.length} Tenor: ${
         tenor.length
       } Bass: ${bass.length}`}</h6>
     );
   }
 
   render() {
+    console.log(this.props);
     if (!this.props.adminMemberList) {
       return <LoaderWithText />;
     } else {
@@ -163,7 +167,7 @@ class AdminMemberList extends Component {
                     sorted={column === "churchname" ? direction : null}
                     onClick={this.handleSort("churchname")}
                   >
-                    Church
+                    Ward/Branch
                   </Table.HeaderCell>
                   <Table.HeaderCell
                     textAlign={"center"}
@@ -194,15 +198,55 @@ class AdminMemberList extends Component {
                     phone,
                     part,
                     churchname,
-                    email
+                    email,
+                    address1,
+                    address2,
+                    city,
+                    prov,
+                    postal
                   }) => (
                     <Table.Row key={memberID}>
                       <Table.Cell value={memberID}>
-                        <Link
-                          to={`/admin/admin-landing/member-list/show-member/${memberID}`}
-                        >
-                          {lastname}, {firstname}
-                        </Link>
+                        <PopUp
+                          trigger={
+                            <h6>
+                              {lastname}, {firstname}
+                            </h6>
+                          }
+                          name={
+                            <div className={classes.PopupHead}>
+                              {firstname} {lastname}
+                            </div>
+                          }
+                          content={
+                            <div className={classes.Popup}>
+                              <h6>{address1}</h6>
+                              <h6>{address2}</h6>
+                              <h6>
+                                {city}, {prov} {postal}
+                              </h6>
+                              <h6>{phone}</h6>
+                              <a href={`mailto:${email}`}>{email}</a>
+                              <div className={classes.DeleteEdit}>
+                                <h6>
+                                  <Link
+                                    to={`admin/admin-landing/edit-member/${memberID}`}
+                                  >
+                                    edit
+                                  </Link>
+                                </h6>
+                                <h6>
+                                  <Link
+                                    className={classes.Delete}
+                                    to={`admin/admin-landing/remove-member/${memberID}`}
+                                  >
+                                    delete this member
+                                  </Link>
+                                </h6>
+                              </div>
+                            </div>
+                          }
+                        />
                       </Table.Cell>
                       <Table.Cell>{phone}</Table.Cell>
                       <Table.Cell>{churchname}</Table.Cell>
