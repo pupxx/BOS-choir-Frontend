@@ -14,18 +14,23 @@ class AdminLayout extends Component {
     return (
       <Aux>
         <AdminToolbar />
-        <Link to={"/admin/admin-landing/member-list"} className={classnames}>
-          Members
-        </Link>
-        <Link to={"/admin/admin-landing/performances"} className={classnames}>
-          Performances
-        </Link>
-        <Link to={"/admin/admin-landing/rehearsals"} className={classnames}>
-          Rehearsals
-        </Link>
-        <Link to={"/admin/admin-landing/pieces"} className={classnames}>
-          Pieces
-        </Link>
+        <div className={classes.NavLinks}>
+          <Link to={"/admin/admin-landing/member-list"} className={classnames}>
+            Members
+          </Link>
+          <Link to={"/admin/admin-landing/performances"} className={classnames}>
+            Performances
+          </Link>
+          <Link to={"/admin/admin-landing/rehearsals"} className={classnames}>
+            Add Rehearsals
+          </Link>
+          <Link to={"/admin/admin-landing/pieces"} className={classnames}>
+            Add Pieces
+          </Link>
+          <Link to={"/admin/admin-landing/ward-branch"} className={classnames}>
+            Add Ward/Branch
+          </Link>
+        </div>
         <main>{this.props.children}</main>
       </Aux>
     );

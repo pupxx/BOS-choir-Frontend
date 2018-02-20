@@ -3,3 +3,12 @@
   text-decoration: none !important;
   margin-top: 20px !important;
 }
+
+.NavLinks {
+  padding: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  grid-gap: 20px;
+  text-align: center;
+  /* justify-items: center; */
+}

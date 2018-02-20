@@ -1,17 +1,13 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import * as actions from "../../../store/actions";
 import { Field, reduxForm } from "redux-form";
-import * as actions from "../../store/actions";
 import _ from "lodash";
 
-import classes from "./register.css";
+import classes from "./adminEditMember.css";
 
-class Register extends Component {
-  componentDidMount() {
-    this.props.fetchMemberInfo();
-    this.props.fetchProfile();
-    this.props.fetchChurchs();
-  }
+class AdminEditMember extends Component {
+  state = {};
 
   renderField(field) {
     const { meta: { touched, error } } = field;
@@ -75,96 +71,85 @@ class Register extends Component {
       return el.churchname;
     });
     const { handleSubmit } = this.props;
-
-    if (!location[0]) {
-      return <div>Loading...</div>;
-    } else {
-      return (
-        <form
-          onSubmit={handleSubmit(this.onSubmit.bind(this))}
-          className={classes.Form}
+    return (
+      <form
+        onSubmit={handleSubmit(this.onSubmit.bind(this))}
+        className={classes.Form}
+      >
+        <Field
+          name="firstname"
+          label="First Name:"
+          type="text"
+          placeholder="First Name"
+          component={this.renderField}
+        />
+        <Field
+          name="lastname"
+          label="Last Name:"
+          type="text"
+          component={this.renderField}
+          placeholder="Last Name"
+        />
+        <Field
+          name="address1"
+          label="Address 1:"
+          type="text"
+          component={this.renderField}
+          placeholder="Address 1"
+        />
+        <Field
+          name="address2"
+          label="Address 2:"
+          type="text"
+          component={this.renderField}
+          placeholder="Address 2"
+        />
+        <Field
+          name="city"
+          label="City:"
+          type="text"
+          component={this.renderField}
+          placeholder="City"
+        />
+        <Field
+          name="postal"
+          label="Postal Code:"
+          type="text"
+          component={this.renderField}
+          placeholder="Postal Code"
+        />
+        <Field
+          name="phone"
+          label="Phone:"
+          type="text"
+          component={this.renderField}
+          placeholder="Phone"
+        />
+        <Field
+          name="churchname"
+          label="Ward or Branch"
+          component={this.renderSelect}
+          options={location}
+          className="form-control"
+          placeholder="Ward or Branch"
+        />
+        <Field
+          name="part"
+          label="Part"
+          component={this.renderSelect}
+          options={parts}
+          className="form-control"
+          placeholder="Part"
+        />
+        <button
+          type="submit"
+          disabled={this.props.pristine}
+          className="btn btn-primary"
         >
-          <h3>Please Register</h3>
-          <Field
-            name="firstname"
-            label="First Name:"
-            type="text"
-            placeholder="First Name"
-            component={this.renderField}
-          />
-          <Field
-            name="lastname"
-            label="Last Name:"
-            type="text"
-            component={this.renderField}
-            placeholder="Last Name"
-          />
-          <Field
-            name="address1"
-            label="Address 1:"
-            type="text"
-            component={this.renderField}
-            placeholder="Address 1"
-          />
-          <Field
-            name="address2"
-            label="Address 2:"
-            type="text"
-            component={this.renderField}
-            placeholder="Address 2"
-          />
-          <Field
-            name="city"
-            label="City:"
-            type="text"
-            component={this.renderField}
-            placeholder="City"
-          />
-          <Field
-            name="postal"
-            label="Postal Code:"
-            type="text"
-            component={this.renderField}
-            placeholder="Postal Code"
-          />
-          <Field
-            name="phone"
-            label="Phone:"
-            type="text"
-            component={this.renderField}
-            placeholder="Phone"
-          />
-          <Field
-            name="churchname"
-            label="Ward or Branch"
-            component={this.renderSelect}
-            options={location}
-            className="form-control"
-            placeholder="Ward or Branch"
-          />
-          <Field
-            name="part"
-            label="Part"
-            component={this.renderSelect}
-            options={parts}
-            className="form-control"
-            placeholder="Part"
-          />
-          <button
-            type="submit"
-            disabled={this.props.pristine}
-            className="btn btn-primary"
-          >
-            Submit
-          </button>
-          {this.props.pristine ? (
-            <div>You must make a change to the form before submitting</div>
-          ) : (
-            ""
-          )}
-        </form>
-      );
-    }
+          Submit
+        </button>
+      </form>
+    );
   }
 }
 
@@ -223,11 +208,5 @@ export default connect(mapStateToProps, actions)(
     validate,
     form: "register",
     enableReinitialize: true
-  })(Register)
+  })(AdminEditMember)
 );
-
-// export default reduxForm({
-//   validate,
-//   form: "register",
-//   enableReinitialize: true
-// })(connect(mapStateToProps, actions)(Register));

@@ -127,18 +127,26 @@ class AdminMemberList extends Component {
           <div>
             <hr />
             <Form className={classes.Form}>
-              <SearchBar
-                title="Search Name"
-                handleSearch={e => this.searchName(e)}
-              />
-              <SearchBar
-                title="Search Ward"
-                handleSearch={e => this.searchWard(e)}
-              />
-              <SearchBar
-                title="Search Part"
-                handleSearch={e => this.searchPart(e)}
-              />
+              <div className={classes.Inputs}>
+                <div>
+                  <SearchBar
+                    title="Search Name"
+                    handleSearch={e => this.searchName(e)}
+                  />
+                </div>
+                <div>
+                  <SearchBar
+                    title="Search Ward"
+                    handleSearch={e => this.searchWard(e)}
+                  />
+                </div>
+                <div>
+                  <SearchBar
+                    title="Search Part"
+                    handleSearch={e => this.searchPart(e)}
+                  />
+                </div>
+              </div>
             </Form>
             {this.state.items.length ? this.renderTotalParts() : null}
 
@@ -230,7 +238,7 @@ class AdminMemberList extends Component {
                               <div className={classes.DeleteEdit}>
                                 <h6>
                                   <Link
-                                    to={`admin/admin-landing/edit-member/${memberID}`}
+                                    to={`/admin/admin-landing/edit-member/${memberID}`}
                                   >
                                     edit
                                   </Link>
@@ -238,7 +246,7 @@ class AdminMemberList extends Component {
                                 <h6>
                                   <Link
                                     className={classes.Delete}
-                                    to={`admin/admin-landing/remove-member/${memberID}`}
+                                    to={`/admin/admin-landing/remove-member/${memberID}`}
                                   >
                                     delete this member
                                   </Link>

@@ -6,7 +6,7 @@ import React from "react";
 function SearchBar(props) {
   return (
     <div className="ui mini input labeled">
-      <label className="ui label label">{props.title}</label>
+      <label className="ui label">{props.title}</label>
       <input type="text" placeholder="Search" onChange={props.handleSearch} />
     </div>
   );
