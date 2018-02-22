@@ -3,18 +3,27 @@ import { connect } from "react-redux";
 import * as actions from "../../../store/actions";
 import { Field, reduxForm } from "redux-form";
 import _ from "lodash";
+import LoaderWithText from "../../../components/UI/loaders/LoaderWithText";
 
 import classes from "./adminEditMember.css";
 
 class AdminEditMember extends Component {
   state = {};
 
+  componentDidMount() {
+    let id = this.props.match.params.id;
+    this.props.fetchSingleMember(id);
+    this.props.fetchChurchs();
+  }
+
   renderField(field) {
     const { meta: { touched, error } } = field;
-    let className = `form-control ${touched && error ? "is-invalid" : ""}`;
+    let className = `form-control form-control-sm ${
+      touched && error ? "is-invalid" : ""
+    }`;
     return (
       <div className="form-group">
-        <label className={classes.Label}>{field.label}</label>
+        <label>{field.label}</label>
         <input
           {...field.input}
           className={className}
@@ -56,100 +65,113 @@ class AdminEditMember extends Component {
   };
 
   onSubmit(values) {
-    if (this.props.admin) {
-      var location = () =>
-        this.props.history.push("/admin/admin-landing/profile");
-    } else {
-      location = () => this.props.history.push("/profile");
-    }
-    this.props.updateMemberProfile(values, location);
+    console.log(values);
   }
 
   render() {
+    console.log(this.props, "!!!");
     let parts = ["Soprano", "Alto", "Tenor", "Bass"];
     let location = _.map(this.props.churchs, (el, i) => {
       return el.churchname;
     });
     const { handleSubmit } = this.props;
-    return (
-      <form
-        onSubmit={handleSubmit(this.onSubmit.bind(this))}
-        className={classes.Form}
-      >
-        <Field
-          name="firstname"
-          label="First Name:"
-          type="text"
-          placeholder="First Name"
-          component={this.renderField}
-        />
-        <Field
-          name="lastname"
-          label="Last Name:"
-          type="text"
-          component={this.renderField}
-          placeholder="Last Name"
-        />
-        <Field
-          name="address1"
-          label="Address 1:"
-          type="text"
-          component={this.renderField}
-          placeholder="Address 1"
-        />
-        <Field
-          name="address2"
-          label="Address 2:"
-          type="text"
-          component={this.renderField}
-          placeholder="Address 2"
-        />
-        <Field
-          name="city"
-          label="City:"
-          type="text"
-          component={this.renderField}
-          placeholder="City"
-        />
-        <Field
-          name="postal"
-          label="Postal Code:"
-          type="text"
-          component={this.renderField}
-          placeholder="Postal Code"
-        />
-        <Field
-          name="phone"
-          label="Phone:"
-          type="text"
-          component={this.renderField}
-          placeholder="Phone"
-        />
-        <Field
-          name="churchname"
-          label="Ward or Branch"
-          component={this.renderSelect}
-          options={location}
-          className="form-control"
-          placeholder="Ward or Branch"
-        />
-        <Field
-          name="part"
-          label="Part"
-          component={this.renderSelect}
-          options={parts}
-          className="form-control"
-          placeholder="Part"
-        />
-        <button
-          type="submit"
-          disabled={this.props.pristine}
-          className="btn btn-primary"
-        >
-          Submit
-        </button>
-      </form>
-    );
+
+    if (!this.props.adminMemberList[this.props.match.params.id]) {
+      return <LoaderWithText />;
+    } else {
+      return (
+        <div className={classes.Layout}>
+          <form
+            onSubmit={handleSubmit(this.onSubmit.bind(this))}
+            className={classes.Form}
+          >
+            <h4 className={classes.Heading}>Edit Member</h4>
+            <Field
+              name="firstname"
+              label="First Name:"
+              type="text"
+              placeholder="First Name"
+              component={this.renderField}
+            />
+            <Field
+              name="lastname"
+              label="Last Name:"
+              type="text"
+              component={this.renderField}
+              placeholder="Last Name"
+            />
+            <Field
+              name="address1"
+              label="Address 1:"
+              type="text"
+              component={this.renderField}
+              placeholder="Address 1"
+            />
+            <Field
+              name="address2"
+              label="Address 2:"
+              type="text"
+              component={this.renderField}
+              placeholder="Address 2"
+            />
+            <Field
+              name="city"
+              label="City:"
+              type="text"
+              component={this.renderField}
+              placeholder="City"
+            />
+            <Field
+              name="postal"
+              label="Postal Code:"
+              type="text"
+              component={this.renderField}
+              placeholder="Postal Code"
+            />
+            <Field
+              name="phone"
+              label="Phone:"
+              type="text"
+              component={this.renderField}
+              placeholder="Phone"
+            />
+            <Field
+              name="churchname"
+              label="Ward or Branch"
+              component={this.renderSelect}
+              options={location}
+              className="form-control"
+              placeholder="Ward or Branch"
+            />
+            <Field
+              name="part"
+              label="Part"
+              component={this.renderSelect}
+              options={parts}
+              className="form-control"
+              placeholder="Part"
+            />
+            <button
+              type="submit"
+              disabled={this.props.pristine}
+              className="btn btn-primary"
+            >
+              Submit
+            </button>
+          </form>
+          <div className={classes.QuickLinks}>
+            <h4 className={classes.Heading}>Quick Links</h4>
+            <a
+              href={`mailto:${
+                this.props.adminMemberList[this.props.match.params.id].email
+              }`}
+            >
+              Send Email
+            </a>
+          </div>
+        </div>
+      );
+    }
   }
 }
 
@@ -192,14 +214,13 @@ function validate(values) {
   return errors;
 }
 
-function mapStateToProps(state) {
-  let profile = _.map(state.profile);
+function mapStateToProps(state, ownProps) {
+  console.log(state, "state");
   return {
     admin: state.isAdmin.admin,
-    profile: state.profile,
-    initialValues: profile[0],
+    initialValues: state.adminMemberList[ownProps.match.params.id],
     churchs: state.churchs,
-    memberInfo: state.memberInfo
+    adminMemberList: state.adminMemberList
   };
 }
 

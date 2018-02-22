@@ -1,0 +1,18 @@
+.Layout {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-gap: 20px;
+}
+
+.Form {
+  padding: 20px;
+}
+
+.QuickLinks {
+  padding: 20px;
+  justify-self: center;
+}
+
+.Heading {
+  margin-bottom: 20px;
+}

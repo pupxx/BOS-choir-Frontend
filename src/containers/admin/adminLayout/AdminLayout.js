@@ -9,6 +9,7 @@ import classes from "./adminLayout.css";
 
 class AdminLayout extends Component {
   state = {};
+
   render() {
     let classnames = `ui medium label ${classes.Blue}`;
     return (
