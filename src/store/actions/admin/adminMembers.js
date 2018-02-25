@@ -20,13 +20,40 @@ export function fetchAdminMemberList() {
   };
 }
 
-export function fetchSingleMember(id) {
+export function fetchSingleMember(id, cb) {
   const url = `${ROOT_URL}/admin/single-member/${id}`;
   const token = localStorage.getItem("token");
   const headers = { authorization: token };
   return function(dispatch) {
-    return axios.get(url, { headers }).then(singleMember => {
-      dispatch({ type: FETCH_ADMIN_SINGLE_MEMBER, payload: singleMember });
-    });
+    return axios
+      .get(url, { headers })
+      .then(singleMember => {
+        dispatch({ type: FETCH_ADMIN_SINGLE_MEMBER, payload: singleMember });
+      })
+      .then(() => {
+        if (cb) {
+          cb();
+        }
+      })
+      .catch(err => {
+        dispatch(authError(err.response.data.message));
+      });
+  };
+}
+
+export function updateMemberInfo(values, cb) {
+  const token = localStorage.getItem("token");
+  const headers = { authorization: token };
+
+  return function(dispatch) {
+    const url = `${ROOT_URL}/admin/update-single-member/${values.memberID}`;
+    axios
+      .patch(url, values, { headers })
+      .then(memberid => {
+        dispatch(fetchSingleMember(memberid.data[0], cb));
+      })
+      .catch(err => {
+        dispatch(authError(err.response.data.message));
+      });
   };
 }

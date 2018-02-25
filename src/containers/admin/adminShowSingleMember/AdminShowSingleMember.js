@@ -14,11 +14,37 @@ class AdminShowSingleMember extends Component {
     }
   }
   render() {
+    const {
+      firstname,
+      lastname,
+      address1,
+      address2,
+      city,
+      prov,
+      postal,
+      church,
+      part,
+      email
+    } = this.props.singleMember;
     console.log(this.props);
     if (!this.props.singleMember) {
       return <LoaderWithText />;
     } else {
-      return <h1>{this.props.singleMember.firstname}</h1>;
+      return (
+        <div>
+          <h4>
+            {firstname} {lastname}
+          </h4>
+          <address>
+            {address1}
+            {address2}
+            {city} {prov}, {postal}
+          </address>
+          <h4>{email}</h4>
+          <h4>{church}</h4>
+          <h4>{part}</h4>
+        </div>
+      );
     }
   }
 }

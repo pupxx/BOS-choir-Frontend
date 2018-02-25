@@ -26,9 +26,7 @@ class AdminMemberList extends Component {
   }
 
   componentDidMount() {
-    if (!this.props.adminMemberList) {
-      this.props.fetchAdminMemberList();
-    }
+    this.props.fetchAdminMemberList();
   }
 
   searchName(event) {
@@ -117,7 +115,6 @@ class AdminMemberList extends Component {
   }
 
   render() {
-    console.log(this.props);
     if (!this.props.adminMemberList) {
       return <LoaderWithText />;
     } else {

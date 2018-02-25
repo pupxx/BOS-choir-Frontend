@@ -65,11 +65,13 @@ class AdminEditMember extends Component {
   };
 
   onSubmit(values) {
-    console.log(values);
+    let gotoLocation = () =>
+      this.props.history.push(`/admin/admin-landing/member-list`);
+    this.props.updateMemberInfo(values, gotoLocation);
   }
 
   render() {
-    console.log(this.props, "!!!");
+    console.log(this.props, "These are the props");
     let parts = ["Soprano", "Alto", "Tenor", "Bass"];
     let location = _.map(this.props.churchs, (el, i) => {
       return el.churchname;
@@ -215,7 +217,6 @@ function validate(values) {
 }
 
 function mapStateToProps(state, ownProps) {
-  console.log(state, "state");
   return {
     admin: state.isAdmin.admin,
     initialValues: state.adminMemberList[ownProps.match.params.id],
