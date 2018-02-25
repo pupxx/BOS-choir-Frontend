@@ -71,7 +71,6 @@ class AdminEditMember extends Component {
   }
 
   render() {
-    console.log(this.props, "These are the props");
     let parts = ["Soprano", "Alto", "Tenor", "Bass"];
     let location = _.map(this.props.churchs, (el, i) => {
       return el.churchname;

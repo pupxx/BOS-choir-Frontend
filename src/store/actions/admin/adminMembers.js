@@ -57,3 +57,20 @@ export function updateMemberInfo(values, cb) {
       });
   };
 }
+
+export function deleteMember(member, cb) {
+  const token = localStorage.getItem("token");
+  const headers = { authorization: token };
+
+  return function(dispatch) {
+    const url = `${ROOT_URL}/admin/remove-member/${member.memberID}`;
+    axios
+      .patch(url, member.memberID, { headers })
+      .then(memberid => {
+        console.log(memberid);
+      })
+      .catch(err => {
+        dispatch(authError(err.response.data.message));
+      });
+  };
+}

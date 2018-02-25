@@ -240,13 +240,8 @@ class AdminMemberList extends Component {
                                     edit
                                   </Link>
                                 </h6>
-                                <h6>
-                                  <Link
-                                    className={classes.Delete}
-                                    to={`/admin/admin-landing/remove-member/${memberID}`}
-                                  >
-                                    delete this member
-                                  </Link>
+                                <h6 className={classes.Delete}>
+                                  delete this member
                                 </h6>
                               </div>
                             </div>
