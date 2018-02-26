@@ -10,9 +10,17 @@
   grid-template-rows: 1fr;
 }
 
-.ModalChild {
+.ModalRegular {
   width: 600px;
   height: 400px;
+  background-color: white;
+  justify-self: center;
+  align-self: center;
+}
+
+.SmallModal {
+  width: 400px;
+  height: 200px;
   background-color: white;
   justify-self: center;
   align-self: center;

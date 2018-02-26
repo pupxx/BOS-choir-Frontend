@@ -15,7 +15,7 @@ import registerServiceWorker from "./registerServiceWorker";
 import reducers from "./store/reducers";
 
 const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore);
-const store = createStoreWithMiddleware(reducers);
+export const store = createStoreWithMiddleware(reducers);
 const token = localStorage.getItem("token");
 
 if (token) {

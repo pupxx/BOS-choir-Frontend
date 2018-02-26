@@ -8,6 +8,7 @@ import LoaderWithText from "../../../components/UI/loaders/LoaderWithText";
 import _ from "lodash";
 
 import AdminShowSingleMember from "../adminShowSingleMember/AdminShowSingleMember";
+import Confirm from "../../../components/UI/confirm/Confirm";
 import SearchBar from "../../../components/searchBar/SearchBar";
 import PopUp from "../../../components/UI/popup/PopUp";
 import Modal from "../../../components/UI/modal/Modal";
@@ -116,32 +117,25 @@ class AdminMemberList extends Component {
     );
   }
 
-  renderModal() {
+  renderModal(id) {
+    this.setState({ memberToDelete: id });
+
     this.state.renderModal
       ? this.setState({ renderModal: false })
       : this.setState({ renderModal: true });
   }
 
   render() {
-    console.log(this.state.renderModal);
     if (!this.props.adminMemberList) {
       return <LoaderWithText />;
     } else if (this.state.renderModal) {
       return (
-        <Modal renderModal={this.renderModal.bind(this)}>
+        <Modal size="small" renderModal={this.renderModal.bind(this)}>
           <h1>Hello</h1>
-          <button
-            className="ui mini red button"
-            onClick={this.renderModal.bind(this)}
-          >
-            Delete
-          </button>
-          <button
-            className="ui mini green button"
-            onClick={this.renderModal.bind(this)}
-          >
-            Cancel
-          </button>
+          <Confirm
+            memberToDelete={this.state.memberToDelete}
+            renderModal={this.renderModal.bind(this)}
+          />
         </Modal>
       );
     } else {
@@ -269,7 +263,7 @@ class AdminMemberList extends Component {
                                 </h6>
                                 <h6
                                   className={classes.Delete}
-                                  onClick={() => this.renderModal()}
+                                  onClick={e => this.renderModal(memberID)}
                                 >
                                   delete this member
                                 </h6>
