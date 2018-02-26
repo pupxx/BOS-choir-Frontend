@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import * as actions from "../../../store/actions";
 import LoaderWithText from "../../../components/UI/loaders/LoaderWithText";
 
-// import classes from './adminShowSingleMember.css';
+import classes from "./adminShowSingleMember.css";
 
 class AdminShowSingleMember extends Component {
   state = {};
@@ -31,7 +31,7 @@ class AdminShowSingleMember extends Component {
       return <LoaderWithText />;
     } else {
       return (
-        <div>
+        <div className={classes.ShowSingleMember}>
           <h4>
             {firstname} {lastname}
           </h4>

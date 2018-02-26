@@ -37,3 +37,10 @@
 .Delete:hover {
   color: red;
 }
+
+.ModalChild {
+  width: 400px;
+  background-color: blue;
+  justify-self: center;
+  align-self: center;
+}

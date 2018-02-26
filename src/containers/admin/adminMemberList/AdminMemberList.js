@@ -10,6 +10,7 @@ import _ from "lodash";
 import AdminShowSingleMember from "../adminShowSingleMember/AdminShowSingleMember";
 import SearchBar from "../../../components/searchBar/SearchBar";
 import PopUp from "../../../components/UI/popup/PopUp";
+import Modal from "../../../components/UI/modal/Modal";
 import classes from "./adminMemberList.css";
 
 // import SearchableTable from "../searchableTable/SearchableTable";
@@ -18,7 +19,8 @@ class AdminMemberList extends Component {
   state = {
     column: null,
     direction: null,
-    emailList: []
+    emailList: [],
+    renderModal: false
   };
 
   componentWillMount() {
@@ -114,9 +116,34 @@ class AdminMemberList extends Component {
     );
   }
 
+  renderModal() {
+    this.state.renderModal
+      ? this.setState({ renderModal: false })
+      : this.setState({ renderModal: true });
+  }
+
   render() {
+    console.log(this.state.renderModal);
     if (!this.props.adminMemberList) {
       return <LoaderWithText />;
+    } else if (this.state.renderModal) {
+      return (
+        <Modal renderModal={this.renderModal.bind(this)}>
+          <h1>Hello</h1>
+          <button
+            className="ui mini red button"
+            onClick={this.renderModal.bind(this)}
+          >
+            Delete
+          </button>
+          <button
+            className="ui mini green button"
+            onClick={this.renderModal.bind(this)}
+          >
+            Cancel
+          </button>
+        </Modal>
+      );
     } else {
       const { column, items, direction } = this.state;
       return (
@@ -240,7 +267,10 @@ class AdminMemberList extends Component {
                                     edit
                                   </Link>
                                 </h6>
-                                <h6 className={classes.Delete}>
+                                <h6
+                                  className={classes.Delete}
+                                  onClick={() => this.renderModal()}
+                                >
                                   delete this member
                                 </h6>
                               </div>
