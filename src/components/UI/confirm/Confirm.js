@@ -1,27 +1,33 @@
 import React, { Component } from "react";
 
+import classes from "./confirm.css";
+
 class Confirm extends Component {
   state = {};
 
-  deleteMember(id) {
-    console.log(id, "this is the member to delete");
+  deleteMember(memberToDelete) {
+    console.log(memberToDelete, "this is the member to delete");
   }
 
   render() {
     return (
-      <div>
-        <button
-          className="ui mini green button"
-          onClick={() => this.deleteMember(this.props.memberToDelete)}
-        >
-          Yes
-        </button>
-        <button
-          className="ui mini red button"
-          onClick={() => this.props.renderModal()}
-        >
-          Cancel
-        </button>
+      <div className={classes.Main}>
+        {this.props.content}
+        <hr />
+        <div className={classes.Right}>
+          <button
+            className="ui mini green button"
+            onClick={() => this.deleteMember(this.props.memberToDelete)}
+          >
+            Confirm
+          </button>
+          <button
+            className="ui mini red button"
+            onClick={() => this.props.renderModal()}
+          >
+            Cancel
+          </button>
+        </div>
       </div>
     );
   }

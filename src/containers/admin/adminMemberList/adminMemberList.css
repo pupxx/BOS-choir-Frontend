@@ -37,3 +37,7 @@
 .Delete:hover {
   color: red;
 }
+
+.Header {
+  grid-column: 1/-1;
+}
