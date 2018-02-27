@@ -119,10 +119,13 @@ class AdminMemberList extends Component {
 
   renderModal(memberToDelete) {
     this.setState({ memberToDelete });
-
     this.state.renderModal
       ? this.setState({ renderModal: false })
       : this.setState({ renderModal: true });
+  }
+
+  deleteMember() {
+    console.log(this.state.memberToDelete, "thisis the member to delete");
   }
 
   render() {
@@ -133,7 +136,7 @@ class AdminMemberList extends Component {
         <Modal size="small" renderModal={this.renderModal.bind(this)}>
           <Confirm
             content={
-              <h6 className={classes.Header}>
+              <h6>
                 Are you sure you want to delete member{" "}
                 <strong>
                   {this.state.memberToDelete.firstname}{" "}
@@ -141,8 +144,9 @@ class AdminMemberList extends Component {
                 </strong>
               </h6>
             }
-            memberToDelete={this.state.memberToDelete}
-            renderModal={this.renderModal.bind(this)}
+            data={this.state.memberToDelete}
+            confirm={this.deleteMember.bind(this)}
+            cancel={this.renderModal.bind(this)}
           />
         </Modal>
       );

@@ -4,7 +4,15 @@
   grid-template-columns: 1fr 1fr;
 }
 
-.Right {
+.ButtonContainer {
   grid-column: 1/-1;
   justify-self: end;
+}
+
+.Content {
+  grid-column: 1/-1;
+}
+
+.Buttons {
+  margin-top: 10px !important;
 }

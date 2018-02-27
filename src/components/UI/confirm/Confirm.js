@@ -5,26 +5,17 @@ import classes from "./confirm.css";
 class Confirm extends Component {
   state = {};
 
-  deleteMember(memberToDelete) {
-    console.log(memberToDelete, "this is the member to delete");
-  }
-
   render() {
+    let confirm = `ui mini green button ${classes.Buttons}`;
+    let cancel = `ui mini red button ${classes.Buttons}`;
     return (
       <div className={classes.Main}>
-        {this.props.content}
-        <hr />
-        <div className={classes.Right}>
-          <button
-            className="ui mini green button"
-            onClick={() => this.deleteMember(this.props.memberToDelete)}
-          >
+        <div className={classes.Content}>{this.props.content}</div>
+        <div className={classes.ButtonContainer}>
+          <button className={confirm} onClick={() => this.props.confirm()}>
             Confirm
           </button>
-          <button
-            className="ui mini red button"
-            onClick={() => this.props.renderModal()}
-          >
+          <button className={cancel} onClick={() => this.props.cancel()}>
             Cancel
           </button>
         </div>
