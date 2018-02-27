@@ -148,9 +148,10 @@ class AdminMemberList extends Component {
                 </strong>
               </h6>
             }
-            data={this.state.memberToDelete}
-            confirm={this.deleteMember.bind(this)}
-            cancel={this.renderModal.bind(this)}
+            confirmButtonText="Confirm"
+            confirmAction={this.deleteMember.bind(this)}
+            cancelAction={this.renderModal.bind(this)}
+            cancelButtonText="Cancel"
           />
         </Modal>
       );
