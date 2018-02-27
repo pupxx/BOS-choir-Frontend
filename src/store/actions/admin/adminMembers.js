@@ -77,8 +77,7 @@ export function deleteMember(memberID, cb) {
         cb();
       })
       .catch(err => {
-        console.log(err);
-        // dispatch(authError(err.response.data.message));
+        dispatch(authError(err.response.data.message));
       });
   };
 }
