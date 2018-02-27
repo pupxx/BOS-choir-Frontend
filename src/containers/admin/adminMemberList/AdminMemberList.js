@@ -125,7 +125,11 @@ class AdminMemberList extends Component {
   }
 
   deleteMember() {
+    const id = this.state.memberToDelete.memberID;
+    const location = () =>
+      this.props.history.push("/admin/admin-landing/member-list");
     console.log(this.state.memberToDelete, "thisis the member to delete");
+    this.props.deleteMember(id, location);
   }
 
   render() {

@@ -1,5 +1,9 @@
 import axios from "axios";
-import { FETCH_ADMIN_MEMBER_LIST, FETCH_ADMIN_SINGLE_MEMBER } from "../types";
+import {
+  FETCH_ADMIN_MEMBER_LIST,
+  FETCH_ADMIN_SINGLE_MEMBER,
+  DELETE_MEMBER
+} from "../types";
 import { authError } from "../index";
 
 const ROOT_URL = "http://localhost:4000";
@@ -58,19 +62,23 @@ export function updateMemberInfo(values, cb) {
   };
 }
 
-export function deleteMember(member, cb) {
+export function deleteMember(memberID, cb) {
   const token = localStorage.getItem("token");
   const headers = { authorization: token };
 
   return function(dispatch) {
-    const url = `${ROOT_URL}/admin/remove-member/${member.memberID}`;
+    const url = `${ROOT_URL}/admin/remove-member/${memberID}`;
     axios
-      .patch(url, member.memberID, { headers })
-      .then(memberid => {
-        console.log(memberid);
+      .delete(url, { headers })
+      .then(() => {
+        dispatch({ type: DELETE_MEMBER, payload: [memberID] });
+      })
+      .then(() => {
+        cb();
       })
       .catch(err => {
-        dispatch(authError(err.response.data.message));
+        console.log(err);
+        // dispatch(authError(err.response.data.message));
       });
   };
 }
