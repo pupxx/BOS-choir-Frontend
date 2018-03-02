@@ -1,5 +1,5 @@
 import React from "react";
-import { Popup, Rating } from "semantic-ui-react";
+import { Popup } from "semantic-ui-react";
 
 const PopUp = props => (
   <Popup trigger={props.trigger} wide position="right center" hoverable>

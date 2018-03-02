@@ -1,13 +1,12 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Link, Route, Switch } from "react-router-dom";
+import { Link } from "react-router-dom";
 import * as actions from "../../../store/actions";
 import Aux from "../../../hoc/Aux";
 import { Table, Form } from "semantic-ui-react";
 import LoaderWithText from "../../../components/UI/loaders/LoaderWithText";
 import _ from "lodash";
 
-import AdminShowSingleMember from "../adminShowSingleMember/AdminShowSingleMember";
 import Confirm from "../../../components/UI/confirm/Confirm";
 import SearchBar from "../../../components/searchBar/SearchBar";
 import PopUp from "../../../components/UI/popup/PopUp";
