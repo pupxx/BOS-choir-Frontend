@@ -32,6 +32,109 @@ class AdminMemberList extends Component {
     this.props.fetchAdminMemberList();
   }
 
+  renderHeaders() {
+    const headers = ["Name", "Phone", "Ward/Branch", "Part", "Email"];
+    const columnNames = ["name", "phone", "churchname", "part", "email"];
+    return headers.map((el, i) => {
+      return (
+        <Table.HeaderCell
+          key={i}
+          textAlign={"center"}
+          sorted={
+            this.state.column === columnNames[i] ? this.state.direction : null
+          }
+          onClick={this.handleSort(columnNames[i])}
+        >
+          <h6>{el}</h6>
+        </Table.HeaderCell>
+      );
+    });
+  }
+
+  renderRows() {
+    return _.map(
+      this.state.items,
+      ({
+        memberID,
+        firstname,
+        lastname,
+        phone,
+        part,
+        churchname,
+        email,
+        address1,
+        address2,
+        city,
+        prov,
+        postal
+      }) => (
+        <Table.Row key={memberID}>
+          <Table.Cell value={memberID}>
+            <PopUp
+              trigger={
+                <h6>
+                  {lastname}, {firstname}
+                </h6>
+              }
+              name={
+                <div className={classes.PopupHead}>
+                  {firstname} {lastname}
+                </div>
+              }
+              content={
+                <div className={classes.Popup}>
+                  <h6>{address1}</h6>
+                  <h6>{address2}</h6>
+                  <h6>
+                    {city}, {prov} {postal}
+                  </h6>
+                  <h6>{phone}</h6>
+                  <a href={`mailto:${email}`}>{email}</a>
+                  <div className={classes.DeleteEdit}>
+                    <h6>
+                      <Link to={`/admin/admin-landing/edit-member/${memberID}`}>
+                        edit
+                      </Link>
+                    </h6>
+                    <h6
+                      className={classes.Delete}
+                      onClick={e =>
+                        this.renderModal({
+                          memberID,
+                          firstname,
+                          lastname
+                        })
+                      }
+                    >
+                      delete this member
+                    </h6>
+                  </div>
+                </div>
+              }
+            />
+          </Table.Cell>
+          <Table.Cell>{phone}</Table.Cell>
+          <Table.Cell>{churchname}</Table.Cell>
+          <Table.Cell>{part}</Table.Cell>
+          <Table.Cell>
+            <a href={`mailto:${email}`}>{email}</a>
+          </Table.Cell>
+          <Table.Cell>
+            <div className={classes.CheckBox}>
+              <input
+                type="checkbox"
+                value={email}
+                onClick={e => {
+                  this.addToEmailList(e);
+                }}
+              />
+            </div>
+          </Table.Cell>
+        </Table.Row>
+      )
+    );
+  }
+
   searchName(event) {
     var updatedList = _.map(this.props.adminMemberList);
     updatedList = updatedList.filter(function(item) {
@@ -156,7 +259,6 @@ class AdminMemberList extends Component {
         </Modal>
       );
     } else {
-      const { column, items, direction } = this.state;
       return (
         <Aux>
           <div>
@@ -183,6 +285,7 @@ class AdminMemberList extends Component {
                 </div>
               </div>
             </Form>
+
             {this.state.items.length ? this.renderTotalParts() : null}
 
             <Table
@@ -191,131 +294,13 @@ class AdminMemberList extends Component {
             >
               <Table.Header>
                 <Table.Row>
-                  <Table.HeaderCell
-                    textAlign={"center"}
-                    sorted={column === "lastname" ? direction : null}
-                    onClick={this.handleSort("lastname")}
-                  >
-                    Name
-                  </Table.HeaderCell>
-                  <Table.HeaderCell
-                    textAlign={"center"}
-                    sorted={column === "phone" ? direction : null}
-                    onClick={this.handleSort("phone")}
-                  >
-                    Phone
-                  </Table.HeaderCell>
-                  <Table.HeaderCell
-                    textAlign={"center"}
-                    sorted={column === "churchname" ? direction : null}
-                    onClick={this.handleSort("churchname")}
-                  >
-                    Ward/Branch
-                  </Table.HeaderCell>
-                  <Table.HeaderCell
-                    textAlign={"center"}
-                    sorted={column === "part" ? direction : null}
-                    onClick={this.handleSort("part")}
-                  >
-                    Part
-                  </Table.HeaderCell>
-                  <Table.HeaderCell
-                    textAlign={"center"}
-                    sorted={column === "email" ? direction : null}
-                    onClick={this.handleSort("email")}
-                  >
-                    Email
-                  </Table.HeaderCell>
+                  {this.renderHeaders()}
                   <Table.HeaderCell textAlign={"center"}>
                     Group Email
                   </Table.HeaderCell>
                 </Table.Row>
               </Table.Header>
-              <Table.Body>
-                {_.map(
-                  items,
-                  ({
-                    memberID,
-                    firstname,
-                    lastname,
-                    phone,
-                    part,
-                    churchname,
-                    email,
-                    address1,
-                    address2,
-                    city,
-                    prov,
-                    postal
-                  }) => (
-                    <Table.Row key={memberID}>
-                      <Table.Cell value={memberID}>
-                        <PopUp
-                          trigger={
-                            <h6>
-                              {lastname}, {firstname}
-                            </h6>
-                          }
-                          name={
-                            <div className={classes.PopupHead}>
-                              {firstname} {lastname}
-                            </div>
-                          }
-                          content={
-                            <div className={classes.Popup}>
-                              <h6>{address1}</h6>
-                              <h6>{address2}</h6>
-                              <h6>
-                                {city}, {prov} {postal}
-                              </h6>
-                              <h6>{phone}</h6>
-                              <a href={`mailto:${email}`}>{email}</a>
-                              <div className={classes.DeleteEdit}>
-                                <h6>
-                                  <Link
-                                    to={`/admin/admin-landing/edit-member/${memberID}`}
-                                  >
-                                    edit
-                                  </Link>
-                                </h6>
-                                <h6
-                                  className={classes.Delete}
-                                  onClick={e =>
-                                    this.renderModal({
-                                      memberID,
-                                      firstname,
-                                      lastname
-                                    })
-                                  }
-                                >
-                                  delete this member
-                                </h6>
-                              </div>
-                            </div>
-                          }
-                        />
-                      </Table.Cell>
-                      <Table.Cell>{phone}</Table.Cell>
-                      <Table.Cell>{churchname}</Table.Cell>
-                      <Table.Cell>{part}</Table.Cell>
-                      <Table.Cell>
-                        <a href={`mailto:${email}`}>{email}</a>
-                      </Table.Cell>
-                      <Table.Cell>
-                        <div className={classes.CheckBox}>
-                          <input
-                            type="checkbox"
-                            value={email}
-                            onClick={e => {
-                              this.addToEmailList(e);
-                            }}
-                          />
-                        </div>
-                      </Table.Cell>
-                    </Table.Row>
-                  )
-                )}
-              </Table.Body>
+              <Table.Body>{this.renderRows()}</Table.Body>
             </Table>
           </div>
           <div>
