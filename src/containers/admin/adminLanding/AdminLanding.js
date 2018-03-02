@@ -10,6 +10,7 @@ import AdminMemberList from "../../admin/adminMemberList/AdminMemberList";
 import AdminPerformanceList from "../../admin/adminPerformanceList/AdminPerformanceList";
 import AdminEditMember from "../adminEditMember/AdminEditMember";
 import AdminShowSingleMember from "../adminShowSingleMember/AdminShowSingleMember";
+import AdminChurchList from "../adminChurchList/AdminChurchList";
 
 class AdminLanding extends Component {
   componentWillMount() {
@@ -35,11 +36,15 @@ class AdminLanding extends Component {
             />
             <Route
               path="/admin/admin-landing/show-single-member/:id"
-              component={withRouter(AdminShowSingleMember)}
+              component={AdminShowSingleMember}
             />
             <Route
               path="/admin/admin-landing/edit-member/:id"
-              component={withRouter(AdminEditMember)}
+              component={AdminEditMember}
+            />
+            <Route
+              path="/admin/admin-landing/ward-branch"
+              component={AdminChurchList}
             />
           </Switch>
         </AdminLayout>

@@ -29,7 +29,7 @@ class AdminLayout extends Component {
             Add Pieces
           </Link>
           <Link to={"/admin/admin-landing/ward-branch"} className={classnames}>
-            Add Ward/Branch
+            Ward/Branch
           </Link>
         </div>
         <main>{this.props.children}</main>
