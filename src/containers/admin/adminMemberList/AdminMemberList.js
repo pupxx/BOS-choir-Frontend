@@ -303,14 +303,6 @@ class AdminMemberList extends Component {
               <Table.Body>{this.renderRows()}</Table.Body>
             </Table>
           </div>
-          <div>
-            <Switch>
-              <Route
-                path="/admin/admin-landing/member-list/show-member/:id"
-                component={AdminShowSingleMember}
-              />
-            </Switch>
-          </div>
         </Aux>
       );
     }
