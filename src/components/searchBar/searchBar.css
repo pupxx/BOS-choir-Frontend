@@ -2,6 +2,32 @@
   padding: 10px;
 }
 
+.SearchBarWrapper {
+  width: 300px;
+}
+
 .Input {
-  /* border: 1px solid lightgray; */
+  border: none;
+  padding: 2px;
+  border-radius: 4px;
+}
+
+.Input::placeholder {
+  color: lightgray;
+}
+
+.SearchBar {
+  background-color: red;
+  /* width: 50px; */
+}
+
+.Label {
+  color: rgb(120, 120, 120);
+  background-color: rgb(228, 228, 228);
+  padding: 3px 5px;
+  margin: 0;
+
+  border-radius: 4px;
+  /* min-width: 75px; */
+  /* display: inline; */
 }

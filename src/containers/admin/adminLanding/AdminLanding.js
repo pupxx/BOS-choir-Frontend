@@ -17,6 +17,7 @@ class AdminLanding extends Component {
     this.props.fetchMemberInfo();
     this.props.fetchProfile();
     this.props.fetchAdminMemberList();
+    this.props.fetchChurchs();
   }
 
   render() {

@@ -3,10 +3,11 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
 import classes from "./adminChurchList.css";
+import styles from "../adminLayout/adminLayout.css";
 
 import * as actions from "../../../store/actions";
 import Aux from "../../../hoc/Aux";
-import { Table, Form } from "semantic-ui-react";
+import { Table } from "semantic-ui-react";
 import LoaderWithText from "../../../components/UI/loaders/LoaderWithText";
 import _ from "lodash";
 import Confirm from "../../../components/UI/confirm/Confirm";
@@ -64,24 +65,19 @@ class AdminChurchList extends Component {
         <Table.Row key={id}>
           <Table.Cell value={id}>
             <PopUp
+              position="top left"
               trigger={<h6>{churchname}</h6>}
-              name={<div className={classes.PopupHead}>{churchname}</div>}
+              name={<div>{churchname}</div>}
               content={
-                <div className={classes.Popup}>
-                  <h6>{churchaddress1}</h6>
-                  <h6>{churchaddress2}</h6>
-                  <h6>
-                    {churchcity}, {churchprov} {churchzip}
-                  </h6>
-                  <h6>{churchphone}</h6>
+                <div>
                   <div className={classes.DeleteEdit}>
-                    <h6>
+                    <h6 className={classes.H6}>
                       <Link to={`/admin/admin-landing/edit-ward-branch/${id}`}>
                         edit
                       </Link>
                     </h6>
                     <h6
-                      className={classes.Delete}
+                      className={styles.Delete}
                       onClick={e =>
                         this.renderModal({
                           id,
@@ -89,7 +85,7 @@ class AdminChurchList extends Component {
                         })
                       }
                     >
-                      delete Ward/Branch
+                      delete
                     </h6>
                   </div>
                 </div>
@@ -154,6 +150,7 @@ class AdminChurchList extends Component {
   }
 
   render() {
+    let classnames = `ui medium label ${styles.Blue}`;
     if (!this.props.churchList) {
       return <LoaderWithText />;
     } else if (this.state.renderModal) {
@@ -178,32 +175,40 @@ class AdminChurchList extends Component {
         <Aux>
           <div>
             <hr />
-            <Form className={classes.Form}>
-              <div className={classes.Inputs}>
-                <div>
-                  <SearchBar
-                    title="Search Ward/Branch"
-                    handleSearch={e => this.searchChurchName(e)}
-                  />
+          </div>
+          <div className={classes.TableLinksWrapper}>
+            <div className={classes.TableWrapper}>
+              <form className={classes.Form}>
+                <div className={classes.Inputs}>
+                  <div className={classes.SearchBarWrapper}>
+                    <SearchBar
+                      title="Search Ward/Branch"
+                      handleSearch={e => this.searchChurchName(e)}
+                    />
+                  </div>
+                  <div className={classes.SearchBarWrapper}>
+                    <SearchBar
+                      title="Search City"
+                      handleSearch={e => this.searchCity(e)}
+                    />
+                  </div>
                 </div>
-                <div>
-                  <SearchBar
-                    title="Search City"
-                    handleSearch={e => this.searchCity(e)}
-                  />
-                </div>
-              </div>
-            </Form>
-
-            <Table
-              className="ui small compact striped celled fixed sortable table"
-              color={"yellow"}
-            >
-              <Table.Header>
-                <Table.Row>{this.renderHeaders()}</Table.Row>
-              </Table.Header>
-              <Table.Body>{this.renderRows()}</Table.Body>
-            </Table>
+              </form>
+              <Table
+                className="ui small compact striped celled fixed sortable table"
+                color={"yellow"}
+              >
+                <Table.Header>
+                  <Table.Row>{this.renderHeaders()}</Table.Row>
+                </Table.Header>
+                <Table.Body>{this.renderRows()}</Table.Body>
+              </Table>
+            </div>
+            <div className={classes.QuickLinksWrapper}>
+              <Link to="k" className={classnames}>
+                <i class="fas fa-plus" /> Ward/Branch
+              </Link>
+            </div>
           </div>
         </Aux>
       );

@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import * as actions from "../../../store/actions";
 import Aux from "../../../hoc/Aux";
-import { Table, Form } from "semantic-ui-react";
+import { Table } from "semantic-ui-react";
 import LoaderWithText from "../../../components/UI/loaders/LoaderWithText";
 import _ from "lodash";
 
@@ -70,6 +70,7 @@ class AdminMemberList extends Component {
         <Table.Row key={memberID}>
           <Table.Cell value={memberID}>
             <PopUp
+              position={"right center"}
               trigger={
                 <h6>
                   {lastname}, {firstname}
@@ -262,7 +263,7 @@ class AdminMemberList extends Component {
         <Aux>
           <div>
             <hr />
-            <Form className={classes.Form}>
+            <form className={classes.Form}>
               <div className={classes.Inputs}>
                 <div>
                   <SearchBar
@@ -283,7 +284,7 @@ class AdminMemberList extends Component {
                   />
                 </div>
               </div>
-            </Form>
+            </form>
 
             {this.state.items.length ? this.renderTotalParts() : null}
 
