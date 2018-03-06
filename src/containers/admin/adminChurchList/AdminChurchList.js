@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, Switch, Route } from "react-router-dom";
 
 import classes from "./adminChurchList.css";
 import styles from "../adminLayout/adminLayout.css";
@@ -14,6 +14,7 @@ import Confirm from "../../../components/UI/confirm/Confirm";
 import SearchBar from "../../../components/searchBar/SearchBar";
 import PopUp from "../../../components/UI/popup/PopUp";
 import Modal from "../../../components/UI/modal/Modal";
+import AdminAddChurch from "../adminAddChurch/AdminAddChurch";
 
 class AdminChurchList extends Component {
   state = {
@@ -150,7 +151,7 @@ class AdminChurchList extends Component {
   }
 
   render() {
-    let classnames = `ui medium label ${styles.Blue}`;
+    let classnames = `ui medium label ${classes.AddChurch}`;
     if (!this.props.churchList) {
       return <LoaderWithText />;
     } else if (this.state.renderModal) {
@@ -205,9 +206,20 @@ class AdminChurchList extends Component {
               </Table>
             </div>
             <div className={classes.QuickLinksWrapper}>
-              <Link to="k" className={classnames}>
-                <i class="fas fa-plus" /> Ward/Branch
+              <Link
+                to="/admin/admin-landing/ward-branch/add-new"
+                className={classnames}
+              >
+                Add Ward/Branch
               </Link>
+              <div>
+                <Switch>
+                  <Route
+                    path="/admin/admin-landing/ward-branch/add-new"
+                    component={AdminAddChurch}
+                  />
+                </Switch>
+              </div>
             </div>
           </div>
         </Aux>

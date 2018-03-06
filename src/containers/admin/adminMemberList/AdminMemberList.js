@@ -12,6 +12,7 @@ import SearchBar from "../../../components/searchBar/SearchBar";
 import PopUp from "../../../components/UI/popup/PopUp";
 import Modal from "../../../components/UI/modal/Modal";
 import classes from "./adminMemberList.css";
+import layout from "../adminLayout/adminLayout.css";
 
 // import SearchableTable from "../searchableTable/SearchableTable";
 
@@ -236,6 +237,9 @@ class AdminMemberList extends Component {
   }
 
   render() {
+    let classnames = `ui medium label ${layout.Blue}`;
+    // let partsTotals = `${classes.Parts} ${layout.Blue}`;
+
     if (!this.props.adminMemberList) {
       return <LoaderWithText />;
     } else if (this.state.renderModal) {
@@ -260,34 +264,43 @@ class AdminMemberList extends Component {
       );
     } else {
       return (
-        <Aux>
-          <div>
-            <hr />
-            <form className={classes.Form}>
-              <div className={classes.Inputs}>
-                <div>
-                  <SearchBar
-                    title="Search Name"
-                    handleSearch={e => this.searchName(e)}
-                  />
-                </div>
-                <div>
-                  <SearchBar
-                    title="Search Ward"
-                    handleSearch={e => this.searchWard(e)}
-                  />
-                </div>
-                <div>
-                  <SearchBar
-                    title="Search Part"
-                    handleSearch={e => this.searchPart(e)}
-                  />
-                </div>
+        <div>
+          <hr />
+          <form className={classes.Form}>
+            <div className={classes.Inputs}>
+              <div>
+                <SearchBar
+                  title="Search Name"
+                  handleSearch={e => this.searchName(e)}
+                />
               </div>
-            </form>
-
-            {this.state.items.length ? this.renderTotalParts() : null}
-
+              <div>
+                <SearchBar
+                  title="Search Ward"
+                  handleSearch={e => this.searchWard(e)}
+                />
+              </div>
+              <div>
+                <SearchBar
+                  title="Search Part"
+                  handleSearch={e => this.searchPart(e)}
+                />
+              </div>
+            </div>
+          </form>
+          <div className={classes.TotalPartsWrapper}>
+            <div className={classes.Parts}>
+              {this.state.items.length ? this.renderTotalParts() : null}
+            </div>
+            <div className={classes.AddMember}>
+              {this.state.items.length ? (
+                <Link to="k" className={classnames}>
+                  Add Member
+                </Link>
+              ) : null}
+            </div>
+          </div>
+          <div className={classes.TableWrapper}>
             <Table
               className="ui small compact striped celled fixed sortable table"
               color={"yellow"}
@@ -303,7 +316,7 @@ class AdminMemberList extends Component {
               <Table.Body>{this.renderRows()}</Table.Body>
             </Table>
           </div>
-        </Aux>
+        </div>
       );
     }
   }

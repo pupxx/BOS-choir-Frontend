@@ -15,6 +15,7 @@
 }
 
 .QuickLinksWrapper {
+  display: grid;
   padding: 20px;
   justify-self: center;
 }
@@ -30,4 +31,11 @@
   .TableLinksWrapper {
     grid-template-columns: 1fr;
   }
+}
+
+.AddChurch {
+  background: linear-gradient(white, #a3c0ff) !important;
+  text-decoration: none !important;
+  justify-self: center;
+  height: 30px;
 }
