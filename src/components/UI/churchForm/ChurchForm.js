@@ -32,6 +32,7 @@ class ChurchForm extends Component {
   }
 
   render() {
+    console.log(this.props);
     const { handleSubmit } = this.props;
     let confirm = `ui mini green button ${classes.Buttons}`;
     let cancel = `ui mini red button ${classes.Buttons}`;
@@ -89,7 +90,7 @@ class ChurchForm extends Component {
             Submit
           </button>
           <button className={cancel} onClick={e => this.props.cancelAction()}>
-            {this.props.cancelButtonText}
+            Cancel
           </button>
         </form>
       </Aux>
@@ -97,7 +98,13 @@ class ChurchForm extends Component {
   }
 }
 
-const mapStateToProps = (state, ownProps) => ({});
+function mapStateToProps(state, ownProps) {
+  let value;
+  if (ownProps.churchToEdit) {
+    value = state.churchs[ownProps.churchToEdit];
+  }
+  return { initialValues: value };
+}
 
 export default connect(mapStateToProps)(
   reduxForm({

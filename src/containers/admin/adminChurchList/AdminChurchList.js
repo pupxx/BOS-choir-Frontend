@@ -73,19 +73,16 @@ class AdminChurchList extends Component {
               content={
                 <div>
                   <div className={classes.DeleteEdit}>
-                    <h6 className={classes.H6}>
-                      <Link to={`/admin/admin-landing/edit-ward-branch/${id}`}>
-                        edit
-                      </Link>
+                    <h6
+                      className={classes.H6}
+                      onClick={() => this.editChurchModalData(id)}
+                    >
+                      Edit
                     </h6>
                     <h6
                       className={styles.Delete}
                       onClick={e => {
-                        // this.renderModal({
-                        //   id,
-                        //   churchname
-                        // });
-                        this.editDeleteChurchModalData({
+                        this.deleteChurchMoadlData({
                           id,
                           churchname
                         });
@@ -155,7 +152,7 @@ class AdminChurchList extends Component {
       : this.setState({ renderModal: true });
   };
 
-  editDeleteChurchModalData = churchToDelete => {
+  deleteChurchMoadlData = churchToDelete => {
     let data = (
       <Modal size="small">
         <Confirm
@@ -179,13 +176,22 @@ class AdminChurchList extends Component {
     });
   };
 
+  editChurchModalData(id) {
+    let data = (
+      <Modal>
+        <ChurchForm cancelAction={this.renderModal} churchToEdit={id} />
+      </Modal>
+    );
+    this.setState({ renderModal: true });
+    this.setState({
+      testData: data
+    });
+  }
+
   addChurchModalData() {
     let data = (
       <Modal>
-        <AdminAddChurch
-          cancelAction={this.renderModal}
-          cancelButtonText="End"
-        />
+        <ChurchForm cancelAction={this.renderModal} />
       </Modal>
     );
     this.setState({ renderModal: true });
@@ -195,6 +201,7 @@ class AdminChurchList extends Component {
   }
 
   render() {
+    console.log(this.props, "!!!!!!!!!!!!!");
     let classnames = `ui medium label ${classes.AddChurch}`;
     if (!this.props.churchList) {
       return <LoaderWithText />;
