@@ -7,7 +7,12 @@ import ChurchForm from "../../../components/UI/churchForm/ChurchForm";
 class AdminAddChurch extends Component {
   state = {};
   render() {
-    return <ChurchForm />;
+    return (
+      <ChurchForm
+        cancelAction={this.props.cancelAction}
+        cancelButtonText={this.props.cancelButtonText}
+      />
+    );
   }
 }
 

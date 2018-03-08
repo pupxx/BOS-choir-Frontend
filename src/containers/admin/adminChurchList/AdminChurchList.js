@@ -15,6 +15,7 @@ import SearchBar from "../../../components/searchBar/SearchBar";
 import PopUp from "../../../components/UI/popup/PopUp";
 import Modal from "../../../components/UI/modal/Modal";
 import AdminAddChurch from "../adminAddChurch/AdminAddChurch";
+import ChurchForm from "../../../components/UI/churchForm/ChurchForm";
 
 class AdminChurchList extends Component {
   state = {
@@ -79,12 +80,16 @@ class AdminChurchList extends Component {
                     </h6>
                     <h6
                       className={styles.Delete}
-                      onClick={e =>
-                        this.renderModal({
+                      onClick={e => {
+                        // this.renderModal({
+                        //   id,
+                        //   churchname
+                        // });
+                        this.editDeleteChurchModalData({
                           id,
                           churchname
-                        })
-                      }
+                        });
+                      }}
                     >
                       delete
                     </h6>
@@ -143,11 +148,50 @@ class AdminChurchList extends Component {
     });
   };
 
-  renderModal(churchToDelete) {
-    this.setState({ churchToDelete });
+  renderModal = () => {
+    console.log("rendering");
     this.state.renderModal
       ? this.setState({ renderModal: false })
       : this.setState({ renderModal: true });
+  };
+
+  editDeleteChurchModalData = churchToDelete => {
+    let data = (
+      <Modal size="small">
+        <Confirm
+          content={
+            <h6>
+              Are you sure you want to delete{" "}
+              <strong>{churchToDelete.churchname}?</strong>
+            </h6>
+          }
+          confirmButtonText="Confirm"
+          cancelAction={
+            this.renderModal // confirmAction={this.deleteMember.bind(this)}
+          }
+          cancelButtonText="Cancel"
+        />
+      </Modal>
+    );
+    this.setState({ renderModal: true });
+    this.setState({
+      testData: data
+    });
+  };
+
+  addChurchModalData() {
+    let data = (
+      <Modal>
+        <AdminAddChurch
+          cancelAction={this.renderModal}
+          cancelButtonText="End"
+        />
+      </Modal>
+    );
+    this.setState({ renderModal: true });
+    this.setState({
+      testData: data
+    });
   }
 
   render() {
@@ -155,22 +199,7 @@ class AdminChurchList extends Component {
     if (!this.props.churchList) {
       return <LoaderWithText />;
     } else if (this.state.renderModal) {
-      return (
-        <Modal size="small" renderModal={this.renderModal.bind(this)}>
-          <Confirm
-            content={
-              <h6>
-                Are you sure you want to delete{" "}
-                <strong>{this.state.churchToDelete.churchname}?</strong>
-              </h6>
-            }
-            confirmButtonText="Confirm"
-            // confirmAction={this.deleteMember.bind(this)}
-            cancelAction={this.renderModal.bind(this)}
-            cancelButtonText="Cancel"
-          />
-        </Modal>
-      );
+      return this.state.testData;
     } else {
       return (
         <Aux>
@@ -206,20 +235,21 @@ class AdminChurchList extends Component {
               </Table>
             </div>
             <div className={classes.QuickLinksWrapper}>
-              <Link
-                to="/admin/admin-landing/ward-branch/add-new"
+              <h5
+                onClick={e => this.addChurchModalData()}
+                // to="/admin/admin-landing/ward-branch/add-new"
                 className={classnames}
               >
                 Add Ward/Branch
-              </Link>
-              <div>
+              </h5>
+              {/* <div>
                 <Switch>
                   <Route
                     path="/admin/admin-landing/ward-branch/add-new"
                     component={AdminAddChurch}
                   />
                 </Switch>
-              </div>
+              </div> */}
             </div>
           </div>
         </Aux>

@@ -3,11 +3,10 @@ import { connect } from "react-redux";
 import { Field, reduxForm } from "redux-form";
 
 import Aux from "../../../hoc/Aux";
+import classes from "./churchForm.css";
 
 class ChurchForm extends Component {
-  state = {
-    renderModal: false
-  };
+  state = {};
 
   renderField(field) {
     const { meta: { touched, error } } = field;
@@ -28,10 +27,18 @@ class ChurchForm extends Component {
     );
   }
 
+  onSubmit(values) {
+    console.log(values);
+  }
+
   render() {
+    const { handleSubmit } = this.props;
+    let confirm = `ui mini green button ${classes.Buttons}`;
+    let cancel = `ui mini red button ${classes.Buttons}`;
     return (
       <Aux>
-        <form>
+        <h5>Add Ward/Branch</h5>
+        <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
           <Field
             name="churchname"
             label="Ward/Branch:"
@@ -74,6 +81,16 @@ class ChurchForm extends Component {
             placeholder="Phone"
             component={this.renderField}
           />
+          <button
+            type="submit"
+            disabled={this.props.pristine}
+            className={confirm}
+          >
+            Submit
+          </button>
+          <button className={cancel} onClick={e => this.props.cancelAction()}>
+            {this.props.cancelButtonText}
+          </button>
         </form>
       </Aux>
     );
