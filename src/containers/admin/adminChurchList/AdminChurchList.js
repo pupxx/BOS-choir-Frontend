@@ -14,7 +14,6 @@ import Confirm from "../../../components/UI/confirm/Confirm";
 import SearchBar from "../../../components/searchBar/SearchBar";
 import PopUp from "../../../components/UI/popup/PopUp";
 import Modal from "../../../components/UI/modal/Modal";
-import AdminAddChurch from "../adminAddChurch/AdminAddChurch";
 import ChurchForm from "../../../components/UI/churchForm/ChurchForm";
 
 class AdminChurchList extends Component {
