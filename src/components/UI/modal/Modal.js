@@ -13,7 +13,6 @@ import classes from "./modal.css";
 
 class Modal extends Component {
   componentDidMount() {
-    console.log(this.props);
     this.modalTarget = document.createElement("div");
     this.modalTarget.className = classes.Modal;
     document.body.appendChild(this.modalTarget);

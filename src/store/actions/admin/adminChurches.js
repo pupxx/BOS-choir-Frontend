@@ -1,5 +1,5 @@
 import axios from "axios";
-import { DELETE_CHURCH, ADD_CHURCH } from "../types";
+import { DELETE_CHURCH, ADD_CHURCH, EDIT_CHURCH } from "../types";
 import { authError } from "../index";
 
 const ROOT_URL = "http://localhost:4000";
@@ -35,6 +35,28 @@ export function addChurch(values, cb) {
       .then(response => {
         dispatch({
           type: ADD_CHURCH,
+          payload: response.data[0]
+        });
+      })
+      .then(() => {
+        cb();
+      })
+      .catch(err => {
+        dispatch(authError(err.response.data.message));
+      });
+  };
+}
+
+export function editChurch(values, cb) {
+  const url = `${ROOT_URL}/admin/update-ward-branch/${values.id}`;
+  const token = localStorage.getItem("token");
+  const headers = { authorization: token };
+  return function(dispatch) {
+    return axios
+      .patch(url, values, { headers })
+      .then(response => {
+        dispatch({
+          type: EDIT_CHURCH,
           payload: response.data[0]
         });
       })

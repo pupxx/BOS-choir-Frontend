@@ -28,9 +28,8 @@ class ChurchForm extends Component {
     );
   }
 
-  //the location and action are getting passed from the component that is rendering ChurchForm.js
   onSubmit(values) {
-    const location = this.props.location;
+    let location = this.props.location;
     this.props.action(values, location);
     this.props.removeModal();
   }
