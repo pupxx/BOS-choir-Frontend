@@ -13,6 +13,7 @@ import PopUp from "../../../components/UI/popup/PopUp";
 import Modal from "../../../components/UI/modal/Modal";
 import classes from "./adminMemberList.css";
 import layout from "../adminLayout/adminLayout.css";
+import AdminAddMember from "../adminAddMember/AdminAddMember";
 
 // import SearchableTable from "../searchableTable/SearchableTable";
 
@@ -100,7 +101,7 @@ class AdminMemberList extends Component {
                     <h6
                       className={classes.Delete}
                       onClick={e =>
-                        this.renderModal({
+                        this.editDeleteModalData({
                           memberID,
                           firstname,
                           lastname
@@ -221,8 +222,7 @@ class AdminMemberList extends Component {
     );
   }
 
-  renderModal(memberToDelete) {
-    this.setState({ memberToDelete });
+  renderModal() {
     this.state.renderModal
       ? this.setState({ renderModal: false })
       : this.setState({ renderModal: true });
@@ -236,32 +236,50 @@ class AdminMemberList extends Component {
     this.props.deleteMember(id, location);
   }
 
+  editDeleteModalData(memberToDelete) {
+    this.setState({ memberToDelete });
+
+    let modalData = (
+      <Modal size="small">
+        <Confirm
+          content={
+            <h6>
+              Are you sure you want to delete member{" "}
+              <strong>
+                {memberToDelete.firstname} {memberToDelete.lastname}?
+              </strong>
+            </h6>
+          }
+          confirmButtonText="Confirm"
+          confirmAction={this.deleteMember.bind(this)}
+          cancelAction={this.renderModal.bind(this)}
+          cancelButtonText="Cancel"
+        />
+      </Modal>
+    );
+    this.setState({
+      modalData,
+      renderModal: true
+    });
+  }
+
+  addMember() {
+    let modalData = (
+      <Modal>
+        <AdminAddMember cancelAction={this.renderModal.bind(this)} />
+      </Modal>
+    );
+    this.setState({ renderModal: true });
+    this.setState({ modalData: modalData });
+  }
+
   render() {
     let classnames = `ui medium label ${layout.Blue}`;
-    // let partsTotals = `${classes.Parts} ${layout.Blue}`;
 
     if (!this.props.adminMemberList) {
       return <LoaderWithText />;
     } else if (this.state.renderModal) {
-      return (
-        <Modal size="small" renderModal={this.renderModal.bind(this)}>
-          <Confirm
-            content={
-              <h6>
-                Are you sure you want to delete member{" "}
-                <strong>
-                  {this.state.memberToDelete.firstname}{" "}
-                  {this.state.memberToDelete.lastname}?
-                </strong>
-              </h6>
-            }
-            confirmButtonText="Confirm"
-            confirmAction={this.deleteMember.bind(this)}
-            cancelAction={this.renderModal.bind(this)}
-            cancelButtonText="Cancel"
-          />
-        </Modal>
-      );
+      return this.state.modalData;
     } else {
       return (
         <div>
@@ -292,13 +310,13 @@ class AdminMemberList extends Component {
             <div className={classes.Parts}>
               {this.state.items.length ? this.renderTotalParts() : null}
             </div>
-            <div className={classes.AddMember}>
+            {/* <div className={classes.AddMember}>
               {this.state.items.length ? (
-                <Link to="k" className={classnames}>
+                <h5 onClick={() => this.addMember()} className={classnames}>
                   Add Member
-                </Link>
+                </h5>
               ) : null}
-            </div>
+            </div> */}
           </div>
           <div className={classes.TableWrapper}>
             <Table

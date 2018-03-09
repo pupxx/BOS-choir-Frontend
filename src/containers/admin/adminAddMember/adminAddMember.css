@@ -1,0 +1,22 @@
+.Heading {
+  margin-bottom: 20px;
+}
+
+.Form {
+  display: grid;
+  grid-gap: 20px;
+  grid-template-columns: 1fr 1fr;
+}
+
+.FirstHalf {
+  grid-column: 1/2;
+}
+.SecondHalf {
+  grid-column: 2/-1;
+}
+
+.Buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 20px;
+}

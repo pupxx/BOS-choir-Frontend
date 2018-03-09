@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import { Link, Switch, Route } from "react-router-dom";
 
 import classes from "./adminChurchList.css";
-import styles from "../adminLayout/adminLayout.css";
 
 import * as actions from "../../../store/actions";
 import Aux from "../../../hoc/Aux";
@@ -73,13 +72,13 @@ class AdminChurchList extends Component {
                 <div>
                   <div className={classes.DeleteEdit}>
                     <h6
-                      className={classes.H6}
+                      className={classes.Confirm}
                       onClick={() => this.editChurchModalData(id)}
                     >
                       Edit
                     </h6>
                     <h6
-                      className={styles.Delete}
+                      className={classes.Delete}
                       onClick={e => {
                         this.deleteChurchMoadlData({
                           id,
@@ -145,7 +144,6 @@ class AdminChurchList extends Component {
   };
 
   renderModal = () => {
-    console.log("rendering");
     this.state.renderModal
       ? this.setState({ renderModal: false })
       : this.setState({ renderModal: true });
@@ -161,14 +159,14 @@ class AdminChurchList extends Component {
               <strong>{churchToDelete.churchname}?</strong>
             </h6>
           }
+          confirmAction={() => this.deleteChurch(churchToDelete.id)}
           confirmButtonText="Confirm"
-          cancelAction={
-            this.renderModal // confirmAction={this.deleteMember.bind(this)}
-          }
+          cancelAction={this.renderModal}
           cancelButtonText="Cancel"
         />
       </Modal>
     );
+    console.log(churchToDelete);
     this.setState({ renderModal: true });
     this.setState({
       testData: data
@@ -199,8 +197,12 @@ class AdminChurchList extends Component {
     });
   }
 
+  deleteChurch(id) {
+    console.log(id, "%%%%%%%%%");
+    this.renderModal();
+  }
+
   render() {
-    console.log(this.props, "!!!!!!!!!!!!!");
     let classnames = `ui medium label ${classes.AddChurch}`;
     if (!this.props.churchList) {
       return <LoaderWithText />;
@@ -243,19 +245,10 @@ class AdminChurchList extends Component {
             <div className={classes.QuickLinksWrapper}>
               <h5
                 onClick={e => this.addChurchModalData()}
-                // to="/admin/admin-landing/ward-branch/add-new"
                 className={classnames}
               >
                 Add Ward/Branch
               </h5>
-              {/* <div>
-                <Switch>
-                  <Route
-                    path="/admin/admin-landing/ward-branch/add-new"
-                    component={AdminAddChurch}
-                  />
-                </Switch>
-              </div> */}
             </div>
           </div>
         </Aux>

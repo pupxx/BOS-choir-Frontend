@@ -39,3 +39,19 @@
   justify-self: center;
   height: 30px;
 }
+
+.Confirm {
+  /* color: #5cb85c; */
+  color: blue;
+}
+.Confirm:hover {
+  cursor: pointer;
+}
+
+.Delete {
+  color: red;
+}
+
+.Delete:hover {
+  cursor: pointer;
+}
