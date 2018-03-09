@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Link, Switch, Route } from "react-router-dom";
 
 import classes from "./adminChurchList.css";
 
@@ -166,7 +165,6 @@ class AdminChurchList extends Component {
         />
       </Modal>
     );
-    console.log(churchToDelete);
     this.setState({ renderModal: true });
     this.setState({
       testData: data
@@ -198,7 +196,10 @@ class AdminChurchList extends Component {
   }
 
   deleteChurch(id) {
-    console.log(id, "%%%%%%%%%");
+    const location = () => {
+      this.props.history.push("/admin/admin-landing/ward-branch");
+    };
+    this.props.deleteChurch(id, location);
     this.renderModal();
   }
 
