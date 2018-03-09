@@ -184,9 +184,16 @@ class AdminChurchList extends Component {
   }
 
   addChurchModalData() {
+    const goto = () =>
+      this.props.history.push("/admin/admin-landing/ward-branch");
     let data = (
       <Modal>
-        <ChurchForm cancelAction={this.renderModal} />
+        <ChurchForm
+          action={this.props.addChurch}
+          location={goto}
+          cancelAction={this.renderModal}
+          removeModal={this.renderModal}
+        />
       </Modal>
     );
     this.setState({ renderModal: true });

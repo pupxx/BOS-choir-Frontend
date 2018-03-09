@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Field, reduxForm } from "redux-form";
+import * as actions from "../../../store/actions";
 
 import Aux from "../../../hoc/Aux";
 import classes from "./churchForm.css";
@@ -27,12 +28,14 @@ class ChurchForm extends Component {
     );
   }
 
+  //the location and action are getting passed from the component that is rendering ChurchForm.js
   onSubmit(values) {
-    console.log(values);
+    const location = this.props.location;
+    this.props.action(values, location);
+    this.props.removeModal();
   }
 
   render() {
-    console.log(this.props);
     const { handleSubmit } = this.props;
     let confirm = `ui mini green button ${classes.Buttons}`;
     let cancel = `ui mini red button ${classes.Buttons}`;
@@ -106,7 +109,7 @@ function mapStateToProps(state, ownProps) {
   return { initialValues: value };
 }
 
-export default connect(mapStateToProps)(
+export default connect(mapStateToProps, actions)(
   reduxForm({
     // validate,
     form: "churchform",

@@ -1,4 +1,4 @@
-import { FETCH_CHURCHS, DELETE_CHURCH } from "../actions/types";
+import { FETCH_CHURCHS, DELETE_CHURCH, ADD_CHURCH } from "../actions/types";
 import _ from "lodash";
 
 export default function(state = {}, action) {
@@ -7,6 +7,8 @@ export default function(state = {}, action) {
       return _.mapKeys(action.payload, "id");
     case DELETE_CHURCH:
       return _.omit(state, action.payload);
+    case ADD_CHURCH:
+      return { ...state, [action.payload.id]: action.payload };
     default:
       return state;
   }
