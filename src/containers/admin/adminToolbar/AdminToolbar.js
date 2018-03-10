@@ -12,7 +12,7 @@ export class AdminToolbar extends Component {
   };
 
   render() {
-    const { activeItem } = this.state;
+    // const { activeItem } = this.state;
 
     return (
       <Aux>

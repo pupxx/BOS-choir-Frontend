@@ -11,28 +11,35 @@ class AdminPerformanceList extends Component {
   state = {};
 
   componentDidMount() {
-    if (!_.map(this.props.adminPerformanceList).length) {
-      this.props.fetchAdminPerformanceList();
-    }
+    this.props.fetchAdminPerformanceList();
   }
 
   renderPerformanceInfo() {
-    return _.map(this.props.adminPerformanceList).map((el, i) => {
-      return (
-        <div>
-          <Card
-            className={classes.Cards}
-            key={i}
-            header={el.perfname}
-            description={<div>{el.perfname}</div>}
-          />
-        </div>
-      );
-    });
+    if (!this.props.adminPerformanceList) {
+      return <LoaderWithText />;
+    } else {
+      return _.map(this.props.adminPerformanceList).map((el, i) => {
+        return (
+          <div key={i}>
+            <Card
+              className={classes.Cards}
+              key={i}
+              header={el.perfname}
+              description={
+                <div>
+                  <h5>Location</h5>
+                  {el.churchname}
+                </div>
+              }
+            />
+          </div>
+        );
+      });
+    }
   }
 
   render() {
-    console.log(this.props);
+    console.log(this.props.adminPerformanceList);
     if (!_.map(this.props.adminPerformanceList).length) {
       return <LoaderWithText />;
     }

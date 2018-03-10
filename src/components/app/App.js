@@ -15,8 +15,6 @@ import Profile from "../../containers/profile/Profile";
 import Register from "../../containers/register/Register";
 import MemberLanding from "../../containers/memberLanding/MemberLanding";
 import requireAuth from "../../hoc/auth/require_authentication";
-import requireAdmin from "../../hoc/authorize/Authorize";
-import AdminLanding from "../../containers/admin/adminLanding/AdminLanding";
 
 // import classes from './app.css';
 

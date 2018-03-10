@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import Aux from "../../../hoc/Aux";
 import AdminToolbar from "../adminToolbar/AdminToolbar";
-import AdminMemberList from "../adminMemberList/AdminMemberList";
 
 import classes from "./adminLayout.css";
 

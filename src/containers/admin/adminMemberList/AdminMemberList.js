@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import * as actions from "../../../store/actions";
-import Aux from "../../../hoc/Aux";
 import { Table } from "semantic-ui-react";
 import LoaderWithText from "../../../components/UI/loaders/LoaderWithText";
 import _ from "lodash";
@@ -12,7 +11,6 @@ import SearchBar from "../../../components/searchBar/SearchBar";
 import PopUp from "../../../components/UI/popup/PopUp";
 import Modal from "../../../components/UI/modal/Modal";
 import classes from "./adminMemberList.css";
-import layout from "../adminLayout/adminLayout.css";
 import AdminAddMember from "../adminAddMember/AdminAddMember";
 
 // import SearchableTable from "../searchableTable/SearchableTable";
@@ -274,8 +272,6 @@ class AdminMemberList extends Component {
   }
 
   render() {
-    let classnames = `ui medium label ${layout.Blue}`;
-
     if (!this.props.adminMemberList) {
       return <LoaderWithText />;
     } else if (this.state.renderModal) {
