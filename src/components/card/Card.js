@@ -8,8 +8,8 @@ const CardExtraContent = props => (
     <Card.Content extra>
       {/* <Icon name="user" /> */}
       <div>
-        <div>Edit</div>
-        <div>Delete</div>
+        <div>{props.date}</div>
+        <div>{props.time}</div>
       </div>
     </Card.Content>
   </Card>

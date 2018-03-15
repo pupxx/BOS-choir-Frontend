@@ -9,7 +9,7 @@ import churchs from "./reducers_churchs";
 import memberInfo from "./reducer_memberInfo";
 import isAdmin from "./auth/reducer_admin";
 import adminMemberList from "./admin/reducer_memberList";
-import adminPerformanceList from "./admin/reducer_performanceList";
+// import adminPerformanceList from "./admin/reducer_performanceList";
 
 const rootReducer = combineReducers({
   performanceList,
@@ -21,8 +21,7 @@ const rootReducer = combineReducers({
   profile,
   churchs,
   memberInfo,
-  adminMemberList,
-  adminPerformanceList
+  adminMemberList
 });
 
 export default rootReducer;

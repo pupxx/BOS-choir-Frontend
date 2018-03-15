@@ -6,7 +6,7 @@ const ROOT_URL = "http://localhost:4000";
 
 export function fetchAdminPerformanceList() {
   return function(dispatch) {
-    let url = `${ROOT_URL}/performances`;
+    let url = `${ROOT_URL}/admin/performances`;
     let token = localStorage.getItem("token");
     let headers = { authorization: token };
     axios

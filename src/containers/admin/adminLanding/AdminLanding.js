@@ -18,6 +18,7 @@ class AdminLanding extends Component {
     this.props.fetchProfile();
     this.props.fetchAdminMemberList();
     this.props.fetchChurchs();
+    this.props.fetchPerformances();
   }
 
   render() {
@@ -29,7 +30,7 @@ class AdminLanding extends Component {
             <Route path="/admin/admin-landing/register" component={Register} />
             <Route
               path="/admin/admin-landing/performances"
-              component={AdminPerformanceList}
+              component={withRouter(AdminPerformanceList)}
             />
             <Route
               path="/admin/admin-landing/member-list"
