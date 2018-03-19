@@ -22,7 +22,7 @@ class PerformanceList extends Component {
           var attendance = (
             <h6 className={classes.NotAttending}>
               <button className={classes.NotAttendingWrapper}>
-                I will not be attending
+                I am currently NOT attending
               </button>
               <span className={classes.Carrot}>></span>
             </h6>
@@ -31,7 +31,7 @@ class PerformanceList extends Component {
           attendance = (
             <h6 className={classes.Attending}>
               <button className={classes.AttendingWrapper}>
-                I will be attending
+                I am currently attending
               </button>
               <span className={classes.Carrot}>></span>
             </h6>

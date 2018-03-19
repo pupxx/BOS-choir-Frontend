@@ -22,10 +22,10 @@ class AdminLayout extends Component {
             Performances
           </Link>
           <Link to={"/admin/admin-landing/rehearsals"} className={classnames}>
-            Add Rehearsals
+            Rehearsals
           </Link>
           <Link to={"/admin/admin-landing/pieces"} className={classnames}>
-            Add Pieces
+            Choir Music
           </Link>
           <Link to={"/admin/admin-landing/ward-branch"} className={classnames}>
             Ward/Branch

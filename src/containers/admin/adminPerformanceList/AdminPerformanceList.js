@@ -33,11 +33,12 @@ class AdminPerformanceList extends Component {
               className={classes.Cards}
               key={i}
               header={el.perfname}
-              date={el.perfdate}
+              date={el.formattedDate}
               time={el.perftime}
               description={
                 <div>
-                  <address>
+                  Location:
+                  <address className={classes.Address}>
                     {el.churchname} <br />
                     {el.churchphone}
                   </address>
@@ -62,12 +63,13 @@ class AdminPerformanceList extends Component {
   }
 
   render() {
+    console.log(this.props.performanceList);
     if (!_.map(this.props.performanceList).length) {
       return <LoaderWithText />;
     } else {
       return (
         <Aux>
-          <div>
+          <div className={classes.Inputs}>
             <SearchBar
               title="Search Year"
               handleSearch={e => this.searchYear(e)}

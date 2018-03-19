@@ -81,7 +81,7 @@ class ShowSinglePerformance extends Component {
           </span>
         </h6>
         <div>
-          <h6>Pieces</h6>
+          <h6>Choir Music</h6>
           <ul>{this.renderPieces()}</ul>
         </div>
         <div>
