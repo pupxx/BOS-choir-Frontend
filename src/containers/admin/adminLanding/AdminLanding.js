@@ -11,6 +11,7 @@ import AdminPerformanceList from "../../admin/adminPerformanceList/AdminPerforma
 import AdminEditMember from "../adminEditMember/AdminEditMember";
 import AdminShowSingleMember from "../adminShowSingleMember/AdminShowSingleMember";
 import AdminChurchList from "../adminChurchList/AdminChurchList";
+import AdminSinglePerformance from "../adminSinglePerformance/AdminSinglePerformance";
 
 class AdminLanding extends Component {
   componentWillMount() {
@@ -47,6 +48,10 @@ class AdminLanding extends Component {
             <Route
               path="/admin/admin-landing/ward-branch"
               component={AdminChurchList}
+            />
+            <Route
+              path="/admin/admin-landing/performance/:id"
+              component={AdminSinglePerformance}
             />
           </Switch>
         </AdminLayout>

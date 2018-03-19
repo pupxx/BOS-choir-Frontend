@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 import _ from "lodash";
 import * as actions from "../../../store/actions";
 import LoaderWithText from "../../../components/UI/loaders/LoaderWithText";
@@ -32,7 +33,13 @@ class AdminPerformanceList extends Component {
             <Card
               className={classes.Cards}
               key={i}
-              header={el.perfname}
+              header={
+                <Link
+                  to={`/admin/admin-landing/performance/${el.performanceID}`}
+                >
+                  {el.perfname}
+                </Link>
+              }
               date={el.formattedDate}
               time={el.perftime}
               description={
