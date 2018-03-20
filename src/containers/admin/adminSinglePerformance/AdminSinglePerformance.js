@@ -1,13 +1,53 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 import * as actions from "../../../store/actions";
 import _ from "lodash";
+import LoaderWithText from "../../../components/UI/loaders/LoaderWithText";
 
 class AdminSinglePerformance extends Component {
   state = {};
 
+  componentDidMount() {
+    console.log("hello");
+    const id = this.props.match.params.id;
+    this.props.fetchSinglePerformance(id);
+  }
+
+  renderPerformance() {
+    return _.map(
+      this.props.singlePerformance,
+      ({
+        performanceID,
+        perfname,
+        formattedTime,
+        churchID,
+        churchname,
+        churchaddress1,
+        churchaddress2,
+        churchcity,
+        churchphone,
+        formattedDate
+      }) => {
+        return (
+          <div key={performanceID}>
+            <h5>{perfname}</h5>
+            <h5>{formattedDate}</h5>
+            <h5>{formattedTime}</h5>
+            <h5>{churchname}</h5>
+            <h5>{churchaddress1}</h5>
+            <h5>{churchaddress2}</h5>
+            <h5>{churchcity}</h5>
+            <h5>{churchphone}</h5>
+            {this.renderPieces()}
+          </div>
+        );
+      }
+    );
+  }
+
   renderPieces() {
-    return this.props.singlePerformance.pieces.map(el => {
+    return _.map(this.props.singlePerformance.pieces, el => {
       return (
         <div key={el.pieceID}>
           <h5>{el.piecetitle}</h5>
@@ -16,41 +56,23 @@ class AdminSinglePerformance extends Component {
       );
     });
   }
+
   render() {
-    const {
-      performanceID,
-      perfname,
-      perfdate,
-      perftime,
-      churchID,
-      churchname,
-      churchaddress1,
-      churchaddress2,
-      churchcity,
-      churchphone
-    } = this.props.singlePerformance;
-    console.log(this.props, "@@@@@@@@@@@@@@@@@");
-    return (
-      <div>
-        <h5>{perfname}</h5>
-        <h5>{perfdate}</h5>
-        <h5>{perftime}</h5>
-        <h5>{churchname}</h5>
-        <h5>{churchaddress1}</h5>
-        <h5>{churchaddress2}</h5>
-        <h5>{churchcity}</h5>
-        <h5>{churchphone}</h5>
-        {this.renderPieces()}
-      </div>
-    );
+    console.log(this.props.singlePerformance);
+    if (!this.props.singlePerformance) {
+      return <LoaderWithText />;
+    } else {
+      return this.renderPerformance();
+    }
   }
 }
 
-function mapStateToProps(state, ownProps) {
+function mapStateToProps(state) {
   return {
-    performanceList: state.performancList,
-    singlePerformance: state.performanceList[ownProps.match.params.id]
+    singlePerformance: state.singlePerformance
   };
 }
 
-export default connect(mapStateToProps, actions)(AdminSinglePerformance);
+export default withRouter(
+  connect(mapStateToProps, actions)(AdminSinglePerformance)
+);
