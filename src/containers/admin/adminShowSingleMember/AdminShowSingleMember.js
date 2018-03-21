@@ -26,7 +26,6 @@ class AdminShowSingleMember extends Component {
       part,
       email
     } = this.props.singleMember;
-    console.log(this.props);
     if (!this.props.singleMember) {
       return <LoaderWithText />;
     } else {

@@ -194,7 +194,6 @@ class AdminMemberList extends Component {
     } else {
       this.state.emailList.push(e.target.value);
     }
-    console.log(this.state.emailList);
   };
 
   renderTotalParts() {
@@ -230,7 +229,6 @@ class AdminMemberList extends Component {
     const id = this.state.memberToDelete.memberID;
     const location = () =>
       this.props.history.push("/admin/admin-landing/member-list");
-    console.log(this.state.memberToDelete, "thisis the member to delete");
     this.props.deleteMember(id, location);
   }
 

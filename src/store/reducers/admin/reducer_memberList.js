@@ -12,7 +12,6 @@ export default function(state = {}, action) {
     case FETCH_ADMIN_SINGLE_MEMBER:
       return { ...state, [action.payload.data.memberID]: action.payload.data };
     case DELETE_MEMBER:
-      console.log(action.payload, "here is the payload");
       return _.omit(state, action.payload);
     default:
       return state;

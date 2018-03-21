@@ -4,7 +4,6 @@ import _ from "lodash";
 export default function(state = {}, action) {
   switch (action.type) {
     case FETCH_SINGLE_PERFORMANCE:
-      console.log(action.payload);
       return _.mapKeys(action.payload, "performanceID");
     default:
       return state;

@@ -9,7 +9,6 @@ class AdminSinglePerformance extends Component {
   state = {};
 
   componentDidMount() {
-    console.log("hello");
     const id = this.props.match.params.id;
     this.props.fetchSinglePerformance(id);
   }
@@ -58,7 +57,6 @@ class AdminSinglePerformance extends Component {
   }
 
   render() {
-    console.log(this.props.singlePerformance);
     if (!this.props.singlePerformance) {
       return <LoaderWithText />;
     } else {

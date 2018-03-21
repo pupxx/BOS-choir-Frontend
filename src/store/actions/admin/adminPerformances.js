@@ -34,7 +34,6 @@ export function fetchSinglePerformance(id) {
     axios
       .get(url, { headers })
       .then(performance => {
-        console.log(performance);
         dispatch({
           type: FETCH_SINGLE_PERFORMANCE,
           payload: performance.data
