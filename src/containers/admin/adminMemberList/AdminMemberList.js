@@ -33,7 +33,7 @@ class AdminMemberList extends Component {
 
   renderHeaders() {
     const headers = ["Name", "Phone", "Ward/Branch", "Part", "Email"];
-    const columnNames = ["name", "phone", "churchname", "part", "email"];
+    const columnNames = ["lastname", "phone", "churchname", "part", "email"];
     return headers.map((el, i) => {
       return (
         <Table.HeaderCell
@@ -278,7 +278,7 @@ class AdminMemberList extends Component {
       return (
         <div>
           <hr />
-          <form className={classes.Form}>
+          <form>
             <div className={classes.Inputs}>
               <div>
                 <SearchBar
@@ -304,13 +304,6 @@ class AdminMemberList extends Component {
             <div className={classes.Parts}>
               {this.state.items.length ? this.renderTotalParts() : null}
             </div>
-            {/* <div className={classes.AddMember}>
-              {this.state.items.length ? (
-                <h5 onClick={() => this.addMember()} className={classnames}>
-                  Add Member
-                </h5>
-              ) : null}
-            </div> */}
           </div>
           <div className={classes.TableWrapper}>
             <Table

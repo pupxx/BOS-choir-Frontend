@@ -26,7 +26,7 @@ export function fetchAdminPerformanceList() {
   };
 }
 
-export function fetchSinglePerformance(id) {
+export function fetchSinglePerformance(id, cb) {
   return function(dispatch) {
     let url = `${ROOT_URL}/admin/performance/${id}`;
     let token = localStorage.getItem("token");
@@ -39,7 +39,11 @@ export function fetchSinglePerformance(id) {
           payload: performance.data
         });
       })
+      .then(() => {
+        cb();
+      })
       .catch(err => {
+        console.log(err);
         dispatch(authError(err.response.data.message));
       });
   };
