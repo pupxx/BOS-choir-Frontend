@@ -147,7 +147,9 @@ class AdminSinglePerformance extends Component {
         churchaddress2,
         churchcity,
         churchphone,
-        formattedDate
+        formattedDate,
+        menattire,
+        womenattire
       }) => {
         return (
           <div key={performanceID}>
@@ -159,6 +161,8 @@ class AdminSinglePerformance extends Component {
             <h5>{churchaddress2}</h5>
             <h5>{churchcity}</h5>
             <h5>{churchphone}</h5>
+            <h5>{menattire}</h5>
+            <h5>{womenattire}</h5>
             {this.renderPieces()}
           </div>
         );
@@ -167,7 +171,8 @@ class AdminSinglePerformance extends Component {
   }
 
   renderPieces() {
-    return _.map(this.props.singlePerformance.pieces, el => {
+    let id = this.props.match.params.id;
+    return _.map(this.props.singlePerformance[id].pieces, el => {
       return (
         <div key={el.pieceID}>
           <h5>{el.piecetitle}</h5>
@@ -321,13 +326,24 @@ class AdminSinglePerformance extends Component {
   };
 
   render() {
+    console.log(this.props.singlePerformance);
+    let classnames = `ui medium label ${classes.ButtonStyle}`;
+
     if (!this.props.singlePerformance) {
       return <LoaderWithText />;
     } else {
       return (
         <div>
-          {this.renderPerformance()}
-          {this.renderAttendance()}
+          <div className={classes.PerformanceLinksWrapper}>
+            <div>{this.renderPerformance()}</div>
+            <div className={classes.QuickLinksWrapper}>
+              <h5 className={classnames}>Edit Performance</h5>
+              <h5 className={classnames}>DeletePerormance</h5>
+            </div>
+          </div>
+          <div className={classes.AttendanceWrapper}>
+            {this.renderAttendance()}
+          </div>
         </div>
       );
     }

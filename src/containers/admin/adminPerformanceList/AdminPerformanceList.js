@@ -40,8 +40,14 @@ class AdminPerformanceList extends Component {
                   {el.perfname}
                 </Link>
               }
-              date={el.formattedDate}
-              time={el.perftime}
+              extraContent={
+                <div>
+                  <div>Date: {el.formattedDate}</div>
+                  <div>Time: {el.perftime}</div>
+                </div>
+              }
+              // date={el.formattedDate}
+              // time={el.perftime}
               description={
                 <div>
                   Location:

@@ -5,3 +5,38 @@
 .RemoveWrapper {
   margin-top: 20px;
 }
+
+.PerformanceLinksWrapper {
+  margin: 20px;
+
+  padding: 20px;
+  display: grid;
+  grid-template-columns: 9fr 3fr;
+  grid-gap: 20px;
+}
+
+.QuickLinksWrapper {
+  display: grid;
+  grid-template-columns: fit-content(75px);
+  grid-template-rows: 40px;
+  padding: 20px;
+  justify-self: center;
+}
+
+.AttendanceWrapper {
+  margin: 20px;
+}
+
+.ButtonStyle {
+  background: linear-gradient(white, #a3c0ff) !important;
+  text-decoration: none !important;
+  justify-self: center;
+  height: 30px;
+  /* margin-top: 10px; */
+}
+
+@media (max-width: 800px) {
+  .PerformanceLinksWrapper {
+    grid-template-columns: 1fr;
+  }
+}

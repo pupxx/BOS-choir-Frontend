@@ -6,12 +6,9 @@ const CardExtraContent = props => (
   <Card>
     <Card.Content textAlign={"center"} header={props.header} />
     <Card.Content description={props.description} />
-    <Card.Content extra className={classes.Address}>
+    <Card.Content description>
       {/* <Icon name="user" /> */}
-      <div>
-        <div>{props.date}</div>
-        <div>{props.time}</div>
-      </div>
+      {props.extraContent}
     </Card.Content>
   </Card>
 );
