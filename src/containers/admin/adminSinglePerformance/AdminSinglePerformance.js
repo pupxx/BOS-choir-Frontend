@@ -8,6 +8,8 @@ import LoaderWithText from "../../../components/UI/loaders/LoaderWithText";
 import SearchBar from "../../../components/searchBar/SearchBar";
 import { Table } from "semantic-ui-react";
 import PopUp from "../../../components/UI/popup/PopUp";
+import Modal from "../../../components/UI/modal/Modal";
+import PerformanceForm from "../../../components/UI/performanceForm/PerformanceForm";
 
 import classes from "./adminSinglePerformance.css";
 import styles from "../adminMemberList/adminMemberList.css";
@@ -15,11 +17,37 @@ import styles from "../adminMemberList/adminMemberList.css";
 class AdminSinglePerformance extends Component {
   state = {
     items: [],
-    emailList: []
+    emailList: [],
+    renderModal: false
+  };
+
+  renderModal = () => {
+    this.state.renderModal
+      ? this.setState({ renderModal: false })
+      : this.setState({ renderModal: true });
+  };
+
+  editPerformanceModalData = id => {
+    let data = (
+      <Modal>
+        <PerformanceForm
+          performanceToHandle={id}
+          action={this.props.addPerformance}
+          location={() =>
+            this.props.history.push(`/admin/admin-landing/performance/${id}`)
+          }
+          cancelAction={this.renderModal}
+          removeModal={this.renderModal}
+        />
+      </Modal>
+    );
+    this.setState({
+      modalData: data
+    });
+    this.setState({ renderModal: true });
   };
 
   componentWillMount() {
-    console.log("hello");
     const id = this.props.match.params.id;
     let token = localStorage.getItem("token");
     let headers = { authorization: token };
@@ -357,18 +385,26 @@ class AdminSinglePerformance extends Component {
   };
 
   render() {
-    console.log(this.props.singlePerformance);
     let classnames = `ui medium label ${classes.ButtonStyle}`;
 
     if (!this.props.singlePerformance) {
       return <LoaderWithText />;
+    } else if (this.state.renderModal) {
+      return this.state.modalData;
     } else {
       return (
         <div>
           <div className={classes.PerformanceLinksWrapper}>
             <div>{this.renderPerformance()}</div>
             <div className={classes.QuickLinksWrapper}>
-              <h5 className={classnames}>Edit Performance</h5>
+              <h5
+                className={classnames}
+                onClick={() =>
+                  this.editPerformanceModalData(this.props.match.params.id)
+                }
+              >
+                Edit Performance
+              </h5>
               <h5 className={classnames}>DeletePerormance</h5>
             </div>
           </div>
@@ -382,7 +418,6 @@ class AdminSinglePerformance extends Component {
 }
 
 function mapStateToProps(state, ownProps) {
-  console.log(state);
   let id = ownProps.match.params.id;
   return {
     singlePerformance: state.performanceList[id]

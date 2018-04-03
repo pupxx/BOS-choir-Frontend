@@ -40,49 +40,49 @@ class ChurchForm extends Component {
     let cancel = `ui mini red button ${classes.Buttons}`;
     return (
       <Aux>
-        <h5>Add Ward/Branch</h5>
+        <h5>Performance</h5>
         <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
-          {/* <Field
-            name="churchname"
-            label="Ward/Branch:"
+          <Field
+            name="perfname"
+            label="Performance Name:"
             type="text"
-            placeholder="Church Name"
+            placeholder="Performance Name"
             component={this.renderField}
           />
           <Field
-            name="churchaddress1"
-            label="Address Line 1:"
+            name="perfdate"
+            label="Date:"
             type="text"
-            placeholder="Address"
+            placeholder="mm/dd/yyyy"
             component={this.renderField}
           />
           <Field
-            name="churchaddress2"
-            label="Address Line 2:"
-            type="text"
-            placeholder="Address"
+            name="perftime"
+            label="Time:"
+            type="time"
+            placeholder="6:00"
             component={this.renderField}
           />
           <Field
-            name="churchcity"
-            label="City:"
+            name="menattire"
+            label="Men's Attire:"
             type="text"
             placeholder="City"
             component={this.renderField}
           />
           <Field
-            name="churchzip"
-            label="Postal Code:"
+            name="womenattire"
+            label="Women's Attire:"
             type="text"
-            placeholder="Postal Code"
+            placeholder="Women's Attire"
             component={this.renderField}
           />
-          <Field
+          {/* <Field
             name="churchphone"
             label="Phone:"
             type="text"
-            placeholder="Phone"
-            component={this.renderField}
+            placeholder="Church"
+            component={this.renderChurches}
           /> */}
           <button
             type="submit"
@@ -102,8 +102,8 @@ class ChurchForm extends Component {
 
 function mapStateToProps(state, ownProps) {
   let value;
-  if (ownProps.churchToEdit) {
-    value = state.churchs[ownProps.churchToEdit];
+  if (ownProps.performanceToHandle) {
+    value = state.performanceList[ownProps.performanceToHandle];
   }
   return { initialValues: value };
 }

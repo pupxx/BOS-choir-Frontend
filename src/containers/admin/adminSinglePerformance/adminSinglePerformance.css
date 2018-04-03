@@ -35,6 +35,10 @@
   /* margin-top: 10px; */
 }
 
+.ButtonStyle:hover {
+  cursor: pointer;
+}
+
 @media (max-width: 800px) {
   .PerformanceLinksWrapper {
     grid-template-columns: 1fr;
