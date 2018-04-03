@@ -6,7 +6,7 @@ const CardExtraContent = props => (
   <Card>
     <Card.Content textAlign={"center"} header={props.header} />
     <Card.Content description={props.description} />
-    <Card.Content description>
+    <Card.Content>
       {/* <Icon name="user" /> */}
       {props.extraContent}
     </Card.Content>

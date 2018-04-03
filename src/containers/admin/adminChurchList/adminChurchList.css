@@ -40,6 +40,10 @@
   height: 30px;
 }
 
+.AddChurch:hover {
+  cursor: pointer;
+}
+
 .Confirm {
   /* color: #5cb85c; */
   color: blue;

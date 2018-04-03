@@ -19,6 +19,7 @@ class AdminSinglePerformance extends Component {
   };
 
   componentWillMount() {
+    console.log("hello");
     const id = this.props.match.params.id;
     let token = localStorage.getItem("token");
     let headers = { authorization: token };
@@ -135,44 +136,74 @@ class AdminSinglePerformance extends Component {
   }
 
   renderPerformance() {
-    return _.map(
-      this.props.singlePerformance,
-      ({
-        performanceID,
-        perfname,
-        formattedTime,
-        churchID,
-        churchname,
-        churchaddress1,
-        churchaddress2,
-        churchcity,
-        churchphone,
-        formattedDate,
-        menattire,
-        womenattire
-      }) => {
-        return (
-          <div key={performanceID}>
-            <h5>{perfname}</h5>
-            <h5>{formattedDate}</h5>
-            <h5>{formattedTime}</h5>
-            <h5>{churchname}</h5>
-            <h5>{churchaddress1}</h5>
-            <h5>{churchaddress2}</h5>
-            <h5>{churchcity}</h5>
-            <h5>{churchphone}</h5>
-            <h5>{menattire}</h5>
-            <h5>{womenattire}</h5>
-            {this.renderPieces()}
-          </div>
-        );
-      }
+    let {
+      performanceID,
+      perfname,
+      formattedTime,
+      churchID,
+      churchname,
+      churchaddress1,
+      churchaddress2,
+      churchcity,
+      churchphone,
+      formattedDate,
+      menattire,
+      womenattire
+    } = this.props.singlePerformance;
+    return (
+      <div key={performanceID}>
+        <h5>{perfname}</h5>
+        <h5>{formattedDate}</h5>
+        <h5>{formattedTime}</h5>
+        <h5>{churchname}</h5>
+        <h5>{churchaddress1}</h5>
+        <h5>{churchaddress2}</h5>
+        <h5>{churchcity}</h5>
+        <h5>{churchphone}</h5>
+        <h5>{menattire}</h5>
+        <h5>{womenattire}</h5>
+        {this.renderPieces()}
+      </div>
     );
+
+    // return _.map(
+    //   this.props.singlePerformance,
+    //   ({
+    //     performanceID,
+    //     perfname,
+    //     formattedTime,
+    //     churchID,
+    //     churchname,
+    //     churchaddress1,
+    //     churchaddress2,
+    //     churchcity,
+    //     churchphone,
+    //     formattedDate,
+    //     menattire,
+    //     womenattire
+    //   }) => {
+    //     return (
+    //       <div key={performanceID}>
+    //         <h5>{perfname}</h5>
+    //         <h5>{formattedDate}</h5>
+    //         <h5>{formattedTime}</h5>
+    //         <h5>{churchname}</h5>
+    //         <h5>{churchaddress1}</h5>
+    //         <h5>{churchaddress2}</h5>
+    //         <h5>{churchcity}</h5>
+    //         <h5>{churchphone}</h5>
+    //         <h5>{menattire}</h5>
+    //         <h5>{womenattire}</h5>
+    //         {this.renderPieces()}
+    //       </div>
+    //     );
+    //   }
+    // );
   }
 
   renderPieces() {
     let id = this.props.match.params.id;
-    return _.map(this.props.singlePerformance[id].pieces, el => {
+    return _.map(this.props.singlePerformance.pieces, el => {
       return (
         <div key={el.pieceID}>
           <h5>{el.piecetitle}</h5>
@@ -351,8 +382,10 @@ class AdminSinglePerformance extends Component {
 }
 
 function mapStateToProps(state, ownProps) {
+  console.log(state);
+  let id = ownProps.match.params.id;
   return {
-    singlePerformance: state.singlePerformance
+    singlePerformance: state.performanceList[id]
   };
 }
 
