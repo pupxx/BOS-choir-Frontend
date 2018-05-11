@@ -76,6 +76,7 @@ class AdminPerformanceList extends Component {
   }
 
   render() {
+    console.log(this.props.performanceList);
     if (!_.map(this.props.performanceList).length) {
       return <LoaderWithText />;
     } else {

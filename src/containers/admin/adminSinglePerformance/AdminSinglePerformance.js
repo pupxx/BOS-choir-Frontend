@@ -21,32 +21,6 @@ class AdminSinglePerformance extends Component {
     renderModal: false
   };
 
-  renderModal = () => {
-    this.state.renderModal
-      ? this.setState({ renderModal: false })
-      : this.setState({ renderModal: true });
-  };
-
-  editPerformanceModalData = id => {
-    let data = (
-      <Modal>
-        <PerformanceForm
-          performanceToHandle={id}
-          action={this.props.addPerformance}
-          location={() =>
-            this.props.history.push(`/admin/admin-landing/performance/${id}`)
-          }
-          cancelAction={this.renderModal}
-          removeModal={this.renderModal}
-        />
-      </Modal>
-    );
-    this.setState({
-      modalData: data
-    });
-    this.setState({ renderModal: true });
-  };
-
   componentWillMount() {
     const id = this.props.match.params.id;
     let token = localStorage.getItem("token");
@@ -64,12 +38,44 @@ class AdminSinglePerformance extends Component {
   }
 
   componentDidMount() {
-    const id = this.props.match.params.id;
-    let location = () =>
-      this.props.history.push(`/admin/admin-landing/performance/${id}`);
-    if (_.map(this.props.singlePerformance).id !== id) {
-      this.props.fetchSinglePerformance(id, location);
-    }
+    // const id = this.props.match.params.id;
+    // let location = () =>
+    //   this.props.history.push(`/admin/admin-landing/performance/${id}`);
+    // if (_.map(this.props.singlePerformance).id !== id) {
+    //   this.props.fetchSinglePerformance(id, location);
+    // }
+  }
+
+  renderModal = () => {
+    this.state.renderModal
+      ? this.setState({ renderModal: false })
+      : this.setState({ renderModal: true });
+  };
+
+  editPerformanceModalData = id => {
+    let data = (
+      <Modal>
+        <PerformanceForm
+          performanceToHandle={id}
+          action={this.editPerformance}
+          location={() =>
+            this.props.history.push(`/admin/admin-landing/performance/${id}`)
+          }
+          cancelAction={this.renderModal}
+          removeModal={this.renderModal}
+        />
+      </Modal>
+    );
+    this.setState({
+      modalData: data
+    });
+    this.setState({ renderModal: true });
+  };
+
+  editPerformance(values, location) {
+    console.log(values);
+    console.log(location);
+    //still need to update this function.
   }
 
   handleSort = clickedColumn => () => {
@@ -315,6 +321,7 @@ class AdminSinglePerformance extends Component {
   }
 
   renderAttendance() {
+    console.log(this.props.performanceList);
     return (
       <div>
         <hr />
@@ -420,7 +427,8 @@ class AdminSinglePerformance extends Component {
 function mapStateToProps(state, ownProps) {
   let id = ownProps.match.params.id;
   return {
-    singlePerformance: state.performanceList[id]
+    singlePerformance: state.performanceList[id],
+    performanceList: state.performanceList
   };
 }
 

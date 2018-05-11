@@ -6,7 +6,7 @@ import * as actions from "../../../store/actions";
 import Aux from "../../../hoc/Aux";
 import classes from "./performanceForm.css";
 
-class ChurchForm extends Component {
+class PerformanceForm extends Component {
   state = {};
 
   renderField(field) {
@@ -29,8 +29,9 @@ class ChurchForm extends Component {
   }
 
   onSubmit(values) {
-    // let location = this.props.location;
-    // this.props.action(values, location);
+    console.log(this.props.performanceList);
+    let location = this.props.location;
+    this.props.action(values, location);
     this.props.removeModal();
   }
 
@@ -105,13 +106,15 @@ function mapStateToProps(state, ownProps) {
   if (ownProps.performanceToHandle) {
     value = state.performanceList[ownProps.performanceToHandle];
   }
-  return { initialValues: value };
+  return {
+    initialValues: value
+  };
 }
 
 export default connect(mapStateToProps, actions)(
   reduxForm({
     // validate,
-    form: "churchform",
+    form: "performanceForm",
     enableReinitialize: true
-  })(ChurchForm)
+  })(PerformanceForm)
 );
