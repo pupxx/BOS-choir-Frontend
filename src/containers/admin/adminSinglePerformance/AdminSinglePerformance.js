@@ -57,7 +57,7 @@ class AdminSinglePerformance extends Component {
       <Modal>
         <PerformanceForm
           performanceToHandle={id}
-          action={this.editPerformance}
+          action={this.props.editSinglePerformance}
           location={() =>
             this.props.history.push(`/admin/admin-landing/performance/${id}`)
           }
@@ -71,12 +71,6 @@ class AdminSinglePerformance extends Component {
     });
     this.setState({ renderModal: true });
   };
-
-  editPerformance(values, location) {
-    console.log(values);
-    console.log(location);
-    //still need to update this function.
-  }
 
   handleSort = clickedColumn => () => {
     const { column, items, direction } = this.state;

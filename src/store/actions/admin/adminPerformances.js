@@ -48,3 +48,25 @@ export function fetchSinglePerformance(id, cb) {
       });
   };
 }
+
+export function editSinglePerformance(values, cb) {
+  return function(dispatch) {
+    console.log("!!!!!!!!!!!!!!!!");
+    let url = `${ROOT_URL}/admin/update-performance/${values.id}`;
+    let token = localStorage.getItem("token");
+    let headers = { authorization: token };
+    axios
+      .patch(url, values, { headers })
+      .then(response => {
+        console.log(response);
+        // dispatch({ type: EDIT_PERFORMANCE, payload: response });
+      })
+      .then(() => {
+        cb();
+      })
+      .catch(err => {
+        console.log(err);
+        dispatch(authError(err.response.data.message));
+      });
+  };
+}

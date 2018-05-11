@@ -10,7 +10,9 @@ class PerformanceForm extends Component {
   state = {};
 
   renderField(field) {
-    const { meta: { touched, error } } = field;
+    const {
+      meta: { touched, error }
+    } = field;
     let className = `form-control form-control-sm ${
       touched && error ? "is-invalid" : ""
     }`;
@@ -29,7 +31,6 @@ class PerformanceForm extends Component {
   }
 
   onSubmit(values) {
-    console.log(this.props.performanceList);
     let location = this.props.location;
     this.props.action(values, location);
     this.props.removeModal();
