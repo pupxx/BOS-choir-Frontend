@@ -38,12 +38,10 @@ class AdminSinglePerformance extends Component {
   }
 
   componentDidMount() {
-    // const id = this.props.match.params.id;
-    // let location = () =>
-    //   this.props.history.push(`/admin/admin-landing/performance/${id}`);
-    // if (_.map(this.props.singlePerformance).id !== id) {
-    //   this.props.fetchSinglePerformance(id, location);
-    // }
+    const id = this.props.match.params.id;
+    let location = () =>
+      this.props.history.push(`/admin/admin-landing/performance/${id}`);
+    this.props.fetchSinglePerformance(id, location);
   }
 
   renderModal = () => {
@@ -57,7 +55,7 @@ class AdminSinglePerformance extends Component {
       <Modal>
         <PerformanceForm
           performanceToHandle={id}
-          action={this.props.editSinglePerformance}
+          action={this.editPerformance}
           location={() =>
             this.props.history.push(`/admin/admin-landing/performance/${id}`)
           }
@@ -70,6 +68,10 @@ class AdminSinglePerformance extends Component {
       modalData: data
     });
     this.setState({ renderModal: true });
+  };
+
+  editPerformance = (values, location) => {
+    this.props.editSinglePerformance(values, location);
   };
 
   handleSort = clickedColumn => () => {
@@ -315,7 +317,6 @@ class AdminSinglePerformance extends Component {
   }
 
   renderAttendance() {
-    console.log(this.props.performanceList);
     return (
       <div>
         <hr />
